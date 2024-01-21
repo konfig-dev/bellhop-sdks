@@ -2,6 +2,25 @@
 
 outputDirectory: /tmp/bellhop-sdks-out
 specPath: api.yaml
+portal:
+  title: Bellhop
+  primaryColor: '#233152'
+  favicon: favicon.ico
+  logo:
+    light: logo.png
+    dark: logo.png
+  socials:
+    website: https://www.getbellhops.com
+  documentation:
+    sidebar:
+      sections:
+        - label: Guides
+          - id: getting-started
+            path: docs/getting-started.md
+readmeHeader:
+  title: Bellhop
+  image: header.png
+  url: https://www.getbellhops.com
 generators:
   java:
     version: 1.0.0
