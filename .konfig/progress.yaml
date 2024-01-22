@@ -2,6 +2,7 @@ description: Bellhop's Partner API
 examples: {}
 examples_2: {}
 examples_3: {}
+ignorePotentialIncorrectType: true
 operationIds:
   /authorize:
     post: Authorization_getAuthToken

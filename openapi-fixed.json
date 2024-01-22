@@ -8,6 +8,9 @@
       "name": "Bellhop Engineering",
       "url": "http://www.bellhop.com/",
       "email": "engineering@bellhop.com"
+    },
+    "x-konfig-ignore": {
+      "potential-incorrect-type": true
     }
   },
   "servers": [
@@ -1365,10 +1368,6 @@
             "format": "email"
           },
           "status": {
-            "description": "Customer status",
-            "examples": [
-              "Active"
-            ],
             "$ref": "#/components/schemas/CustomerStatusNullable"
           },
           "primary_market": {
@@ -1440,11 +1439,12 @@
           },
           "origin_postal_code": {
             "title": "Origin Postal Code",
-            "examples": [
-              "85001"
-            ],
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "example": "85001",
+            "x-examples": [
+              "85001"
+            ]
           },
           "origin_street": {
             "title": "Origin Street",
@@ -1458,11 +1458,12 @@
           },
           "origin_state": {
             "title": "Origin State",
-            "examples": [
-              "AZ"
-            ],
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "example": "AZ",
+            "x-examples": [
+              "AZ"
+            ]
           },
           "origin_square_feet": {
             "title": "Origin Square Feet",
@@ -1471,11 +1472,12 @@
           },
           "destination_postal_code": {
             "title": "Destination Postal Code",
-            "examples": [
-              "85001"
-            ],
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "example": "85001",
+            "x-examples": [
+              "85001"
+            ]
           },
           "destination_street": {
             "title": "Destination Street",
@@ -1489,11 +1491,12 @@
           },
           "destination_state": {
             "title": "Destination State",
-            "examples": [
-              "AZ"
-            ],
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "example": "AZ",
+            "x-examples": [
+              "AZ"
+            ]
           },
           "clickid": {
             "title": "Clickid",
@@ -1527,21 +1530,23 @@
           },
           "load_date": {
             "title": "Load Date",
-            "examples": [
-              "2021-01-01"
-            ],
             "type": "string",
             "format": "date",
-            "nullable": true
+            "nullable": true,
+            "example": "2021-01-01",
+            "x-examples": [
+              "2021-01-01"
+            ]
           },
           "close_date": {
             "title": "Close Date",
-            "examples": [
-              "2021-01-01"
-            ],
             "type": "string",
             "format": "date",
-            "nullable": true
+            "nullable": true,
+            "example": "2021-01-01",
+            "x-examples": [
+              "2021-01-01"
+            ]
           }
         },
         "type": "object",
@@ -1563,7 +1568,13 @@
                 "$ref": "#/components/schemas/CreateCustomerAccountRequest"
               }
             ],
-            "examples": [
+            "example": {
+              "email": "heythereitsjon@gooogle.com",
+              "first_name": "John",
+              "last_name": "Doe",
+              "phone": "5555555555"
+            },
+            "x-examples": [
               {
                 "email": "heythereitsjon@gooogle.com",
                 "first_name": "John",
@@ -1577,7 +1588,8 @@
             "description": "Start date and time of the quote",
             "type": "string",
             "format": "date-time",
-            "examples": [
+            "example": "2024-01-22T17:33:27.541275",
+            "x-examples": [
               "2024-01-22T17:33:27.541275"
             ]
           },
@@ -1585,7 +1597,8 @@
             "title": "Service Code",
             "description": "Services to be quoted",
             "type": "string",
-            "examples": [
+            "example": "LOCALFULLSERVICE",
+            "x-examples": [
               "LOCALFULLSERVICE",
               "LOADING"
             ]
@@ -1597,7 +1610,25 @@
               "$ref": "#/components/schemas/LocationRequest"
             },
             "type": "object",
-            "examples": [
+            "example": {
+              "1": {
+                "city": "New York",
+                "country": "US",
+                "line_1": "123 Main St",
+                "postal_code": "10001",
+                "property_type": "SINGLE_FAMILY_HOME",
+                "state": "NY"
+              },
+              "2": {
+                "city": "New York",
+                "country": "US",
+                "line_1": "321 Secondary St",
+                "postal_code": "10001",
+                "property_type": "SINGLE_FAMILY_HOME",
+                "state": "NY"
+              }
+            },
+            "x-examples": [
               {
                 "1": {
                   "city": "New York",
@@ -1639,7 +1670,10 @@
             },
             "type": "array",
             "minItems": 1,
-            "examples": [
+            "example": [
+              "LOADINGUNLOADING"
+            ],
+            "x-examples": [
               [
                 "LOADINGUNLOADING"
               ]
@@ -1653,7 +1687,11 @@
             },
             "type": "array",
             "minItems": 1,
-            "examples": [
+            "example": [
+              "a4cef656c2a04ca4aa6d19cee4eb9b7e",
+              "b4cef656c2a04ca4aa6d19cee4eb9b7e"
+            ],
+            "x-examples": [
               [
                 "a4cef656c2a04ca4aa6d19cee4eb9b7e",
                 "b4cef656c2a04ca4aa6d19cee4eb9b7e"
@@ -1665,7 +1703,8 @@
             "description": "Start datetime of service group",
             "type": "string",
             "format": "date-time",
-            "examples": [
+            "example": "2021-01-01T12:00:00",
+            "x-examples": [
               "2021-01-01T12:00:00"
             ]
           }
@@ -1865,7 +1904,8 @@
             "description": "Date of earliest flexible service quote to generate",
             "type": "string",
             "format": "date",
-            "examples": [
+            "example": "1970-01-01",
+            "x-examples": [
               "1970-01-01"
             ]
           },
@@ -1874,7 +1914,8 @@
             "description": "Date of latest flexible service quote to generate",
             "type": "string",
             "format": "date",
-            "examples": [
+            "example": "1970-01-01",
+            "x-examples": [
               "1970-01-01"
             ]
           },
@@ -1896,9 +1937,6 @@
               19,
               20
             ],
-            "examples": [
-              "[8, 9, 10, 11, 12]"
-            ],
             "items": {
               "type": "integer",
               "enum": [
@@ -1918,7 +1956,11 @@
               ]
             },
             "type": "array",
-            "nullable": true
+            "nullable": true,
+            "example": "[8, 9, 10, 11, 12]",
+            "x-examples": [
+              "[8, 9, 10, 11, 12]"
+            ]
           }
         },
         "type": "object",
@@ -2006,13 +2048,9 @@
             "nullable": true
           },
           "access_flags": {
-            "default": {
-            },
             "$ref": "#/components/schemas/AccessFlagsResponseNullable"
           },
           "extra_data": {
-            "default": {
-            },
             "$ref": "#/components/schemas/ExtraDataResponseNullable"
           },
           "additional_items": {
@@ -2349,7 +2387,6 @@
             "nullable": true
           },
           "property_type": {
-            "default": "SINGLE_FAMILY_HOME",
             "$ref": "#/components/schemas/PropertyTypeNullable"
           },
           "rooms": {
@@ -2404,24 +2441,27 @@
             "title": "Line 1",
             "description": "Address line 1",
             "type": "string",
-            "examples": [
+            "example": "123 Main St",
+            "x-examples": [
               "123 Main St"
             ]
           },
           "line_2": {
             "title": "Line 2",
             "description": "Address line 2",
-            "examples": [
-              "Apt 1"
-            ],
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "example": "Apt 1",
+            "x-examples": [
+              "Apt 1"
+            ]
           },
           "city": {
             "title": "City",
             "description": "City",
             "type": "string",
-            "examples": [
+            "example": "New York City",
+            "x-examples": [
               "New York City"
             ]
           },
@@ -2429,7 +2469,8 @@
             "title": "State",
             "description": "State",
             "type": "string",
-            "examples": [
+            "example": "NY",
+            "x-examples": [
               "NY"
             ]
           },
@@ -2437,7 +2478,8 @@
             "title": "Postal Code",
             "description": "Postal code",
             "type": "string",
-            "examples": [
+            "example": "10001",
+            "x-examples": [
               "10001"
             ]
           },
@@ -2445,45 +2487,50 @@
             "title": "Country",
             "description": "Two Character Country Code",
             "type": "string",
-            "examples": [
+            "example": "US",
+            "x-examples": [
               "US"
             ]
           },
           "market_code": {
             "title": "Market Code",
             "description": "Market ID",
-            "examples": [
-              "NEW_YORK_NY"
-            ],
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "example": "NEW_YORK_NY",
+            "x-examples": [
+              "NEW_YORK_NY"
+            ]
           },
           "id": {
             "title": "Id",
             "description": "Location ID",
             "type": "string",
-            "examples": [
+            "example": "a786e73c879040669225dcf4eb6214f0",
+            "x-examples": [
               "a786e73c879040669225dcf4eb6214f0"
             ]
           },
           "property_type": {
             "title": "Property Type",
             "description": "Property type",
-            "examples": [
+            "type": "string",
+            "nullable": true,
+            "example": "APARTMENT",
+            "x-examples": [
               "APARTMENT",
               "SINGLE_FAMILY_HOME"
-            ],
-            "type": "string",
-            "nullable": true
+            ]
           },
           "timezone": {
             "title": "Timezone",
             "description": "Timezone",
-            "examples": [
-              "America/New_York"
-            ],
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "example": "America/New_York",
+            "x-examples": [
+              "America/New_York"
+            ]
           }
         },
         "type": "object",
@@ -2887,11 +2934,9 @@
             "nullable": true
           },
           "inventory": {
-            "description": "Quote Inventory object",
             "$ref": "#/components/schemas/InventoryResponseNullable"
           },
           "totals": {
-            "description": "Quote total estimated cost",
             "$ref": "#/components/schemas/TotalsNullable"
           },
           "inventory_type": {
@@ -2968,7 +3013,8 @@
                 "$ref": "#/components/schemas/PropertyType"
               }
             ],
-            "examples": [
+            "example": "APARTMENT",
+            "x-examples": [
               "APARTMENT"
             ]
           },
@@ -3091,7 +3137,26 @@
               "$ref": "#/components/schemas/ServiceQuoteResponseV2"
             },
             "type": "array",
-            "examples": [
+            "example": [
+              {
+                "created_at": "2024-01-22T17:33:25.537829+00:00",
+                "end_datetime": "2024-01-22T17:33:25.537833+00:00",
+                "end_timezone": "America/New_York",
+                "estimated_hours": 2.5,
+                "estimated_pricing_strategy": "HOURLY",
+                "estimated_unit_price": 10000,
+                "estimated_workers": 2,
+                "id": "162e1110-16ea-49a2-af84-1d5ee38ba021",
+                "locked": false,
+                "service_code": "LOADING",
+                "service_group_id": "715e6a3e-5836-477f-a28a-18feb0b0def2",
+                "start_datetime": "2024-01-22T17:33:25.537832+00:00",
+                "start_timezone": "America/New_York",
+                "total_cost": 10000,
+                "updated_at": "2024-01-22T17:33:25.537832+00:00"
+              }
+            ],
+            "x-examples": [
               [
                 {
                   "created_at": "2024-01-22T17:33:25.537829+00:00",
@@ -3140,35 +3205,22 @@
             "title": "Location Id",
             "description": "Location ID",
             "type": "string",
-            "examples": [
+            "example": "abl1304jdfh0",
+            "x-examples": [
               "abl1304jdfh0"
             ]
           },
           "sequence": {
             "title": "Sequence",
             "description": "Location sequence within a service group. Sequence 0 is first",
-            "examples": [
-              1
-            ],
             "type": "integer",
-            "nullable": true
+            "nullable": true,
+            "example": 1,
+            "x-examples": [
+              1
+            ]
           },
           "location": {
-            "description": "Location object",
-            "examples": [
-              {
-                "city": "New York City",
-                "country": "US",
-                "id": "c9e57f49ea874476a185c3fd44739c60",
-                "line_1": "123 Main St",
-                "line_2": "Apt 1",
-                "market_code": "NEW_YORK_NY",
-                "postal_code": "10001",
-                "property_type": "SINGLE_FAMILY_HOME",
-                "state": "NY",
-                "timezone": "America/New_York"
-              }
-            ],
             "$ref": "#/components/schemas/LocationResponseNullable"
           }
         },
@@ -3188,111 +3240,123 @@
             "description": "Service Quote ID",
             "type": "string",
             "format": "uuid",
-            "examples": [
+            "example": "06b8347f-46c2-4578-aeed-3f5ef90513af",
+            "x-examples": [
               "06b8347f-46c2-4578-aeed-3f5ef90513af"
             ]
           },
           "created_at": {
             "title": "Created At",
             "description": "Created at",
-            "examples": [
-              "2024-01-02T12:00:00"
-            ],
             "type": "string",
             "format": "date-time",
-            "nullable": true
+            "nullable": true,
+            "example": "2024-01-02T12:00:00",
+            "x-examples": [
+              "2024-01-02T12:00:00"
+            ]
           },
           "updated_at": {
             "title": "Updated At",
             "description": "Last updated at",
-            "examples": [
-              "2024-01-02T12:00:00"
-            ],
             "type": "string",
             "format": "date-time",
-            "nullable": true
+            "nullable": true,
+            "example": "2024-01-02T12:00:00",
+            "x-examples": [
+              "2024-01-02T12:00:00"
+            ]
           },
           "start_datetime": {
             "title": "Start Datetime",
             "description": "Start datetime",
-            "examples": [
-              "2024-01-02T12:00:00"
-            ],
             "type": "string",
             "format": "date-time",
-            "nullable": true
+            "nullable": true,
+            "example": "2024-01-02T12:00:00",
+            "x-examples": [
+              "2024-01-02T12:00:00"
+            ]
           },
           "end_datetime": {
             "title": "End Datetime",
             "description": "End datetime",
-            "examples": [
-              "2024-01-02T12:00:00"
-            ],
             "type": "string",
             "format": "date-time",
-            "nullable": true
+            "nullable": true,
+            "example": "2024-01-02T12:00:00",
+            "x-examples": [
+              "2024-01-02T12:00:00"
+            ]
           },
           "start_timezone": {
             "title": "Start Timezone",
             "description": "Timezone of the start datetime",
-            "examples": [
-              "America/New_York"
-            ],
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "example": "America/New_York",
+            "x-examples": [
+              "America/New_York"
+            ]
           },
           "end_timezone": {
             "title": "End Timezone",
             "description": "Timezone of the end datetime",
-            "examples": [
-              "America/New_York"
-            ],
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "example": "America/New_York",
+            "x-examples": [
+              "America/New_York"
+            ]
           },
           "estimated_hours": {
             "title": "Estimated Hours",
             "description": "Estimated number of hours",
-            "examples": [
-              2.5
-            ],
             "type": "number",
-            "nullable": true
+            "nullable": true,
+            "example": 2.5,
+            "x-examples": [
+              2.5
+            ]
           },
           "estimated_workers": {
             "title": "Estimated Workers",
             "description": "Estimated number of workers",
-            "examples": [
-              2
-            ],
             "type": "integer",
-            "nullable": true
+            "nullable": true,
+            "example": 2,
+            "x-examples": [
+              2
+            ]
           },
           "estimated_unit_price": {
             "title": "Estimated Unit Price",
             "description": "Estimated unit price in cents",
-            "examples": [
-              10000
-            ],
             "type": "integer",
-            "nullable": true
+            "nullable": true,
+            "example": 10000,
+            "x-examples": [
+              10000
+            ]
           },
           "estimated_pricing_strategy": {
             "title": "Estimated Pricing Strategy",
             "description": "Pricing strategy",
-            "examples": [
+            "type": "string",
+            "nullable": true,
+            "example": "HOURLY",
+            "x-examples": [
               "HOURLY",
               "FIXED"
-            ],
-            "type": "string",
-            "nullable": true
+            ]
           },
           "service_group_id": {
             "title": "Service Group Id",
             "description": "Service Group ID",
             "type": "string",
             "format": "uuid",
-            "examples": [
+            "example": "da42b5c6-e786-49dd-b8e3-dc41e493e0d4",
+            "x-examples": [
               "da42b5c6-e786-49dd-b8e3-dc41e493e0d4"
             ]
           },
@@ -3300,18 +3364,20 @@
             "title": "Service Code",
             "description": "Service code",
             "type": "string",
-            "examples": [
+            "example": "LOADING",
+            "x-examples": [
               "LOADING"
             ]
           },
           "total_cost": {
             "title": "Total Cost",
             "description": "Total estimated cost of the service",
-            "examples": [
-              10000
-            ],
             "type": "integer",
-            "nullable": true
+            "nullable": true,
+            "example": 10000,
+            "x-examples": [
+              10000
+            ]
           },
           "locked": {
             "title": "Locked",
@@ -3369,7 +3435,8 @@
                 "$ref": "#/components/schemas/ServiceType"
               }
             ],
-            "examples": [
+            "example": "TRANSIT",
+            "x-examples": [
               "TRANSIT"
             ]
           },
@@ -3378,7 +3445,8 @@
             "description": "Number of workers",
             "type": "integer",
             "minimum": 1,
-            "examples": [
+            "example": 1,
+            "x-examples": [
               1
             ]
           }
@@ -3457,7 +3525,13 @@
             },
             "type": "array",
             "minItems": 1,
-            "examples": [
+            "example": [
+              {
+                "service_code": "TRANSIT",
+                "workers": 1
+              }
+            ],
+            "x-examples": [
               [
                 {
                   "service_code": "TRANSIT",
@@ -3478,8 +3552,14 @@
           "loc": {
             "title": "Location",
             "items": {
-              "type": "string",
-              "nullable": true
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
             },
             "type": "array"
           },
@@ -3501,13 +3581,18 @@
       },
       "CustomerStatusNullable": {
         "title": "CustomerStatus",
+        "description": "Customer status",
         "type": "string",
         "enum": [
           "Active",
           "Do Not Book",
           "Opportunity"
         ],
-        "nullable": true
+        "nullable": true,
+        "example": "Active",
+        "x-examples": [
+          "Active"
+        ]
       },
       "AccountSourceNullable": {
         "title": "AccountSource",
@@ -3708,6 +3793,8 @@
           "elevator_reserved",
           "long_walk_to_truck"
         ],
+        "default": {
+        },
         "nullable": true
       },
       "ExtraDataResponseNullable": {
@@ -3784,6 +3871,8 @@
           "long_haul",
           "adjacent_market"
         ],
+        "default": {
+        },
         "nullable": true
       },
       "PropertyTypeNullable": {
@@ -3797,6 +3886,7 @@
           "SINGLE_FAMILY_HOME",
           "STORAGE"
         ],
+        "default": "SINGLE_FAMILY_HOME",
         "nullable": true
       },
       "PostalCodeServiceabilityResponseNullable": {
@@ -3820,7 +3910,7 @@
       },
       "InventoryResponseNullable": {
         "title": "InventoryResponse",
-        "description": "TODO",
+        "description": "Quote Inventory object",
         "properties": {
           "is_room_based_inventory": {
             "title": "Is Room Based Inventory",
@@ -3837,13 +3927,9 @@
             "nullable": true
           },
           "access_flags": {
-            "default": {
-            },
             "$ref": "#/components/schemas/AccessFlagsResponseNullable"
           },
           "extra_data": {
-            "default": {
-            },
             "$ref": "#/components/schemas/ExtraDataResponseNullable"
           },
           "additional_items": {
@@ -3887,7 +3973,7 @@
       },
       "TotalsNullable": {
         "title": "Totals",
-        "description": "Response for computed quote totals (populated by Quote.totals property)",
+        "description": "Quote total estimated cost",
         "properties": {
           "service_total": {
             "title": "Service Total",
@@ -3932,30 +4018,33 @@
       },
       "LocationResponseNullable": {
         "title": "LocationResponse",
-        "description": "LocationResponse extends USPSLocationResponse with additional fields",
+        "description": "Location object",
         "properties": {
           "line_1": {
             "title": "Line 1",
             "description": "Address line 1",
             "type": "string",
-            "examples": [
+            "example": "123 Main St",
+            "x-examples": [
               "123 Main St"
             ]
           },
           "line_2": {
             "title": "Line 2",
             "description": "Address line 2",
-            "examples": [
-              "Apt 1"
-            ],
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "example": "Apt 1",
+            "x-examples": [
+              "Apt 1"
+            ]
           },
           "city": {
             "title": "City",
             "description": "City",
             "type": "string",
-            "examples": [
+            "example": "New York City",
+            "x-examples": [
               "New York City"
             ]
           },
@@ -3963,7 +4052,8 @@
             "title": "State",
             "description": "State",
             "type": "string",
-            "examples": [
+            "example": "NY",
+            "x-examples": [
               "NY"
             ]
           },
@@ -3971,7 +4061,8 @@
             "title": "Postal Code",
             "description": "Postal code",
             "type": "string",
-            "examples": [
+            "example": "10001",
+            "x-examples": [
               "10001"
             ]
           },
@@ -3979,45 +4070,50 @@
             "title": "Country",
             "description": "Two Character Country Code",
             "type": "string",
-            "examples": [
+            "example": "US",
+            "x-examples": [
               "US"
             ]
           },
           "market_code": {
             "title": "Market Code",
             "description": "Market ID",
-            "examples": [
-              "NEW_YORK_NY"
-            ],
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "example": "NEW_YORK_NY",
+            "x-examples": [
+              "NEW_YORK_NY"
+            ]
           },
           "id": {
             "title": "Id",
             "description": "Location ID",
             "type": "string",
-            "examples": [
+            "example": "a786e73c879040669225dcf4eb6214f0",
+            "x-examples": [
               "a786e73c879040669225dcf4eb6214f0"
             ]
           },
           "property_type": {
             "title": "Property Type",
             "description": "Property type",
-            "examples": [
+            "type": "string",
+            "nullable": true,
+            "example": "APARTMENT",
+            "x-examples": [
               "APARTMENT",
               "SINGLE_FAMILY_HOME"
-            ],
-            "type": "string",
-            "nullable": true
+            ]
           },
           "timezone": {
             "title": "Timezone",
             "description": "Timezone",
-            "examples": [
-              "America/New_York"
-            ],
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "example": "America/New_York",
+            "x-examples": [
+              "America/New_York"
+            ]
           }
         },
         "type": "object",
@@ -4033,7 +4129,33 @@
           "property_type",
           "timezone"
         ],
-        "nullable": true
+        "nullable": true,
+        "example": {
+          "city": "New York City",
+          "country": "US",
+          "id": "c9e57f49ea874476a185c3fd44739c60",
+          "line_1": "123 Main St",
+          "line_2": "Apt 1",
+          "market_code": "NEW_YORK_NY",
+          "postal_code": "10001",
+          "property_type": "SINGLE_FAMILY_HOME",
+          "state": "NY",
+          "timezone": "America/New_York"
+        },
+        "x-examples": [
+          {
+            "city": "New York City",
+            "country": "US",
+            "id": "c9e57f49ea874476a185c3fd44739c60",
+            "line_1": "123 Main St",
+            "line_2": "Apt 1",
+            "market_code": "NEW_YORK_NY",
+            "postal_code": "10001",
+            "property_type": "SINGLE_FAMILY_HOME",
+            "state": "NY",
+            "timezone": "America/New_York"
+          }
+        ]
       },
       "QuoteServiceGroupsCreateRequest": {
         "title": "Body",
