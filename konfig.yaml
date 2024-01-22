@@ -7,8 +7,8 @@ portal:
   primaryColor: '#233152'
   favicon: favicon.ico
   logo:
-    light: logo.png
-    dark: logo.png
+    light: logo-light.png
+    dark: logo-dark.png
   socials:
     website: https://www.getbellhops.com
   documentation:
