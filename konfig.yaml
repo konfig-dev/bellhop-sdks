@@ -4,6 +4,14 @@ outputDirectory: /tmp/bellhop-sdks-out
 specRemotePath: https://partners.bellhop.com/v5/openapi.json
 specInputPath: openapi.json
 specPath: openapi-fixed.json
+fixConfig:
+  modify:
+    components.schemas.FlexibleServiceRequest.properties.local_hours.example:
+      - 8
+      - 9
+      - 10
+      - 11
+      - 12
 portal:
   title: Bellhop
   primaryColor: '#233152'

@@ -1957,7 +1957,13 @@
             },
             "type": "array",
             "nullable": true,
-            "example": "[8, 9, 10, 11, 12]",
+            "example": [
+              8,
+              9,
+              10,
+              11,
+              12
+            ],
             "x-examples": [
               "[8, 9, 10, 11, 12]"
             ]

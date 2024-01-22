@@ -575,7 +575,7 @@ const createFlexibleResponse = await bellhop.quoteServiceGroups.createFlexible({
   serviceGroupId: "serviceGroupId_example",
   start_date: "1970-01-01",
   end_date: "1970-01-01",
-  local_hours: [[8, 9, 10, 11, 12]],
+  local_hours: [8, 9, 10, 11, 12],
 });
 ```
 
