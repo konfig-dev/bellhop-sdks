@@ -39,7 +39,6 @@ generators:
     projectName: bellhop-python-sdk
     outputDirectory: python
     clientName: Bellhop
-    disabled: true
     git:
       userId: konfig-dev
       repoId: bellhop-sdks/tree/main/python
