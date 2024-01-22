@@ -15,8 +15,9 @@ portal:
     sidebar:
       sections:
         - label: Guides
-          - id: getting-started
-            path: docs/getting-started.md
+          links:
+            - id: getting-started
+              path: docs/getting-started.md
 readmeHeader:
   title: Bellhop
   image: header.png
