@@ -1,5 +1,5 @@
 {
-  "openapi": "3.1.0",
+  "openapi": "3.0.3",
   "info": {
     "title": "partner-api",
     "description": "Bellhop's Partner API",
@@ -73,14 +73,8 @@
             "required": false,
             "schema": {
               "title": "Destination Postal Code",
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ]
+              "type": "string",
+              "nullable": true
             }
           }
         ],
@@ -173,15 +167,9 @@
             "required": false,
             "schema": {
               "title": "Email",
-              "anyOf": [
-                {
-                  "type": "string",
-                  "format": "email"
-                },
-                {
-                  "type": "null"
-                }
-              ]
+              "type": "string",
+              "format": "email",
+              "nullable": true
             }
           }
         ],
@@ -1143,47 +1131,23 @@
         "properties": {
           "stairs": {
             "title": "Stairs",
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "integer",
+            "nullable": true
           },
           "elevator": {
             "title": "Elevator",
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "boolean",
+            "nullable": true
           },
           "elevator_reserved": {
             "title": "Elevator Reserved",
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "boolean",
+            "nullable": true
           },
           "long_walk_to_truck": {
             "title": "Long Walk To Truck",
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "boolean",
+            "nullable": true
           }
         },
         "type": "object",
@@ -1402,59 +1366,26 @@
           },
           "status": {
             "description": "Customer status",
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/CustomerStatus"
-              },
-              {
-                "type": "null"
-              }
-            ],
             "examples": [
               "Active"
-            ]
+            ],
+            "$ref": "#/components/schemas/CustomerStatusNullable"
           },
           "primary_market": {
             "title": "Primary Market",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "source": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/AccountSource"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "$ref": "#/components/schemas/AccountSourceNullable"
           },
           "hear_about_us": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/HearAboutUs"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "$ref": "#/components/schemas/HearAboutUsNullable"
           },
           "owner_code": {
             "title": "Owner Code",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           }
         },
         "type": "object",
@@ -1471,14 +1402,8 @@
         "properties": {
           "description": {
             "title": "Description",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "first_name": {
             "title": "First Name",
@@ -1500,243 +1425,123 @@
           },
           "lead_source": {
             "title": "Lead Source",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "email": {
             "title": "Email",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "phone": {
             "title": "Phone",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "origin_postal_code": {
             "title": "Origin Postal Code",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
             "examples": [
               "85001"
-            ]
+            ],
+            "type": "string",
+            "nullable": true
           },
           "origin_street": {
             "title": "Origin Street",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "origin_city": {
             "title": "Origin City",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "origin_state": {
             "title": "Origin State",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
             "examples": [
               "AZ"
-            ]
+            ],
+            "type": "string",
+            "nullable": true
           },
           "origin_square_feet": {
             "title": "Origin Square Feet",
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "integer",
+            "nullable": true
           },
           "destination_postal_code": {
             "title": "Destination Postal Code",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
             "examples": [
               "85001"
-            ]
+            ],
+            "type": "string",
+            "nullable": true
           },
           "destination_street": {
             "title": "Destination Street",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "destination_city": {
             "title": "Destination City",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "destination_state": {
             "title": "Destination State",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
             "examples": [
               "AZ"
-            ]
+            ],
+            "type": "string",
+            "nullable": true
           },
           "clickid": {
             "title": "Clickid",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "gclid": {
             "title": "Gclid",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "utm_medium": {
             "title": "Utm Medium",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "utm_source": {
             "title": "Utm Source",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "utm_campaign": {
             "title": "Utm Campaign",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "msclkid": {
             "title": "Msclkid",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "load_date": {
             "title": "Load Date",
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date"
-              },
-              {
-                "type": "null"
-              }
-            ],
             "examples": [
               "2021-01-01"
-            ]
+            ],
+            "type": "string",
+            "format": "date",
+            "nullable": true
           },
           "close_date": {
             "title": "Close Date",
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date"
-              },
-              {
-                "type": "null"
-              }
-            ],
             "examples": [
               "2021-01-01"
-            ]
+            ],
+            "type": "string",
+            "format": "date",
+            "nullable": true
           }
         },
         "type": "object",
@@ -1887,124 +1692,58 @@
         "properties": {
           "miles_to_origin": {
             "title": "Miles To Origin",
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "integer",
+            "nullable": true
           },
           "weight": {
             "title": "Weight",
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "integer",
+            "nullable": true
           },
           "assembly": {
             "title": "Assembly",
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "integer",
+            "nullable": true
           },
           "disassembly": {
             "title": "Disassembly",
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "integer",
+            "nullable": true
           },
           "extra_stop": {
             "title": "Extra Stop",
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "integer",
+            "nullable": true
           },
           "zippy_move_type": {
             "title": "Zippy Move Type",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "number_of_shells": {
             "title": "Number Of Shells",
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "integer",
+            "nullable": true
           },
           "stairs": {
             "title": "Stairs",
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "integer",
+            "nullable": true
           },
           "elevator": {
             "title": "Elevator",
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "integer",
+            "nullable": true
           },
           "long_haul": {
             "title": "Long Haul",
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "integer",
+            "nullable": true
           },
           "adjacent_market": {
             "title": "Adjacent Market",
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "integer",
+            "nullable": true
           }
         },
         "type": "object",
@@ -2103,14 +1842,8 @@
           },
           "total_cost": {
             "title": "Total Cost",
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "integer",
+            "nullable": true
           }
         },
         "type": "object",
@@ -2148,32 +1881,6 @@
           "local_hours": {
             "title": "Local Hours",
             "description": "List of hours in local time to generate quotes for: [8, 9, 10, 11, 12]",
-            "anyOf": [
-              {
-                "items": {
-                  "type": "integer",
-                  "enum": [
-                    8,
-                    9,
-                    10,
-                    11,
-                    12,
-                    13,
-                    14,
-                    15,
-                    16,
-                    17,
-                    18,
-                    19,
-                    20
-                  ]
-                },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
             "default": [
               8,
               9,
@@ -2191,7 +1898,27 @@
             ],
             "examples": [
               "[8, 9, 10, 11, 12]"
-            ]
+            ],
+            "items": {
+              "type": "integer",
+              "enum": [
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20
+              ]
+            },
+            "type": "array",
+            "nullable": true
           }
         },
         "type": "object",
@@ -2249,14 +1976,8 @@
           },
           "pretty_name": {
             "title": "Pretty Name",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           }
         },
         "type": "object",
@@ -2276,92 +1997,48 @@
           },
           "intent": {
             "title": "Intent",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "area": {
             "title": "Area",
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "integer",
+            "nullable": true
           },
           "access_flags": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/AccessFlagsResponse"
-              },
-              {
-                "type": "null"
-              }
-            ],
             "default": {
-            }
+            },
+            "$ref": "#/components/schemas/AccessFlagsResponseNullable"
           },
           "extra_data": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/ExtraDataResponse"
-              },
-              {
-                "type": "null"
-              }
-            ],
             "default": {
-            }
+            },
+            "$ref": "#/components/schemas/ExtraDataResponseNullable"
           },
           "additional_items": {
             "title": "Additional Items",
-            "anyOf": [
-              {
-                "items": {
-                  "$ref": "#/components/schemas/InventoryItem"
-                },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
             "default": [
-            ]
+            ],
+            "items": {
+              "$ref": "#/components/schemas/InventoryItem"
+            },
+            "type": "array",
+            "nullable": true
           },
           "rooms": {
             "title": "Rooms",
-            "anyOf": [
-              {
-                "items": {
-                  "$ref": "#/components/schemas/InventoryItem"
-                },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
             "default": [
-            ]
+            ],
+            "items": {
+              "$ref": "#/components/schemas/InventoryItem"
+            },
+            "type": "array",
+            "nullable": true
           },
           "notes": {
             "title": "Notes",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           }
         },
         "type": "object",
@@ -2391,381 +2068,177 @@
         "properties": {
           "description": {
             "title": "Description",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "clickid": {
             "title": "Clickid",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "code": {
             "title": "Code",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "company": {
             "title": "Company",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "customer_close_date": {
             "title": "Customer Close Date",
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "format": "date",
+            "nullable": true
           },
           "destination_city": {
             "title": "Destination City",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "destination_postal_code": {
             "title": "Destination Postal Code",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "destination_state": {
             "title": "Destination State",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "destination_street_address": {
             "title": "Destination Street Address",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "email": {
             "title": "Email",
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "email"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "format": "email",
+            "nullable": true
           },
           "external_id": {
             "title": "External Id",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "first_name": {
             "title": "First Name",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "from_market": {
             "title": "From Market",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "from_street_address": {
             "title": "From Street Address",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "full_address_details": {
             "title": "Full Address Details",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "gclid": {
             "title": "Gclid",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "deleted": {
             "title": "Deleted",
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "boolean",
+            "nullable": true
           },
           "last_name": {
             "title": "Last Name",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "lead_type": {
             "title": "Lead Type",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "lead_source": {
             "title": "Lead Source",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "name": {
             "title": "Name",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "origin_city": {
             "title": "Origin City",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "origin_postal_code": {
             "title": "Origin Postal Code",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "origin_state": {
             "title": "Origin State",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "origin_street_address": {
             "title": "Origin Street Address",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "phone": {
             "title": "Phone",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "pipes_status": {
             "title": "Pipes Status",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "preferred_load_date": {
             "title": "Preferred Load Date",
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "format": "date",
+            "nullable": true
           },
           "primary_lost_reason": {
             "title": "Primary Lost Reason",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "recordtype_sfid": {
             "title": "Recordtype Sfid",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "square_feet": {
             "title": "Square Feet",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "status": {
             "title": "Status",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "updated_at": {
             "title": "Updated At",
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date-time"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
           },
           "partner_code": {
             "title": "Partner Code",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           }
         },
         "type": "object",
@@ -2823,38 +2296,20 @@
         "properties": {
           "description": {
             "title": "Description",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "close_date": {
             "title": "Close Date",
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "format": "date",
+            "nullable": true
           },
           "load_date": {
             "title": "Load Date",
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "format": "date",
+            "nullable": true
           }
         },
         "type": "object",
@@ -2872,14 +2327,8 @@
           },
           "line_2": {
             "title": "Line 2",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "city": {
             "title": "City",
@@ -2895,103 +2344,48 @@
           },
           "country": {
             "title": "Country",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "default": "US"
+            "default": "US",
+            "type": "string",
+            "nullable": true
           },
           "property_type": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/PropertyType"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "default": "SINGLE_FAMILY_HOME"
+            "default": "SINGLE_FAMILY_HOME",
+            "$ref": "#/components/schemas/PropertyTypeNullable"
           },
           "rooms": {
             "title": "Rooms",
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "integer",
+            "nullable": true
           },
           "area": {
             "title": "Area",
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "integer",
+            "nullable": true
           },
           "garage": {
             "title": "Garage",
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "boolean",
+            "nullable": true
           },
           "stories": {
             "title": "Stories",
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "integer",
+            "nullable": true
           },
           "floor": {
             "title": "Floor",
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "integer",
+            "nullable": true
           },
           "attic": {
             "title": "Attic",
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "boolean",
+            "nullable": true
           },
           "basement": {
             "title": "Basement",
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "boolean",
+            "nullable": true
           }
         },
         "type": "object",
@@ -3017,17 +2411,11 @@
           "line_2": {
             "title": "Line 2",
             "description": "Address line 2",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
             "examples": [
               "Apt 1"
-            ]
+            ],
+            "type": "string",
+            "nullable": true
           },
           "city": {
             "title": "City",
@@ -3064,17 +2452,11 @@
           "market_code": {
             "title": "Market Code",
             "description": "Market ID",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
             "examples": [
               "NEW_YORK_NY"
-            ]
+            ],
+            "type": "string",
+            "nullable": true
           },
           "id": {
             "title": "Id",
@@ -3087,33 +2469,21 @@
           "property_type": {
             "title": "Property Type",
             "description": "Property type",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
             "examples": [
               "APARTMENT",
               "SINGLE_FAMILY_HOME"
-            ]
+            ],
+            "type": "string",
+            "nullable": true
           },
           "timezone": {
             "title": "Timezone",
             "description": "Timezone",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
             "examples": [
               "America/New_York"
-            ]
+            ],
+            "type": "string",
+            "nullable": true
           }
         },
         "type": "object",
@@ -3136,282 +2506,132 @@
         "properties": {
           "code": {
             "title": "Code",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "account_code": {
             "title": "Account Code",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "affiliated_partner_code": {
             "title": "Affiliated Partner Code",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "affiliate_code": {
             "title": "Affiliate Code",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "cancellation_reason": {
             "title": "Cancellation Reason",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "cancellation_type": {
             "title": "Cancellation Type",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "confirmation_number": {
             "title": "Confirmation Number",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "created_date": {
             "title": "Created Date",
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date-time"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
           },
           "end_date": {
             "title": "End Date",
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "format": "date",
+            "nullable": true
           },
           "end_date_time": {
             "title": "End Date Time",
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date-time"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
           },
           "end_time_zone": {
             "title": "End Time Zone",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "end_market_code": {
             "title": "End Market Code",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "is_fulfilled": {
             "title": "Is Fulfilled",
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "boolean",
+            "nullable": true
           },
           "guaranteed": {
             "title": "Guaranteed",
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "boolean",
+            "nullable": true
           },
           "long_distance": {
             "title": "Long Distance",
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "boolean",
+            "nullable": true
           },
           "name": {
             "title": "Name",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "notes": {
             "title": "Notes",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "promo_code": {
             "title": "Promo Code",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "reschedule_reason": {
             "title": "Reschedule Reason",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "reschedule_type": {
             "title": "Reschedule Type",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "start_date_time": {
             "title": "Start Date Time",
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date-time"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
           },
           "start_market_code": {
             "title": "Start Market Code",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "start_time_zone": {
             "title": "Start Time Zone",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "status": {
             "title": "Status",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "transaction_failure_review": {
             "title": "Transaction Failure Review",
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "boolean",
+            "nullable": true
           }
         },
         "type": "object",
@@ -3468,14 +2688,7 @@
             "$ref": "#/components/schemas/PostalCodeServiceabilityResponse"
           },
           "destination_postal_code": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/PostalCodeServiceabilityResponse"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "$ref": "#/components/schemas/PostalCodeServiceabilityResponseNullable"
           },
           "services": {
             "title": "Services",
@@ -3508,91 +2721,43 @@
           },
           "name": {
             "title": "Name",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "adjustment_code": {
             "title": "Adjustment Code",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "adjustment_family": {
             "title": "Adjustment Family",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "adjustment_value": {
             "title": "Adjustment Value",
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "integer",
+            "nullable": true
           },
           "adjustment_type": {
             "title": "Adjustment Type",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "estimated_amount": {
             "title": "Estimated Amount",
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "integer",
+            "nullable": true
           },
           "adjustment_description": {
             "title": "Adjustment Description",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "adjustment_reason": {
             "title": "Adjustment Reason",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           }
         },
         "type": "object",
@@ -3619,36 +2784,18 @@
           },
           "product_code": {
             "title": "Product Code",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "estimated_quantity": {
             "title": "Estimated Quantity",
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "integer",
+            "nullable": true
           },
           "estimated_unit_price": {
             "title": "Estimated Unit Price",
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "integer",
+            "nullable": true
           }
         },
         "type": "object",
@@ -3696,129 +2843,67 @@
           "price_updated_at": {
             "title": "Price Updated At",
             "description": "Price updated at",
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date-time"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
           },
           "partner_code": {
             "title": "Partner Code",
             "description": "ID of the Partner that generated the quote",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "customer_code": {
             "title": "Customer Code",
             "description": "Customer ID",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "service_groups": {
             "title": "Service Groups",
             "description": "Quote Service Group objects",
-            "anyOf": [
-              {
-                "items": {
-                  "$ref": "#/components/schemas/ServiceGroupResponse"
-                },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "items": {
+              "$ref": "#/components/schemas/ServiceGroupResponse"
+            },
+            "type": "array",
+            "nullable": true
           },
           "products": {
             "title": "Products",
             "description": "Quote Product objects",
-            "anyOf": [
-              {
-                "items": {
-                  "$ref": "#/components/schemas/ProductQuoteResponse"
-                },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "items": {
+              "$ref": "#/components/schemas/ProductQuoteResponse"
+            },
+            "type": "array",
+            "nullable": true
           },
           "price_adjustments": {
             "title": "Price Adjustments",
             "description": "Quote Price Adjustment objects",
-            "anyOf": [
-              {
-                "items": {
-                  "$ref": "#/components/schemas/PriceAdjustmentQuoteResponse"
-                },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "items": {
+              "$ref": "#/components/schemas/PriceAdjustmentQuoteResponse"
+            },
+            "type": "array",
+            "nullable": true
           },
           "inventory": {
             "description": "Quote Inventory object",
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/InventoryResponse"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "$ref": "#/components/schemas/InventoryResponseNullable"
           },
           "totals": {
             "description": "Quote total estimated cost",
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/Totals"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "$ref": "#/components/schemas/TotalsNullable"
           },
           "inventory_type": {
             "title": "Inventory Type",
             "description": "Quote Inventory type",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "marketplace_availability": {
             "title": "Marketplace Availability",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "valid_price": {
             "title": "Valid Price",
@@ -3855,14 +2940,8 @@
           },
           "line_2": {
             "title": "Line 2",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "city": {
             "title": "City",
@@ -3878,15 +2957,9 @@
           },
           "country": {
             "title": "Country",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "default": "US"
+            "default": "US",
+            "type": "string",
+            "nullable": true
           },
           "property_type": {
             "description": "Type of the property.",
@@ -3902,90 +2975,48 @@
           "rooms": {
             "title": "Rooms",
             "description": "Number of rooms in the property.",
-            "anyOf": [
-              {
-                "type": "integer",
-                "minimum": 0
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "integer",
+            "minimum": 0,
+            "nullable": true
           },
           "area": {
             "title": "Area",
             "description": "Total area of the property in square feet.",
-            "anyOf": [
-              {
-                "type": "integer",
-                "minimum": 0
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "integer",
+            "minimum": 0,
+            "nullable": true
           },
           "garage": {
             "title": "Garage",
             "description": "Indicates whether the property has a garage or not.",
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "boolean",
+            "nullable": true
           },
           "stories": {
             "title": "Stories",
             "description": "Number of stories or floors in the property.",
-            "anyOf": [
-              {
-                "type": "integer",
-                "minimum": 0
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "integer",
+            "minimum": 0,
+            "nullable": true
           },
           "floor": {
             "title": "Floor",
             "description": "Floor number of the property.",
-            "anyOf": [
-              {
-                "type": "integer",
-                "minimum": 0
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "integer",
+            "minimum": 0,
+            "nullable": true
           },
           "attic": {
             "title": "Attic",
             "description": "Indicates whether the property has an attic or not.",
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "boolean",
+            "nullable": true
           },
           "basement": {
             "title": "Basement",
             "description": "Indicates whether the property has a basement or not.",
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "boolean",
+            "nullable": true
           }
         },
         "type": "object",
@@ -4042,14 +3073,8 @@
           "total_cost": {
             "title": "Total Cost",
             "description": "Total estimated cost of the service group",
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": "integer",
+            "nullable": true
           },
           "locations": {
             "title": "Locations",
@@ -4122,28 +3147,14 @@
           "sequence": {
             "title": "Sequence",
             "description": "Location sequence within a service group. Sequence 0 is first",
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
             "examples": [
               1
-            ]
+            ],
+            "type": "integer",
+            "nullable": true
           },
           "location": {
             "description": "Location object",
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/LocationResponse"
-              },
-              {
-                "type": "null"
-              }
-            ],
             "examples": [
               {
                 "city": "New York City",
@@ -4157,7 +3168,8 @@
                 "state": "NY",
                 "timezone": "America/New_York"
               }
-            ]
+            ],
+            "$ref": "#/components/schemas/LocationResponseNullable"
           }
         },
         "type": "object",
@@ -4183,157 +3195,97 @@
           "created_at": {
             "title": "Created At",
             "description": "Created at",
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date-time"
-              },
-              {
-                "type": "null"
-              }
-            ],
             "examples": [
               "2024-01-02T12:00:00"
-            ]
+            ],
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
           },
           "updated_at": {
             "title": "Updated At",
             "description": "Last updated at",
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date-time"
-              },
-              {
-                "type": "null"
-              }
-            ],
             "examples": [
               "2024-01-02T12:00:00"
-            ]
+            ],
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
           },
           "start_datetime": {
             "title": "Start Datetime",
             "description": "Start datetime",
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date-time"
-              },
-              {
-                "type": "null"
-              }
-            ],
             "examples": [
               "2024-01-02T12:00:00"
-            ]
+            ],
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
           },
           "end_datetime": {
             "title": "End Datetime",
             "description": "End datetime",
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date-time"
-              },
-              {
-                "type": "null"
-              }
-            ],
             "examples": [
               "2024-01-02T12:00:00"
-            ]
+            ],
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
           },
           "start_timezone": {
             "title": "Start Timezone",
             "description": "Timezone of the start datetime",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
             "examples": [
               "America/New_York"
-            ]
+            ],
+            "type": "string",
+            "nullable": true
           },
           "end_timezone": {
             "title": "End Timezone",
             "description": "Timezone of the end datetime",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
             "examples": [
               "America/New_York"
-            ]
+            ],
+            "type": "string",
+            "nullable": true
           },
           "estimated_hours": {
             "title": "Estimated Hours",
             "description": "Estimated number of hours",
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "null"
-              }
-            ],
             "examples": [
               2.5
-            ]
+            ],
+            "type": "number",
+            "nullable": true
           },
           "estimated_workers": {
             "title": "Estimated Workers",
             "description": "Estimated number of workers",
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
             "examples": [
               2
-            ]
+            ],
+            "type": "integer",
+            "nullable": true
           },
           "estimated_unit_price": {
             "title": "Estimated Unit Price",
             "description": "Estimated unit price in cents",
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
             "examples": [
               10000
-            ]
+            ],
+            "type": "integer",
+            "nullable": true
           },
           "estimated_pricing_strategy": {
             "title": "Estimated Pricing Strategy",
             "description": "Pricing strategy",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
             "examples": [
               "HOURLY",
               "FIXED"
-            ]
+            ],
+            "type": "string",
+            "nullable": true
           },
           "service_group_id": {
             "title": "Service Group Id",
@@ -4355,17 +3307,11 @@
           "total_cost": {
             "title": "Total Cost",
             "description": "Total estimated cost of the service",
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
             "examples": [
               10000
-            ]
+            ],
+            "type": "integer",
+            "nullable": true
           },
           "locked": {
             "title": "Locked",
@@ -4494,15 +3440,9 @@
           "duration": {
             "title": "Duration",
             "description": "Duration for all services in group",
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "gte": 1
+            "gte": 1,
+            "type": "number",
+            "nullable": true
           },
           "service_workers": {
             "title": "Service Workers",
@@ -4538,14 +3478,8 @@
           "loc": {
             "title": "Location",
             "items": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                }
-              ]
+              "type": "string",
+              "nullable": true
             },
             "type": "array"
           },
@@ -4564,6 +3498,542 @@
           "msg",
           "type"
         ]
+      },
+      "CustomerStatusNullable": {
+        "title": "CustomerStatus",
+        "type": "string",
+        "enum": [
+          "Active",
+          "Do Not Book",
+          "Opportunity"
+        ],
+        "nullable": true
+      },
+      "AccountSourceNullable": {
+        "title": "AccountSource",
+        "description": "Pick-list values for account.accountsource",
+        "type": "string",
+        "enum": [
+          "123 Load Board",
+          "AllConnect",
+          "All My Sons",
+          "AllWebLeads",
+          "AMLI",
+          "Angie's List",
+          "Another Bellhop",
+          "ApartmentList.com",
+          "Apartments.com Site Search",
+          "Atlanta Moving Pros",
+          "Avail",
+          "Avvinue",
+          "Bark",
+          "BDS",
+          "Bellhop Site",
+          "Bellhop Site - Booking Flow",
+          "Bellhop Site - Out of Service Area",
+          "Beyond Self Storage",
+          "Brookfield",
+          "Citizen Home Solutions",
+          "Clever",
+          "College Recruiter",
+          "Consumer Affairs",
+          "Cortland Apartments",
+          "Craigslist",
+          "Crye-Leike",
+          "CubeSmart",
+          "Dallas Moving Pros",
+          "DAT Load Board",
+          "dotdash",
+          "DOT Registry",
+          "Drive for Bellhops",
+          "Email Capture Blog",
+          "Email Capture MLP",
+          "Email Only",
+          "Equate",
+          "Equate Live Transfers",
+          "Flatrate Moving",
+          "Flyhomes",
+          "From a Friend",
+          "GMB Request a Quote",
+          "Google Ads Lead Form",
+          "Google Local Services",
+          "Google My Business",
+          "havenly",
+          "Hello Alfred",
+          "HireAHelper",
+          "HomeAdvisor Exact Match",
+          "HomeAdvisor Market Match",
+          "Home Depot",
+          "homeexpert",
+          "HomeGuage",
+          "Ideal Agent",
+          "Inbound Call",
+          "Inbound Call - Drive for Bellhops",
+          "Indeed",
+          "Intercom Chat",
+          "IRELO",
+          "Job Case",
+          "Landing",
+          "Las Vegas Giveaway",
+          "Lead Hero",
+          "leadvision",
+          "Livly",
+          "LocalMovingPros.com",
+          "LongDistanceMover.com",
+          "MCR",
+          "Mediabids",
+          "Metropolitan Movers",
+          "Move Buddha",
+          "MoveEasy",
+          "MoveHQ",
+          "MoveInc",
+          "Move Matcher",
+          "Movermatch",
+          "Moverscom",
+          "Moves for Seniors",
+          "moving.com",
+          "movingbiz",
+          "Movingful",
+          "movinglabor-lead",
+          "movingwaldo",
+          "Mr. Cooper",
+          "MYMOVE",
+          "MyMovingLoads",
+          "newkeyz",
+          "Offerpad",
+          "OJO",
+          "OneSource",
+          "Other",
+          "Outbound Call",
+          "Partnerships",
+          "PetScreening",
+          "PODS",
+          "PODS CORP RELO",
+          "poweron",
+          "property managers",
+          "Purchased List",
+          "Quote Runner",
+          "Quote Runner Exclusive",
+          "Quote Runner LIVE",
+          "Real Estate Bidders",
+          "realtor referrals",
+          "Recleim",
+          "Redfin",
+          "redfin concierge",
+          "Referral",
+          "rego",
+          "Rent Application",
+          "Rexdirect",
+          "RexDirect Live",
+          "RexHomes",
+          "San Jose Moving Pros",
+          "SeveralBrands",
+          "Shyft",
+          "site-ld-form",
+          "Snag",
+          "Social Media",
+          "sold.com",
+          "Steady",
+          "Storage",
+          "Suited Connector",
+          "Swift Homes",
+          "thespruce",
+          "Thumbtack",
+          "TruckStop Load Board",
+          "Updatr",
+          "usnews",
+          "Utility Connect",
+          "Yelp",
+          "Yelp RAQ",
+          "Zendesk Lead",
+          "Zillow",
+          "Zillow Builder",
+          "Zillow - Outbound",
+          "Zippy Shell",
+          "Zippy Shell Corp Relo"
+        ],
+        "nullable": true
+      },
+      "HearAboutUsNullable": {
+        "title": "HearAboutUs",
+        "description": "Pick-list values for account.how_did_customer_hear_about_us__c",
+        "type": "string",
+        "enum": [
+          "Friend/Family Referral",
+          "Google/Bing - Search Engine",
+          "Yelp",
+          "Billboard",
+          "Yard Sign",
+          "Truck",
+          "Social Media",
+          "All My Sons/Another Moving Company",
+          "Affiliates/Partners - Groupon",
+          "Blog",
+          "Outbound lead",
+          "Repeat Customer",
+          "Skipped",
+          "Used Bellhop before",
+          "PODS"
+        ],
+        "nullable": true
+      },
+      "AccessFlagsResponseNullable": {
+        "title": "AccessFlagsResponse",
+        "properties": {
+          "stairs": {
+            "title": "Stairs",
+            "type": "integer",
+            "nullable": true
+          },
+          "elevator": {
+            "title": "Elevator",
+            "type": "boolean",
+            "nullable": true
+          },
+          "elevator_reserved": {
+            "title": "Elevator Reserved",
+            "type": "boolean",
+            "nullable": true
+          },
+          "long_walk_to_truck": {
+            "title": "Long Walk To Truck",
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "required": [
+          "stairs",
+          "elevator",
+          "elevator_reserved",
+          "long_walk_to_truck"
+        ],
+        "nullable": true
+      },
+      "ExtraDataResponseNullable": {
+        "title": "ExtraDataResponse",
+        "description": "Extra data for inventory meta-data",
+        "properties": {
+          "miles_to_origin": {
+            "title": "Miles To Origin",
+            "type": "integer",
+            "nullable": true
+          },
+          "weight": {
+            "title": "Weight",
+            "type": "integer",
+            "nullable": true
+          },
+          "assembly": {
+            "title": "Assembly",
+            "type": "integer",
+            "nullable": true
+          },
+          "disassembly": {
+            "title": "Disassembly",
+            "type": "integer",
+            "nullable": true
+          },
+          "extra_stop": {
+            "title": "Extra Stop",
+            "type": "integer",
+            "nullable": true
+          },
+          "zippy_move_type": {
+            "title": "Zippy Move Type",
+            "type": "string",
+            "nullable": true
+          },
+          "number_of_shells": {
+            "title": "Number Of Shells",
+            "type": "integer",
+            "nullable": true
+          },
+          "stairs": {
+            "title": "Stairs",
+            "type": "integer",
+            "nullable": true
+          },
+          "elevator": {
+            "title": "Elevator",
+            "type": "integer",
+            "nullable": true
+          },
+          "long_haul": {
+            "title": "Long Haul",
+            "type": "integer",
+            "nullable": true
+          },
+          "adjacent_market": {
+            "title": "Adjacent Market",
+            "type": "integer",
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "required": [
+          "miles_to_origin",
+          "weight",
+          "assembly",
+          "disassembly",
+          "extra_stop",
+          "zippy_move_type",
+          "number_of_shells",
+          "stairs",
+          "elevator",
+          "long_haul",
+          "adjacent_market"
+        ],
+        "nullable": true
+      },
+      "PropertyTypeNullable": {
+        "title": "PropertyType",
+        "type": "string",
+        "enum": [
+          "APARTMENT",
+          "COMMERCIAL",
+          "OTHER",
+          "MULTI_FAMILY_HOME",
+          "SINGLE_FAMILY_HOME",
+          "STORAGE"
+        ],
+        "nullable": true
+      },
+      "PostalCodeServiceabilityResponseNullable": {
+        "title": "PostalCodeServiceabilityResponse",
+        "properties": {
+          "postal_code": {
+            "title": "Postal Code",
+            "type": "string"
+          },
+          "serviceable": {
+            "title": "Serviceable",
+            "type": "boolean"
+          }
+        },
+        "type": "object",
+        "required": [
+          "postal_code",
+          "serviceable"
+        ],
+        "nullable": true
+      },
+      "InventoryResponseNullable": {
+        "title": "InventoryResponse",
+        "description": "TODO",
+        "properties": {
+          "is_room_based_inventory": {
+            "title": "Is Room Based Inventory",
+            "type": "boolean"
+          },
+          "intent": {
+            "title": "Intent",
+            "type": "string",
+            "nullable": true
+          },
+          "area": {
+            "title": "Area",
+            "type": "integer",
+            "nullable": true
+          },
+          "access_flags": {
+            "default": {
+            },
+            "$ref": "#/components/schemas/AccessFlagsResponseNullable"
+          },
+          "extra_data": {
+            "default": {
+            },
+            "$ref": "#/components/schemas/ExtraDataResponseNullable"
+          },
+          "additional_items": {
+            "title": "Additional Items",
+            "default": [
+            ],
+            "items": {
+              "$ref": "#/components/schemas/InventoryItem"
+            },
+            "type": "array",
+            "nullable": true
+          },
+          "rooms": {
+            "title": "Rooms",
+            "default": [
+            ],
+            "items": {
+              "$ref": "#/components/schemas/InventoryItem"
+            },
+            "type": "array",
+            "nullable": true
+          },
+          "notes": {
+            "title": "Notes",
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "required": [
+          "is_room_based_inventory",
+          "intent",
+          "area",
+          "access_flags",
+          "extra_data",
+          "additional_items",
+          "rooms",
+          "notes"
+        ],
+        "nullable": true
+      },
+      "TotalsNullable": {
+        "title": "Totals",
+        "description": "Response for computed quote totals (populated by Quote.totals property)",
+        "properties": {
+          "service_total": {
+            "title": "Service Total",
+            "type": "integer"
+          },
+          "product_total": {
+            "title": "Product Total",
+            "type": "integer"
+          },
+          "fee_total": {
+            "title": "Fee Total",
+            "type": "integer"
+          },
+          "subtotal": {
+            "title": "Subtotal",
+            "type": "integer"
+          },
+          "discount_total": {
+            "title": "Discount Total",
+            "type": "integer"
+          },
+          "total": {
+            "title": "Total",
+            "type": "integer"
+          },
+          "deposit_amount": {
+            "title": "Deposit Amount",
+            "type": "integer"
+          }
+        },
+        "type": "object",
+        "required": [
+          "service_total",
+          "product_total",
+          "fee_total",
+          "subtotal",
+          "discount_total",
+          "total",
+          "deposit_amount"
+        ],
+        "nullable": true
+      },
+      "LocationResponseNullable": {
+        "title": "LocationResponse",
+        "description": "LocationResponse extends USPSLocationResponse with additional fields",
+        "properties": {
+          "line_1": {
+            "title": "Line 1",
+            "description": "Address line 1",
+            "type": "string",
+            "examples": [
+              "123 Main St"
+            ]
+          },
+          "line_2": {
+            "title": "Line 2",
+            "description": "Address line 2",
+            "examples": [
+              "Apt 1"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "city": {
+            "title": "City",
+            "description": "City",
+            "type": "string",
+            "examples": [
+              "New York City"
+            ]
+          },
+          "state": {
+            "title": "State",
+            "description": "State",
+            "type": "string",
+            "examples": [
+              "NY"
+            ]
+          },
+          "postal_code": {
+            "title": "Postal Code",
+            "description": "Postal code",
+            "type": "string",
+            "examples": [
+              "10001"
+            ]
+          },
+          "country": {
+            "title": "Country",
+            "description": "Two Character Country Code",
+            "type": "string",
+            "examples": [
+              "US"
+            ]
+          },
+          "market_code": {
+            "title": "Market Code",
+            "description": "Market ID",
+            "examples": [
+              "NEW_YORK_NY"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "id": {
+            "title": "Id",
+            "description": "Location ID",
+            "type": "string",
+            "examples": [
+              "a786e73c879040669225dcf4eb6214f0"
+            ]
+          },
+          "property_type": {
+            "title": "Property Type",
+            "description": "Property type",
+            "examples": [
+              "APARTMENT",
+              "SINGLE_FAMILY_HOME"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "timezone": {
+            "title": "Timezone",
+            "description": "Timezone",
+            "examples": [
+              "America/New_York"
+            ],
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "required": [
+          "line_1",
+          "line_2",
+          "city",
+          "state",
+          "postal_code",
+          "country",
+          "market_code",
+          "id",
+          "property_type",
+          "timezone"
+        ],
+        "nullable": true
       },
       "QuoteServiceGroupsCreateRequest": {
         "title": "Body",

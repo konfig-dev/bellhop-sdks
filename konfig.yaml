@@ -26,9 +26,9 @@ readmeHeader:
   url: https://www.getbellhops.com
 generators:
   java:
-    version: 1.0.0
+    version: 0.1.0
     groupId: com.getbellhops
-    artifactId: bellhop-java-sdk
+    artifactId: bellhop-partners-java-sdk
     clientName: Bellhop
     outputDirectory: java
     disabled: true
@@ -36,17 +36,18 @@ generators:
       userId: konfig-dev
       repoId: bellhop-sdks/tree/main/java
   python:
-    version: 1.0.0
+    version: 0.1.0
     packageName: bellhop
-    projectName: bellhop-python-sdk
+    projectName: bellhop-partners-python
     outputDirectory: python
     clientName: Bellhop
+    disabled: true
     git:
       userId: konfig-dev
       repoId: bellhop-sdks/tree/main/python
   typescript:
-    version: 1.0.0
-    npmName: bellhop-typescript-sdk
+    version: 0.1.0
+    npmName: bellhop-partners-typescript
     outputDirectory: typescript
     clientName: Bellhop
     git:
