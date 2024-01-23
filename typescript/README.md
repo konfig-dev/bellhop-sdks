@@ -168,8 +168,8 @@ Create Lead
 const createResponse = await bellhop.leads.create({
   first_name: "first_name_example",
   last_name: "last_name_example",
-  lead_type: "Long Distance",
-  lead_record_type: "Potential Customer",
+  lead_type: "string_example",
+  lead_record_type: "string_example",
   origin_postal_code: "85001",
   origin_state: "AZ",
   destination_postal_code: "85001",
@@ -185,9 +185,9 @@ const createResponse = await bellhop.leads.create({
 
 ##### last_name: `string`<a id="last_name-string"></a>
 
-##### lead_type:<a id="lead_type"></a>
+##### lead_type: [`LeadType`](./models/lead-type.ts)<a id="lead_type-leadtypemodelslead-typets"></a>
 
-##### lead_record_type:<a id="lead_record_type"></a>
+##### lead_record_type: [`LeadRecordType`](./models/lead-record-type.ts)<a id="lead_record_type-leadrecordtypemodelslead-record-typets"></a>
 
 ##### description: `string`<a id="description-string"></a>
 
@@ -538,7 +538,7 @@ const createResponse = await bellhop.quoteServiceGroups.create({
 
 UUID of the quote
 
-##### service_codes: []<a id="service_codes-"></a>
+##### service_codes: [`ServiceType`](./models/service-type.ts)[]<a id="service_codes-servicetypemodelsservice-typets"></a>
 
 List of service codes
 
@@ -779,9 +779,6 @@ const createResponse = await bellhop.quotes.create({
     last_name: "last_name_example",
     phone: "phone_example",
     email: "email_example",
-    status: "Active",
-    source: "123 Load Board",
-    hear_about_us: "Friend/Family Referral",
   },
   start_datetime: "2024-01-22T17:33:27.541275",
   service_code: "LOCALFULLSERVICE",
@@ -792,7 +789,6 @@ const createResponse = await bellhop.quotes.create({
       state: "state_example",
       postal_code: "postal_code_example",
       country: "US",
-      property_type: "SINGLE_FAMILY_HOME",
     },
   },
 });

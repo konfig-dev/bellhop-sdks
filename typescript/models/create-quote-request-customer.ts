@@ -46,7 +46,7 @@ export interface CreateQuoteRequestCustomer {
      */
     'email': string;
     /**
-     * 
+     * Customer status
      * @type {CustomerStatusNullable}
      * @memberof CreateQuoteRequestCustomer
      */
@@ -58,13 +58,13 @@ export interface CreateQuoteRequestCustomer {
      */
     'primary_market'?: string | null;
     /**
-     * 
+     * Pick-list values for account.accountsource
      * @type {AccountSourceNullable}
      * @memberof CreateQuoteRequestCustomer
      */
     'source'?: AccountSourceNullable | null;
     /**
-     * 
+     * Pick-list values for account.how_did_customer_hear_about_us__c
      * @type {HearAboutUsNullable}
      * @memberof CreateQuoteRequestCustomer
      */
