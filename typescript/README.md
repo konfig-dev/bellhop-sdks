@@ -523,10 +523,10 @@ Creates a new service group  A service group is a collection of services that ar
 ```typescript
 const createResponse = await bellhop.quoteServiceGroups.create({
   quoteId: "quoteId_example",
-  service_codes: [LOADINGUNLOADING],
+  service_codes: ["LOADINGUNLOADING"],
   locations: [
-    a4cef656c2a04ca4aa6d19cee4eb9b7e,
-    b4cef656c2a04ca4aa6d19cee4eb9b7e,
+    "a4cef656c2a04ca4aa6d19cee4eb9b7e",
+    "b4cef656c2a04ca4aa6d19cee4eb9b7e",
   ],
   start_datetime: "2021-01-01T12:00:00",
 });
