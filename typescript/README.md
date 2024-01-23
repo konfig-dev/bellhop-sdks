@@ -731,7 +731,12 @@ Update the service configuration on a service group  Update services, workers an
 const updateResponse = await bellhop.quoteServiceGroups.update({
   quoteId: "quoteId_example",
   serviceGroupId: "serviceGroupId_example",
-  service_workers: [{ service_code = TRANSIT, workers = 1 }],
+  service_workers: [
+    {
+      service_code: "string_example",
+      workers: 1,
+    },
+  ],
 });
 ```
 
