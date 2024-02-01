@@ -21,8 +21,18 @@ operationIds:
     get: PostalCodes_getServiceability
   /quotes:
     post: Quotes_create
+  /quotes/service-groups/{service_group_id}/estimate:
+    get: QuoteServiceGroups_getEstimate
   /quotes/service_groups/{service_group_id}/locations:
     put: QuoteServiceGroups_changeLocations
+  /quotes/{inventory_id}/inventory:
+    delete: QuoteInventory_delete
+    put: QuoteInventory_update
+  /quotes/{quote_id}:
+    get: Quotes_get
+  /quotes/{quote_id}/inventory:
+    get: QuoteInventory_get
+    post: QuoteInventory_create
   /quotes/{quote_id}/service-group/{service_group_id}:
     delete: QuoteServiceGroups_delete
     get: QuoteServiceGroups_get
@@ -34,7 +44,9 @@ operationIds:
     put: QuoteServiceGroups_update
   /quotes/{quote_id}/service_groups/{service_group_id}/flexible:
     post: QuoteServiceGroups_createFlexible
-operationTags: {}
+operationTags:
+  /quotes/service-groups/{service_group_id}/estimate:
+    get: QuoteServiceGroups
 renameTags: {}
 requestSchemaNames:
   /quotes/service_groups/{service_group_id}/locations:
