@@ -25,6 +25,8 @@ readmeHeader:
   title: Bellhop
   image: header.png
   url: https://www.getbellhops.com
+filterPaths:
+  - path: /authorize
 generators:
   java:
     version: 0.1.0
