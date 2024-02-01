@@ -25,8 +25,8 @@ readmeHeader:
   title: Bellhop
   image: header.png
   url: https://www.getbellhops.com
-filterPaths:
-  - path: /authorize
+tagPriority:
+  - Quotes
 generators:
   java:
     version: 0.1.0
@@ -53,6 +53,12 @@ generators:
     npmName: bellhop-partners-typescript
     outputDirectory: typescript
     clientName: Bellhop
+    apiDocumentationAuthenticationPartial: snippets/typescriptDocAuthPartial.ts
+    clientStateWithExamples:
+      - name: clientId
+        required: true
+      - name: clientSecret
+        required: true
     git:
       userId: konfig-dev
       repoId: bellhop-sdks/tree/main/typescript

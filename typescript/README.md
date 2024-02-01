@@ -18,6 +18,8 @@ Bellhop's Partner API
 - [Installation](#installation)
 - [Getting Started](#getting-started)
 - [Reference](#reference)
+  * [`bellhop.quotes.create`](#bellhopquotescreate)
+  * [`bellhop.quotes.get`](#bellhopquotesget)
   * [`bellhop.authorization.getAuthToken`](#bellhopauthorizationgetauthtoken)
   * [`bellhop.leads.cancel`](#bellhopleadscancel)
   * [`bellhop.leads.create`](#bellhopleadscreate)
@@ -27,14 +29,18 @@ Bellhop's Partner API
   * [`bellhop.locations.createQuoting`](#bellhoplocationscreatequoting)
   * [`bellhop.orders.create`](#bellhoporderscreate)
   * [`bellhop.postalCodes.getServiceability`](#bellhoppostalcodesgetserviceability)
+  * [`bellhop.quoteInventory.create`](#bellhopquoteinventorycreate)
+  * [`bellhop.quoteInventory.delete`](#bellhopquoteinventorydelete)
+  * [`bellhop.quoteInventory.get`](#bellhopquoteinventoryget)
+  * [`bellhop.quoteInventory.update`](#bellhopquoteinventoryupdate)
   * [`bellhop.quoteServiceGroups.changeLocations`](#bellhopquoteservicegroupschangelocations)
   * [`bellhop.quoteServiceGroups.create`](#bellhopquoteservicegroupscreate)
   * [`bellhop.quoteServiceGroups.createFlexible`](#bellhopquoteservicegroupscreateflexible)
   * [`bellhop.quoteServiceGroups.delete`](#bellhopquoteservicegroupsdelete)
   * [`bellhop.quoteServiceGroups.get`](#bellhopquoteservicegroupsget)
+  * [`bellhop.quoteServiceGroups.getEstimate`](#bellhopquoteservicegroupsgetestimate)
   * [`bellhop.quoteServiceGroups.replace`](#bellhopquoteservicegroupsreplace)
   * [`bellhop.quoteServiceGroups.update`](#bellhopquoteservicegroupsupdate)
-  * [`bellhop.quotes.create`](#bellhopquotescreate)
 
 <!-- tocstop -->
 
@@ -79,20 +85,122 @@ import { Bellhop } from "bellhop-partners-typescript";
 const bellhop = new Bellhop({
   // Defining the base path is optional and defaults to https://partners.bellhops.dev/v5
   // basePath: "https://partners.bellhops.dev/v5",
-  accessToken: "ACCESS_TOKEN",
+  clientId: "CLIENT_ID",
+  clientSecret: "CLIENT_SECRET",
 });
 
-const getAuthTokenResponse = await bellhop.authorization.getAuthToken({
-  useCache: true,
-  client_id: "client_id_example",
-  client_secret: "client_secret_example",
-  audience: "audience_example",
+const createResponse = await bellhop.quotes.create({
+  customer: {
+    first_name: "first_name_example",
+    last_name: "last_name_example",
+    phone: "phone_example",
+    email: "email_example",
+  },
+  start_datetime: "2024-01-29T22:01:10.069722",
+  service_code: "LOCALFULLSERVICE",
+  locations: {
+    key: {
+      line_1: "line_1_example",
+      city: "city_example",
+      state: "state_example",
+      postal_code: "postal_code_example",
+      country: "US",
+    },
+  },
 });
 
-console.log(getAuthTokenResponse);
+console.log(createResponse);
 ```
 
 ## Reference<a id="reference"></a>
+
+
+### `bellhop.quotes.create`<a id="bellhopquotescreate"></a>
+
+Creates a quote  Creates a quote for a given customer using the provided locations and service code. The LOCALFULLSERVICE service code will generate a service group with LOADINGUNLOADING and TRANSIT services. All other service codes generate service groups with a single service.
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```typescript
+const createResponse = await bellhop.quotes.create({
+  customer: {
+    first_name: "first_name_example",
+    last_name: "last_name_example",
+    phone: "phone_example",
+    email: "email_example",
+  },
+  start_datetime: "2024-01-29T22:01:10.069722",
+  service_code: "LOCALFULLSERVICE",
+  locations: {
+    key: {
+      line_1: "line_1_example",
+      city: "city_example",
+      state: "state_example",
+      postal_code: "postal_code_example",
+      country: "US",
+    },
+  },
+});
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### customer: [`CreateQuoteRequestCustomer`](./models/create-quote-request-customer.ts)<a id="customer-createquoterequestcustomermodelscreate-quote-request-customerts"></a>
+
+##### start_datetime: `string`<a id="start_datetime-string"></a>
+
+Start date and time of the quote
+
+##### service_code: `string`<a id="service_code-string"></a>
+
+Services to be quoted
+
+##### locations: Record<string, [`LocationRequest`](./models/location-request.ts)><a id="locations-record"></a>
+
+Mapping locations and their sequence
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[QuoteResponse](./models/quote-response.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/quotes` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `bellhop.quotes.get`<a id="bellhopquotesget"></a>
+
+Fetch a quote by ID
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```typescript
+const getResponse = await bellhop.quotes.get({
+  quoteId: "quoteId_example",
+});
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### quoteId: `string`<a id="quoteid-string"></a>
+
+UUID of the quote
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[QuoteResponse](./models/quote-response.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/quotes/{quote_id}` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
 
 
 ### `bellhop.authorization.getAuthToken`<a id="bellhopauthorizationgetauthtoken"></a>
@@ -476,6 +584,200 @@ const getServiceabilityResponse = await bellhop.postalCodes.getServiceability({
 ---
 
 
+### `bellhop.quoteInventory.create`<a id="bellhopquoteinventorycreate"></a>
+
+Creates a quote inventory object on a quote
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```typescript
+const createResponse = await bellhop.quoteInventory.create({
+  quoteId: "quoteId_example",
+  area: 1000,
+  rooms: [
+    {
+      slug: "string_example",
+      count: 1,
+    },
+  ],
+  access_flags: {
+    elevator: true,
+    elevator_reserved: true,
+    long_walk_to_truck: true,
+    stair_flights: 1,
+  },
+  additional_items: [
+    {
+      slug: "string_example",
+      count: 1,
+    },
+  ],
+});
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### area: `number`<a id="area-number"></a>
+
+The area of the property in square feet.
+
+##### rooms: [`QuoteInventoryRoom`](./models/quote-inventory-room.ts)[]<a id="rooms-quoteinventoryroommodelsquote-inventory-roomts"></a>
+
+List of rooms in the property.
+
+##### access_flags: [`CreateQuoteInventoryRequestAccessFlags`](./models/create-quote-inventory-request-access-flags.ts)<a id="access_flags-createquoteinventoryrequestaccessflagsmodelscreate-quote-inventory-request-access-flagsts"></a>
+
+##### quoteId: `string`<a id="quoteid-string"></a>
+
+UUID of the source quote
+
+##### intent: [`MovingIntentNullable`](./models/moving-intent-nullable.ts)<a id="intent-movingintentnullablemodelsmoving-intent-nullablets"></a>
+
+The estimated amount of belongings to move.
+
+##### additional_items: [`QuoteInventoryItem`](./models/quote-inventory-item.ts)[]<a id="additional_items-quoteinventoryitemmodelsquote-inventory-itemts"></a>
+
+List of additional bulky items in the property.
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[QuoteInventoryResponse](./models/quote-inventory-response.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/quotes/{quote_id}/inventory` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `bellhop.quoteInventory.delete`<a id="bellhopquoteinventorydelete"></a>
+
+Delete Quote Inventory
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```typescript
+const deleteResponse = await bellhop.quoteInventory.delete({
+  inventoryId: "inventoryId_example",
+});
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### inventoryId: `string`<a id="inventoryid-string"></a>
+
+UUID of the inventory
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/quotes/{inventory_id}/inventory` `DELETE`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `bellhop.quoteInventory.get`<a id="bellhopquoteinventoryget"></a>
+
+Get Quote Inventory
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```typescript
+const getResponse = await bellhop.quoteInventory.get({
+  quoteId: "quoteId_example",
+});
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### quoteId: `string`<a id="quoteid-string"></a>
+
+UUID of the source quote
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[QuoteInventoryResponse](./models/quote-inventory-response.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/quotes/{quote_id}/inventory` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `bellhop.quoteInventory.update`<a id="bellhopquoteinventoryupdate"></a>
+
+Update Quote Inventory
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```typescript
+const updateResponse = await bellhop.quoteInventory.update({
+  inventoryId: "inventoryId_example",
+  area: 1000,
+  rooms: [
+    {
+      slug: "string_example",
+      count: 1,
+    },
+  ],
+  access_flags: {
+    elevator: true,
+    elevator_reserved: true,
+    long_walk_to_truck: true,
+    stair_flights: 1,
+  },
+  additional_items: [
+    {
+      slug: "string_example",
+      count: 1,
+    },
+  ],
+});
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### area: `number`<a id="area-number"></a>
+
+The area of the property in square feet.
+
+##### rooms: [`QuoteInventoryRoom`](./models/quote-inventory-room.ts)[]<a id="rooms-quoteinventoryroommodelsquote-inventory-roomts"></a>
+
+List of rooms in the property.
+
+##### access_flags: [`CreateQuoteInventoryRequestAccessFlags`](./models/create-quote-inventory-request-access-flags.ts)<a id="access_flags-createquoteinventoryrequestaccessflagsmodelscreate-quote-inventory-request-access-flagsts"></a>
+
+##### inventoryId: `string`<a id="inventoryid-string"></a>
+
+UUID of the inventory
+
+##### intent: [`MovingIntentNullable`](./models/moving-intent-nullable.ts)<a id="intent-movingintentnullablemodelsmoving-intent-nullablets"></a>
+
+The estimated amount of belongings to move.
+
+##### additional_items: [`QuoteInventoryItem`](./models/quote-inventory-item.ts)[]<a id="additional_items-quoteinventoryitemmodelsquote-inventory-itemts"></a>
+
+List of additional bulky items in the property.
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[QuoteInventoryResponse](./models/quote-inventory-response.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/quotes/{inventory_id}/inventory` `PUT`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
 ### `bellhop.quoteServiceGroups.changeLocations`<a id="bellhopquoteservicegroupschangelocations"></a>
 
 Overwrite the locations on a service group  The locations included in the request are overwritten as the locations on the service group maintaining the sequence in the request. This action triggers a re-estimation of the service group using the new locations.
@@ -487,8 +789,8 @@ const changeLocationsResponse =
   await bellhop.quoteServiceGroups.changeLocations({
     serviceGroupId: "service_group_id_example",
     requestBody: [
-      "a627084cd72247bf9217363f8772aa5f",
-      "12fb179d05294c3e8f433c315966a515",
+      "9ac41c1877714c1280adb9a14da426a5",
+      "b582168a67604c59b20534224e6630e4",
     ],
   });
 ```
@@ -682,6 +984,37 @@ UUID of the service group
 ---
 
 
+### `bellhop.quoteServiceGroups.getEstimate`<a id="bellhopquoteservicegroupsgetestimate"></a>
+
+Get Service Group Estimate
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```typescript
+const getEstimateResponse = await bellhop.quoteServiceGroups.getEstimate({
+  serviceGroupId: "serviceGroupId_example",
+});
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### serviceGroupId: `string`<a id="servicegroupid-string"></a>
+
+UUID of the service group
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[EstimationResponse](./models/estimation-response.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/quotes/service-groups/{service_group_id}/estimate` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
 ### `bellhop.quoteServiceGroups.replace`<a id="bellhopquoteservicegroupsreplace"></a>
 
 Replaces a service group with a flexible service group  Replaces the existing service group with the selected flexible service group.
@@ -765,63 +1098,6 @@ Duration for all services in group
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/quotes/{quote_id}/service-groups/{service_group_id}/services` `PUT`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `bellhop.quotes.create`<a id="bellhopquotescreate"></a>
-
-Creates a quote  Creates a quote for a given customer using the provided locations and service code. The LOCALFULLSERVICE service code will generate a service group with LOADINGUNLOADING and TRANSIT services. All other service codes generate service groups with a single service.
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```typescript
-const createResponse = await bellhop.quotes.create({
-  customer: {
-    first_name: "first_name_example",
-    last_name: "last_name_example",
-    phone: "phone_example",
-    email: "email_example",
-  },
-  start_datetime: "2024-01-22T17:33:27.541275",
-  service_code: "LOCALFULLSERVICE",
-  locations: {
-    key: {
-      line_1: "line_1_example",
-      city: "city_example",
-      state: "state_example",
-      postal_code: "postal_code_example",
-      country: "US",
-    },
-  },
-});
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### customer: [`CreateQuoteRequestCustomer`](./models/create-quote-request-customer.ts)<a id="customer-createquoterequestcustomermodelscreate-quote-request-customerts"></a>
-
-##### start_datetime: `string`<a id="start_datetime-string"></a>
-
-Start date and time of the quote
-
-##### service_code: `string`<a id="service_code-string"></a>
-
-Services to be quoted
-
-##### locations: Record<string, [`LocationRequest`](./models/location-request.ts)><a id="locations-record"></a>
-
-Mapping locations and their sequence
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[QuoteResponse](./models/quote-response.ts)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/quotes` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
