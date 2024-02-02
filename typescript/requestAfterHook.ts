@@ -19,12 +19,16 @@ export async function requestAfterHook({
       configuration?.clientSecret !== undefined &&
       configuration?.accessToken === undefined
     ) {
+      // remove subpath from base path
+      // e.g. https://partners.bellhops.dev/v5 -> https://partners.bellhops.dev
+      const audience = configuration.basePath.split("/").slice(0, 3).join("/");
+
       const tokenResponse = await axios.post(
-        `${configuration.basePath}/authorize`,
+        `${configuration.basePath}/authorize?use_cache=true`,
         {
-          grant_type: "client_credentials",
           client_id: configuration.clientId,
           client_secret: configuration.clientSecret,
+          audience,
         }
       );
       const token = tokenResponse.data.token;
@@ -45,7 +49,7 @@ export async function requestAfterHook({
     const token = configuration.accessToken;
     const decodedToken = jwtDecode(token);
     const currentTime = Date.now() / 1000;
-    if ((decodedToken as any)["expiry"] < currentTime) {
+    if ((decodedToken as any)["exp"] < currentTime) {
       await authenticate();
     }
   }

@@ -59,7 +59,6 @@ generators:
         required: true
       - name: clientSecret
         required: true
-      - name: audience
     dependencies:
      jwt-decode: 4.0.0
     git:
