@@ -1,6 +1,6 @@
 {
   "name": "bellhop-partners-typescript",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Client for partner-api",
   "author": "Konfig",
   "engines": {

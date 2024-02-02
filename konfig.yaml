@@ -49,7 +49,7 @@ generators:
       userId: konfig-dev
       repoId: bellhop-sdks/tree/main/python
   typescript:
-    version: 0.1.0
+    version: 0.1.1
     npmName: bellhop-partners-typescript
     outputDirectory: typescript
     clientName: Bellhop
@@ -60,7 +60,7 @@ generators:
       - name: clientSecret
         required: true
     dependencies:
-     jwt-decode: 4.0.0
+      jwt-decode: 4.0.0
     git:
       userId: konfig-dev
       repoId: bellhop-sdks/tree/main/typescript
