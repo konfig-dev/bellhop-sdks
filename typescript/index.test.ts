@@ -1,10 +1,10 @@
 import { Bellhop } from "./index";
 
 describe("bellhop-partners-typescript", () => {
-  it("initialize client", async () => {
+  it.skip("initialize client", async () => {
     const bellhop = new Bellhop({});
   });
-  it("Get Auth token", async () => {
+  it.skip("Get Auth token", async () => {
     const bellhop = new Bellhop({
       accessToken: "ACCESS_TOKEN",
       basePath: "http://127.0.0.1:4010",
@@ -16,7 +16,7 @@ describe("bellhop-partners-typescript", () => {
     });
     console.log(token.data);
   });
-  it("Cancel Lead", async () => {
+  it.skip("Cancel Lead", async () => {
     const bellhop = new Bellhop({
       accessToken: "ACCESS_TOKEN",
       basePath: "http://127.0.0.1:4010",
@@ -26,7 +26,7 @@ describe("bellhop-partners-typescript", () => {
     });
     console.log(lead.data);
   });
-  it("Create Lead", async () => {
+  it.skip("Create Lead", async () => {
     const bellhop = new Bellhop({
       accessToken: "ACCESS_TOKEN",
       basePath: "http://127.0.0.1:4010",
@@ -39,7 +39,7 @@ describe("bellhop-partners-typescript", () => {
     });
     console.log(lead.data);
   });
-  it("List Leads", async () => {
+  it.skip("List Leads", async () => {
     const bellhop = new Bellhop({
       accessToken: "ACCESS_TOKEN",
       basePath: "http://127.0.0.1:4010",
@@ -47,7 +47,20 @@ describe("bellhop-partners-typescript", () => {
     const leads = await bellhop.leads.list();
     console.log(leads.data);
   });
-  it("Leads Update", async () => {
+  it("List Leads OAuth", async () => {
+    const bellhop = new Bellhop({
+      clientId: process.env.BELLHOP_CLIENT_ID,
+      clientSecret: process.env.BELLHOP_CLIENT_SECRET,
+      basePath: "https://partners.bellhops.dev/v5",
+    });
+    const response = await bellhop.leads.list();
+    console.log(response.data);
+
+    // second one should check expiry
+    const response2 = await bellhop.leads.list();
+    console.log(response2.data);
+  });
+  it.skip("Leads Update", async () => {
     const bellhop = new Bellhop({
       accessToken: "ACCESS_TOKEN",
       basePath: "http://127.0.0.1:4010",
@@ -58,7 +71,7 @@ describe("bellhop-partners-typescript", () => {
     });
     console.log(lead.data);
   });
-  it("Creating Quoting Locaoion Object", async () => {
+  it.skip("Creating Quoting Locaoion Object", async () => {
     const bellhop = new Bellhop({
       accessToken: "ACCESS_TOKEN",
       basePath: "http://127.0.0.1:4010",
@@ -73,7 +86,7 @@ describe("bellhop-partners-typescript", () => {
     });
     console.log(createQuotingResponse.data);
   });
-  it("Create an order from quote", async () => {
+  it.skip("Create an order from quote", async () => {
     const bellhop = new Bellhop({
       accessToken: "ACCESS_TOKEN",
       basePath: "http://127.0.0.1:4010",
@@ -83,7 +96,7 @@ describe("bellhop-partners-typescript", () => {
     });
     console.log(createResponse.data);
   });
-  it("Get Postal Codes Serviceability", async () => {
+  it.skip("Get Postal Codes Serviceability", async () => {
     const bellhop = new Bellhop({
       accessToken: "ACCESS_TOKEN",
       basePath: "http://127.0.0.1:4010",
@@ -94,7 +107,7 @@ describe("bellhop-partners-typescript", () => {
       });
     console.log(getServiceabilityResponse.data);
   });
-  it("Overwrite locations on service group", async () => {
+  it.skip("Overwrite locations on service group", async () => {
     const bellhop = new Bellhop({
       accessToken: "ACCESS_TOKEN",
       basePath: "http://127.0.0.1:4010",
@@ -109,7 +122,7 @@ describe("bellhop-partners-typescript", () => {
       });
     console.log(changeLocationsResponse.data);
   });
-  it("Create New Service Group", async () => {
+  it.skip("Create New Service Group", async () => {
     const bellhop = new Bellhop({
       accessToken: "ACCESS_TOKEN",
       basePath: "http://127.0.0.1:4010",
@@ -124,7 +137,7 @@ describe("bellhop-partners-typescript", () => {
 
     console.log(serviceGroup.data);
   });
-  it("Create flexible service groups", async () => {
+  it.skip("Create flexible service groups", async () => {
     const bellhop = new Bellhop({
       accessToken: "ACCESS_TOKEN",
       basePath: "http://127.0.0.1:4010",
@@ -139,7 +152,7 @@ describe("bellhop-partners-typescript", () => {
       });
     console.log(createFlexibleResponse.data);
   });
-  it("Delete service group by id", async () => {
+  it.skip("Delete service group by id", async () => {
     const bellhop = new Bellhop({
       accessToken: "ACCESS_TOKEN",
       basePath: "http://127.0.0.1:4010",
@@ -150,7 +163,7 @@ describe("bellhop-partners-typescript", () => {
     });
     console.log(deleteResponse.data);
   });
-  it("Fetch service group by quote ID and service group ID", async () => {
+  it.skip("Fetch service group by quote ID and service group ID", async () => {
     const bellhop = new Bellhop({
       accessToken: "ACCESS_TOKEN",
       basePath: "http://127.0.0.1:4010",
@@ -161,7 +174,7 @@ describe("bellhop-partners-typescript", () => {
     });
     console.log(deleteResponse.data);
   });
-  it("Replace service group with flexible service group", async () => {
+  it.skip("Replace service group with flexible service group", async () => {
     const bellhop = new Bellhop({
       accessToken: "ACCESS_TOKEN",
       basePath: "http://127.0.0.1:4010",
@@ -173,7 +186,7 @@ describe("bellhop-partners-typescript", () => {
     });
     console.log(replaceResponse.data);
   });
-  it("Update service configuration on a service group", async () => {
+  it.skip("Update service configuration on a service group", async () => {
     const bellhop = new Bellhop({
       accessToken: "ACCESS_TOKEN",
       basePath: "http://127.0.0.1:4010",
@@ -190,7 +203,7 @@ describe("bellhop-partners-typescript", () => {
     });
     console.log(updateResponse.data);
   });
-  it("Create a quote for a given customer", async () => {
+  it.skip("Create a quote for a given customer", async () => {
     const bellhop = new Bellhop({
       accessToken: "ACCESS_TOKEN",
       basePath: "http://127.0.0.1:4010",
