@@ -21,7 +21,6 @@ type ApiKey =
 export interface ConfigurationParameters {
     clientId?: string;
     clientSecret?: string;
-    audience?: string;
     /**
      * parameter for apiKey security
      * @param name security name
@@ -46,10 +45,6 @@ export class Configuration {
     * Client state
     */
     clientSecret?: string;
-    /**
-    * Client state
-    */
-    audience?: string;
     /**
      * parameter for apiKey security
      * @param name security name
@@ -107,7 +102,6 @@ export class Configuration {
     constructor(param: ConfigurationParameters = {}) {
         this.clientId = param.clientId
         this.clientSecret = param.clientSecret
-        this.audience = param.audience
         this.apiKey = param.apiKey
         if (this.apiKey === undefined) {
             this.apiKey = {}
