@@ -1,5 +1,4 @@
 import { RequestArgs } from "./base";
-import { Bellhop } from "./client";
 import { Configuration } from "./configuration";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";

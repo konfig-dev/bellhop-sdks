@@ -23,7 +23,6 @@ Bellhop's Partner API
   * [`bellhop.lead.get`](#bellhopleadget)
   * [`bellhop.lead.list`](#bellhopleadlist)
   * [`bellhop.lead.update`](#bellhopleadupdate)
-  * [`bellhop.authorization.createAuthorize`](#bellhopauthorizationcreateauthorize)
   * [`bellhop.location.create`](#bellhoplocationcreate)
   * [`bellhop.order.create`](#bellhopordercreate)
   * [`bellhop.postalCode.listServiceability`](#bellhoppostalcodelistserviceability)
@@ -306,44 +305,6 @@ const updateResponse = await bellhop.lead.update({
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/leads/{lead_id}` `PATCH`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `bellhop.authorization.createAuthorize`<a id="bellhopauthorizationcreateauthorize"></a>
-
-Get Auth Token
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```typescript
-const createAuthorizeResponse = await bellhop.authorization.createAuthorize({
-  useCache: true,
-  client_id: "client_id_example",
-  client_secret: "client_secret_example",
-  audience: "audience_example",
-});
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### client_id: `string`<a id="client_id-string"></a>
-
-##### client_secret: `string`<a id="client_secret-string"></a>
-
-##### audience: `string`<a id="audience-string"></a>
-
-##### useCache: `boolean`<a id="usecache-boolean"></a>
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[Auth0TokenResponse](./models/auth0-token-response.ts)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/authorize` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

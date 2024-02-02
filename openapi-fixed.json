@@ -37,9 +37,6 @@
       "name": "Quote"
     },
     {
-      "name": "Authorization"
-    },
-    {
       "name": "PostalCode"
     },
     {
@@ -50,70 +47,6 @@
     }
   ],
   "paths": {
-    "/authorize": {
-      "post": {
-        "tags": [
-          "Authorization"
-        ],
-        "summary": "Get Auth Token",
-        "operationId": "Authorization_createAuthorize",
-        "parameters": [
-          {
-            "name": "use_cache",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "title": "Use Cache",
-              "type": "boolean",
-              "default": true
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Auth0TokenRequest"
-              },
-              "examples": {
-                "Example": {
-                  "summary": "Example",
-                  "description": "Example",
-                  "value": {
-                    "client_id": "147ee9a5d8334d988b2d805fc2bf5a10NOT_REAL",
-                    "client_secret": "0f27881a878c48cba709a7460c1ee757-03abbae1fa2d4482b70fb7d0d8324b9dNOT_REAL",
-                    "audience": "https://partners.bellhops.dev"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Auth0TokenResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/postal-codes/serviceability": {
       "get": {
         "tags": [

@@ -99,7 +99,7 @@ export class Configuration {
      */
     userAgent: string;
 
-    constructor(param: ConfigurationParameters = {}) {
+    constructor(param: ConfigurationParameters) {
         this.clientId = param.clientId
         this.clientSecret = param.clientSecret
         this.apiKey = param.apiKey

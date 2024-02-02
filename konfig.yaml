@@ -27,6 +27,8 @@ readmeHeader:
   url: https://www.getbellhops.com
 tagPriority:
   - Lead
+filterPaths:
+  - path: /authorize
 generators:
   java:
     version: 0.1.0
