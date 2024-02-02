@@ -61,6 +61,10 @@ responseSchemaNames:
     get:
       '200':
         application/json: LeadsListResponse
+  /quotes/{quote_id}/service-groups/{service_group_id}/flexible:
+    post:
+      '200':
+        application/json: QuoteServiceGroupCreateFlexibleResponse
   /quotes/{quote_id}/service_groups/{service_group_id}/flexible:
     post:
       '200':

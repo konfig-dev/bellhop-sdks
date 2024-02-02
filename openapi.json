@@ -20,13 +20,77 @@
     }
   ],
   "paths": {
+    "/authorize": {
+      "post": {
+        "tags": [
+          "Authorization"
+        ],
+        "summary": "Get Auth Token",
+        "operationId": "Authorization_createAuthorize",
+        "parameters": [
+          {
+            "name": "use_cache",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true,
+              "title": "Use Cache"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Auth0TokenRequest"
+              },
+              "examples": {
+                "Example": {
+                  "summary": "Example",
+                  "description": "Example",
+                  "value": {
+                    "client_id": "147ee9a5d8334d988b2d805fc2bf5a10NOT_REAL",
+                    "client_secret": "0f27881a878c48cba709a7460c1ee757-03abbae1fa2d4482b70fb7d0d8324b9dNOT_REAL",
+                    "audience": "https://partners.bellhops.dev"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Auth0TokenResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/postal-codes/serviceability": {
       "get": {
         "tags": [
-          "Postal Codes"
+          "PostalCode"
         ],
-        "summary": "Get Postal Codes Serviceability",
-        "operationId": "get_postal_codes_serviceability_postal_codes_serviceability_get",
+        "summary": "Get Postal Codes Serviceability V5",
+        "operationId": "PostalCode_listServiceability",
         "security": [
           {
             "Auth0HTTPBearer": []
@@ -86,10 +150,10 @@
     "/leads": {
       "post": {
         "tags": [
-          "Leads"
+          "Lead"
         ],
         "summary": "Create Lead",
-        "operationId": "create_lead_leads_post",
+        "operationId": "Lead_create",
         "security": [
           {
             "Auth0HTTPBearer": []
@@ -130,10 +194,10 @@
       },
       "get": {
         "tags": [
-          "Leads"
+          "Lead"
         ],
         "summary": "List Leads",
-        "operationId": "list_leads_leads_get",
+        "operationId": "Lead_list",
         "security": [
           {
             "Auth0HTTPBearer": []
@@ -186,13 +250,13 @@
         }
       }
     },
-    "/leads/{code}": {
+    "/leads/{lead_id}": {
       "get": {
         "tags": [
-          "Leads"
+          "Lead"
         ],
         "summary": "Get Lead",
-        "operationId": "get_lead_leads__code__get",
+        "operationId": "Lead_get",
         "security": [
           {
             "Auth0HTTPBearer": []
@@ -200,12 +264,12 @@
         ],
         "parameters": [
           {
-            "name": "code",
+            "name": "lead_id",
             "in": "path",
             "required": true,
             "schema": {
               "type": "string",
-              "title": "Code"
+              "title": "Lead Id"
             }
           }
         ],
@@ -234,10 +298,10 @@
       },
       "delete": {
         "tags": [
-          "Leads"
+          "Lead"
         ],
         "summary": "Cancel Lead",
-        "operationId": "cancel_lead_leads__code__delete",
+        "operationId": "Lead_delete",
         "security": [
           {
             "Auth0HTTPBearer": []
@@ -245,12 +309,12 @@
         ],
         "parameters": [
           {
-            "name": "code",
+            "name": "lead_id",
             "in": "path",
             "required": true,
             "schema": {
               "type": "string",
-              "title": "Code"
+              "title": "Lead Id"
             }
           }
         ],
@@ -272,10 +336,11 @@
       },
       "patch": {
         "tags": [
-          "Leads"
+          "Lead"
         ],
         "summary": "Update Lead",
-        "operationId": "update_lead_leads__code__patch",
+        "description": "Update attributes of a lead.\n\n:lead_id: The ID of the lead to update. This can be either the bellhop id or the external_id.",
+        "operationId": "Lead_update",
         "security": [
           {
             "Auth0HTTPBearer": []
@@ -283,12 +348,12 @@
         ],
         "parameters": [
           {
-            "name": "code",
+            "name": "lead_id",
             "in": "path",
             "required": true,
             "schema": {
               "type": "string",
-              "title": "Code"
+              "title": "Lead Id"
             }
           }
         ],
@@ -329,11 +394,11 @@
     "/quotes/{quote_id}": {
       "get": {
         "tags": [
-          "Quotes"
+          "Quote"
         ],
         "summary": "Get Quote",
         "description": "Fetch a quote by ID",
-        "operationId": "get_quote_quotes__quote_id__get",
+        "operationId": "Quote_get",
         "security": [
           {
             "Auth0HTTPBearer": []
@@ -379,11 +444,11 @@
     "/quotes": {
       "post": {
         "tags": [
-          "Quotes"
+          "Quote"
         ],
         "summary": "Create Quote",
         "description": "Creates a quote\n\nCreates a quote for a given customer using the provided locations and service code.\nThe LOCALFULLSERVICE service code will generate a service group with\nLOADINGUNLOADING and TRANSIT services.\nAll other service codes generate service groups with a single service.",
-        "operationId": "create_quote_quotes_post",
+        "operationId": "Quote_create",
         "requestBody": {
           "content": {
             "application/json": {
@@ -420,6 +485,28 @@
                         "country": "US",
                         "property_type": "SINGLE_FAMILY_HOME"
                       }
+                    },
+                    "inventory": {
+                      "area": 1500,
+                      "intent": "EVERYTHING",
+                      "rooms": [
+                        {
+                          "slug": "primary-bedroom",
+                          "count": 1
+                        }
+                      ],
+                      "access_flags": {
+                        "elevator": false,
+                        "elevator_reserved": false,
+                        "long_walk_to_truck": false,
+                        "stair_flights": 1
+                      },
+                      "additional_items": [
+                        {
+                          "slug": "washing-machine",
+                          "count": 1
+                        }
+                      ]
                     }
                   }
                 }
@@ -460,11 +547,11 @@
     "/quotes/{quote_id}/service-groups": {
       "post": {
         "tags": [
-          "QuoteServiceGroups"
+          "QuoteServiceGroup"
         ],
         "summary": "Create Service Group",
         "description": "Creates a new service group\n\nA service group is a collection of services that are performed at the\nsame time and location.\nThe created service group will be created with the provided services,\nlocations, and start date time.\nThe workers, duration, and end date time will be estimated based on the\nlocations and inventory attached to the quote.",
-        "operationId": "create_service_group_quotes__quote_id__service_groups_post",
+        "operationId": "QuoteServiceGroup_create",
         "security": [
           {
             "Auth0HTTPBearer": []
@@ -543,11 +630,11 @@
     "/quotes/service_groups/{service_group_id}/locations": {
       "put": {
         "tags": [
-          "QuoteServiceGroups"
+          "QuoteServiceGroup"
         ],
         "summary": "Change Locations On Service Group",
         "description": "Overwrite the locations on a service group\n\nThe locations included in the request are overwritten as the locations on\nthe service group maintaining the sequence in the request.\nThis action triggers a re-estimation of the service group using the new locations.",
-        "operationId": "change_locations_on_service_group_quotes_service_groups__service_group_id__locations_put",
+        "operationId": "QuoteServiceGroup_updateService_groups",
         "security": [
           {
             "Auth0HTTPBearer": []
@@ -583,8 +670,8 @@
                   "summary": "Change locations",
                   "description": "Change locations on a service group",
                   "value": [
-                    "9ac41c1877714c1280adb9a14da426a5",
-                    "b582168a67604c59b20534224e6630e4"
+                    "7b755011519641faa612ce9e47c8e7d4",
+                    "c5f4b1e593c54c11a7e6704da332f4f2"
                   ]
                 }
               }
@@ -618,11 +705,11 @@
     "/quotes/{quote_id}/service-group/{service_group_id}": {
       "get": {
         "tags": [
-          "QuoteServiceGroups"
+          "QuoteServiceGroup"
         ],
         "summary": "Get Service Group",
         "description": "Fetch a service group by quote ID and service group ID",
-        "operationId": "get_service_group_quotes__quote_id__service_group__service_group_id__get",
+        "operationId": "QuoteServiceGroup_getService-group",
         "security": [
           {
             "Auth0HTTPBearer": []
@@ -677,11 +764,11 @@
       },
       "delete": {
         "tags": [
-          "QuoteServiceGroups"
+          "QuoteServiceGroup"
         ],
         "summary": "Delete Service Group",
         "description": "Delete a service group by quote ID and service group ID",
-        "operationId": "delete_service_group_quotes__quote_id__service_group__service_group_id__delete",
+        "operationId": "QuoteServiceGroup_deleteService-group",
         "security": [
           {
             "Auth0HTTPBearer": []
@@ -731,11 +818,11 @@
     "/quotes/{quote_id}/service-groups/{service_group_id}": {
       "patch": {
         "tags": [
-          "QuoteServiceGroups"
+          "QuoteServiceGroup"
         ],
         "summary": "Replace Service Group",
         "description": "Replaces a service group with a flexible service group\n\nReplaces the existing service group with the selected flexible service group.",
-        "operationId": "Replace_Service_Group_quotes__quote_id__service_groups__service_group_id__patch",
+        "operationId": "QuoteServiceGroup_update",
         "security": [
           {
             "Auth0HTTPBearer": []
@@ -777,7 +864,7 @@
                   "summary": "Replace a service group",
                   "description": "Replace a service group",
                   "value": {
-                    "flexible_quote_id": "dd313bc3-5e69-45d0-a6d7-7e8f89a19c0b"
+                    "flexible_quote_id": "d286dbfd-76a0-4457-ae69-08ca9b3f2dde"
                   }
                 }
               }
@@ -811,11 +898,11 @@
     "/quotes/{quote_id}/service-groups/{service_group_id}/services": {
       "put": {
         "tags": [
-          "QuoteServiceGroups"
+          "QuoteServiceGroup"
         ],
         "summary": "Update Service Group Services",
         "description": "Update the service configuration on a service group\n\nUpdate services, workers and duration on a service group.\nthe service_workers object is a mapping of service code and number of workers.\n\nOnly the included service codes will be retained on the service group.\n\nAny excluded services will be removed.",
-        "operationId": "Update_Service_Group_Services_quotes__quote_id__service_groups__service_group_id__services_put",
+        "operationId": "QuoteServiceGroup_updateServices",
         "security": [
           {
             "Auth0HTTPBearer": []
@@ -857,7 +944,7 @@
                   "summary": "Update a service group",
                   "description": "Update a service group",
                   "value": {
-                    "duration": 120,
+                    "duration": 120.0,
                     "service_workers": [
                       {
                         "service_code": "LOADINGUNLOADING",
@@ -898,14 +985,14 @@
         }
       }
     },
-    "/quotes/{quote_id}/service_groups/{service_group_id}/flexible": {
+    "/quotes/{quote_id}/service-groups/{service_group_id}/flexible": {
       "post": {
         "tags": [
-          "QuoteServiceGroups"
+          "QuoteServiceGroup"
         ],
         "summary": "Create Flexible Service Groups",
         "description": "Creates an array of flexible service groups from a service group\n\nGenerate an array of flexible service groups. The services and locations\nwill be copied from the source service group.\nOne flexible service group will be created for each day and hour combination in the input.",
-        "operationId": "create_flexible_service_groups_quotes__quote_id__service_groups__service_group_id__flexible_post",
+        "operationId": "QuoteServiceGroup_createFlexible",
         "security": [
           {
             "Auth0HTTPBearer": []
@@ -989,147 +1076,12 @@
       }
     },
     "/quotes/{quote_id}/inventory": {
-      "post": {
-        "tags": [
-          "QuoteInventory"
-        ],
-        "summary": "Create Quote Inventory",
-        "description": "Creates a quote inventory object on a quote",
-        "operationId": "create_quote_inventory_quotes__quote_id__inventory_post",
-        "security": [
-          {
-            "Auth0HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "quote_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Quote ID",
-              "description": "UUID of the source quote"
-            },
-            "description": "UUID of the source quote"
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateQuoteInventoryRequest"
-              },
-              "examples": {
-                "default": {
-                  "summary": "Request for creating inventory on a quote",
-                  "description": "Contains information about the inventory to be created",
-                  "value": {
-                    "area": 1500,
-                    "intent": "EVERYTHING",
-                    "rooms": [
-                      {
-                        "slug": "primary-bedroom",
-                        "count": 1
-                      }
-                    ],
-                    "access_flags": {
-                      "elevator": false,
-                      "elevator_reserved": false,
-                      "long_walk_to_truck": false,
-                      "stair_flights": 1
-                    },
-                    "additional_items": [
-                      {
-                        "slug": "washing-machine",
-                        "count": 1
-                      }
-                    ]
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/QuoteInventoryResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "QuoteInventory"
-        ],
-        "summary": "Get Quote Inventory",
-        "operationId": "get_quote_inventory_quotes__quote_id__inventory_get",
-        "security": [
-          {
-            "Auth0HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "quote_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Quote ID",
-              "description": "UUID of the source quote"
-            },
-            "description": "UUID of the source quote"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/QuoteInventoryResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/quotes/{inventory_id}/inventory": {
       "put": {
         "tags": [
           "QuoteInventory"
         ],
         "summary": "Update Quote Inventory",
-        "operationId": "update_quote_inventory_quotes__inventory_id__inventory_put",
+        "operationId": "QuoteInventory_updateInventory",
         "security": [
           {
             "Auth0HTTPBearer": []
@@ -1137,7 +1089,7 @@
         ],
         "parameters": [
           {
-            "name": "inventory_id",
+            "name": "quote_id",
             "in": "path",
             "required": true,
             "schema": {
@@ -1153,7 +1105,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateQuoteInventoryRequest"
+                "$ref": "#/components/schemas/SetQuoteInventoryRequest"
               },
               "examples": {
                 "default": {
@@ -1214,7 +1166,7 @@
           "QuoteInventory"
         ],
         "summary": "Delete Quote Inventory",
-        "operationId": "delete_quote_inventory_quotes__inventory_id__inventory_delete",
+        "operationId": "QuoteInventory_deleteInventory",
         "security": [
           {
             "Auth0HTTPBearer": []
@@ -1222,7 +1174,7 @@
         ],
         "parameters": [
           {
-            "name": "inventory_id",
+            "name": "quote_id",
             "in": "path",
             "required": true,
             "schema": {
@@ -1248,12 +1200,62 @@
             }
           }
         }
+      },
+      "get": {
+        "tags": [
+          "QuoteInventory"
+        ],
+        "summary": "Get Quote Inventory",
+        "operationId": "QuoteInventory_listInventory",
+        "security": [
+          {
+            "Auth0HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "quote_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Quote ID",
+              "description": "UUID of the source quote"
+            },
+            "description": "UUID of the source quote"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QuoteInventoryResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/quotes/service-groups/{service_group_id}/estimate": {
-      "get": {
+      "post": {
+        "tags": [
+          "QuoteServiceGroup"
+        ],
         "summary": "Get Service Group Estimate",
-        "operationId": "get_service_group_estimate_quotes_service_groups__service_group_id__estimate_get",
+        "operationId": "QuoteServiceGroup_createEstimate",
         "security": [
           {
             "Auth0HTTPBearer": []
@@ -1299,11 +1301,11 @@
     "/locations": {
       "post": {
         "tags": [
-          "Locations"
+          "Location"
         ],
         "summary": "Create Quoting Location",
         "description": "Create quoting location object from address\n\nCreate Quoting Location standardizes input address via USPS and generates\ngeo-location details Google Maps APIs.\nThe location id is a hash of the required fields on the location object.",
-        "operationId": "Create_Quoting_Location_locations_post",
+        "operationId": "Location_create",
         "requestBody": {
           "content": {
             "application/json": {
@@ -1361,11 +1363,11 @@
     "/orders/{quote_id}": {
       "post": {
         "tags": [
-          "Orders"
+          "Order"
         ],
         "summary": "Create Order",
         "description": "Creates an order from a quote",
-        "operationId": "create_order_orders__quote_id__post",
+        "operationId": "Order_create",
         "security": [
           {
             "Auth0HTTPBearer": []
@@ -1391,70 +1393,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/OrderResponseV2"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/authorize": {
-      "post": {
-        "tags": [
-          "Authorization"
-        ],
-        "summary": "Get Auth Token",
-        "operationId": "get_auth_token_authorize_post",
-        "parameters": [
-          {
-            "name": "use_cache",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "boolean",
-              "default": true,
-              "title": "Use Cache"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Auth0TokenRequest"
-              },
-              "examples": {
-                "Example": {
-                  "summary": "Example",
-                  "description": "Example",
-                  "value": {
-                    "client_id": "230f2001a964452b9715c22308dfb0b3NOT_REAL",
-                    "client_secret": "a2dc352bd2ee4e36a8fcc030583b500e-98ae16fabc0e4223848747a1242e8aaaNOT_REAL",
-                    "audience": "https://partners.bellhops.dev"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Auth0TokenResponse"
                 }
               }
             }
@@ -2078,95 +2016,6 @@
         "title": "CreateLeadRequest",
         "description": "Input model for creating a lead"
       },
-      "CreateQuoteInventoryRequest": {
-        "properties": {
-          "area": {
-            "type": "integer",
-            "title": "Area",
-            "description": "The area of the property in square feet.",
-            "examples": [
-              1000,
-              2500,
-              3000
-            ]
-          },
-          "intent": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/MovingIntent"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "The estimated amount of belongings to move.",
-            "default": "EVERYTHING",
-            "examples": [
-              "EVERYTHING",
-              "HALF"
-            ]
-          },
-          "rooms": {
-            "items": {
-              "$ref": "#/components/schemas/QuoteInventoryRoom"
-            },
-            "type": "array",
-            "title": "Rooms",
-            "description": "List of rooms in the property.",
-            "examples": [
-              {
-                "count": 1,
-                "slug": "primary-bedroom"
-              }
-            ]
-          },
-          "access_flags": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/EstimationAccessFlags"
-              }
-            ],
-            "description": "Access challenges for the property.",
-            "examples": [
-              {
-                "elevator": false,
-                "elevator_reserved": false,
-                "long_walk_to_truck": false,
-                "stair_flights": 1
-              }
-            ]
-          },
-          "additional_items": {
-            "anyOf": [
-              {
-                "items": {
-                  "$ref": "#/components/schemas/QuoteInventoryItem"
-                },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Additional Items",
-            "description": "List of additional bulky items in the property.",
-            "examples": [
-              {
-                "count": 1,
-                "slug": "washing-machine"
-              }
-            ]
-          }
-        },
-        "type": "object",
-        "required": [
-          "area",
-          "rooms",
-          "access_flags"
-        ],
-        "title": "CreateQuoteInventoryRequest",
-        "description": "Request body for creating room based inventory related to a quote"
-      },
       "CreateQuoteRequest": {
         "properties": {
           "customer": {
@@ -2191,7 +2040,7 @@
             "title": "Start Datetime",
             "description": "Start date and time of the quote",
             "examples": [
-              "2024-01-29T22:01:10.069722"
+              "2024-02-02T16:12:36.152282"
             ]
           },
           "service_code": {
@@ -2228,6 +2077,41 @@
                   "property_type": "SINGLE_FAMILY_HOME",
                   "state": "NY"
                 }
+              }
+            ]
+          },
+          "inventory": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SetQuoteInventoryRequest"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Inventory to be quoted",
+            "examples": [
+              {
+                "access_flags": {
+                  "elevator": false,
+                  "elevator_reserved": false,
+                  "long_walk_to_truck": false,
+                  "stair_flights": 1
+                },
+                "additional_items": [
+                  {
+                    "count": 1,
+                    "slug": "washing-machine"
+                  }
+                ],
+                "area": 1500,
+                "intent": "EVERYTHING",
+                "rooms": [
+                  {
+                    "count": 1,
+                    "slug": "primary-bedroom"
+                  }
+                ]
               }
             ]
           }
@@ -2641,7 +2525,13 @@
               20
             ],
             "examples": [
-              "[8, 9, 10, 11, 12]"
+              [
+                8,
+                9,
+                10,
+                11,
+                12
+              ]
             ]
           }
         },
@@ -3685,7 +3575,7 @@
             "title": "Id",
             "description": "Location ID",
             "examples": [
-              "d688fcb54ddf42ba91f5edb774377b4c"
+              "38fd476fb69743b88c3cd3efe202b72e"
             ]
           },
           "property_type": {
@@ -3718,6 +3608,21 @@
             "examples": [
               "America/New_York"
             ]
+          },
+          "area": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Area",
+            "description": "Area in square feet",
+            "examples": [
+              1000
+            ]
           }
         },
         "type": "object",
@@ -3731,7 +3636,8 @@
           "market_code",
           "id",
           "property_type",
-          "timezone"
+          "timezone",
+          "area"
         ],
         "title": "LocationResponse",
         "description": "LocationResponse extends USPSLocationResponse with additional fields"
@@ -4587,7 +4493,7 @@
             "anyOf": [
               {
                 "type": "integer",
-                "minimum": 0
+                "minimum": 0.0
               },
               {
                 "type": "null"
@@ -4600,7 +4506,7 @@
             "anyOf": [
               {
                 "type": "integer",
-                "minimum": 0
+                "minimum": 0.0
               },
               {
                 "type": "null"
@@ -4625,7 +4531,7 @@
             "anyOf": [
               {
                 "type": "integer",
-                "minimum": 0
+                "minimum": 0.0
               },
               {
                 "type": "null"
@@ -4638,7 +4544,7 @@
             "anyOf": [
               {
                 "type": "integer",
-                "minimum": 0
+                "minimum": 0.0
               },
               {
                 "type": "null"
@@ -4753,21 +4659,21 @@
             "examples": [
               [
                 {
-                  "created_at": "2024-01-29T22:01:08.413668+00:00",
-                  "end_datetime": "2024-01-29T22:01:08.413672+00:00",
+                  "created_at": "2024-02-02T16:12:35.244459+00:00",
+                  "end_datetime": "2024-02-02T16:12:35.244471+00:00",
                   "end_timezone": "America/New_York",
                   "estimated_hours": 2.5,
                   "estimated_pricing_strategy": "HOURLY",
                   "estimated_unit_price": 10000,
                   "estimated_workers": 2,
-                  "id": "7db5a491-6069-4331-acf8-4545f41970e1",
+                  "id": "260bb103-faf0-42af-9156-2e9d8807e333",
                   "locked": false,
                   "service_code": "LOADING",
-                  "service_group_id": "838f2c4d-e024-4c61-a00c-4ad327129f5a",
-                  "start_datetime": "2024-01-29T22:01:08.413672+00:00",
+                  "service_group_id": "8c054668-5b5f-4de9-b2a6-9fb46b17bc11",
+                  "start_datetime": "2024-02-02T16:12:35.244471+00:00",
                   "start_timezone": "America/New_York",
                   "total_cost": 10000,
-                  "updated_at": "2024-01-29T22:01:08.413671+00:00"
+                  "updated_at": "2024-02-02T16:12:35.244470+00:00"
                 }
               ]
             ]
@@ -4829,9 +4735,10 @@
             "description": "Location object",
             "examples": [
               {
+                "area": 1000,
                 "city": "New York City",
                 "country": "US",
-                "id": "cbf70ddd24e74876a64815aeec594a14",
+                "id": "e277864463f147e8ac490693e3d2bc7f",
                 "line_1": "123 Main St",
                 "line_2": "Apt 1",
                 "market_code": "NEW_YORK_NY",
@@ -4860,7 +4767,7 @@
             "title": "Id",
             "description": "Service Quote ID",
             "examples": [
-              "fcba6705-9153-466a-b1d9-c5ebaefe6535"
+              "c0f11a6c-4be0-42ca-84cc-8d3c76d19ce5"
             ]
           },
           "created_at": {
@@ -5024,7 +4931,7 @@
             "title": "Service Group Id",
             "description": "Service Group ID",
             "examples": [
-              "af4e3fa7-2a03-40e2-9ca9-6a6df0979826"
+              "904c8d8d-bfd2-4904-bbe0-7443ee114549"
             ]
           },
           "service_code": {
@@ -5111,7 +5018,7 @@
           },
           "workers": {
             "type": "integer",
-            "minimum": 1,
+            "minimum": 1.0,
             "title": "Workers",
             "description": "Number of workers",
             "examples": [
@@ -5127,51 +5034,7 @@
         "title": "ServiceWorkers",
         "description": "ServiceWorkers"
       },
-      "Totals": {
-        "properties": {
-          "service_total": {
-            "type": "integer",
-            "title": "Service Total"
-          },
-          "product_total": {
-            "type": "integer",
-            "title": "Product Total"
-          },
-          "fee_total": {
-            "type": "integer",
-            "title": "Fee Total"
-          },
-          "subtotal": {
-            "type": "integer",
-            "title": "Subtotal"
-          },
-          "discount_total": {
-            "type": "integer",
-            "title": "Discount Total"
-          },
-          "total": {
-            "type": "integer",
-            "title": "Total"
-          },
-          "deposit_amount": {
-            "type": "integer",
-            "title": "Deposit Amount"
-          }
-        },
-        "type": "object",
-        "required": [
-          "service_total",
-          "product_total",
-          "fee_total",
-          "subtotal",
-          "discount_total",
-          "total",
-          "deposit_amount"
-        ],
-        "title": "Totals",
-        "description": "Response for computed quote totals (populated by Quote.totals property)"
-      },
-      "UpdateQuoteInventoryRequest": {
+      "SetQuoteInventoryRequest": {
         "properties": {
           "area": {
             "type": "integer",
@@ -5257,32 +5120,71 @@
           "rooms",
           "access_flags"
         ],
-        "title": "UpdateQuoteInventoryRequest",
+        "title": "SetQuoteInventoryRequest",
         "description": "Request body for updating room based inventory related to a quote"
+      },
+      "Totals": {
+        "properties": {
+          "service_total": {
+            "type": "integer",
+            "title": "Service Total"
+          },
+          "product_total": {
+            "type": "integer",
+            "title": "Product Total"
+          },
+          "fee_total": {
+            "type": "integer",
+            "title": "Fee Total"
+          },
+          "subtotal": {
+            "type": "integer",
+            "title": "Subtotal"
+          },
+          "discount_total": {
+            "type": "integer",
+            "title": "Discount Total"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          },
+          "deposit_amount": {
+            "type": "integer",
+            "title": "Deposit Amount"
+          }
+        },
+        "type": "object",
+        "required": [
+          "service_total",
+          "product_total",
+          "fee_total",
+          "subtotal",
+          "discount_total",
+          "total",
+          "deposit_amount"
+        ],
+        "title": "Totals",
+        "description": "Response for computed quote totals (populated by Quote.totals property)"
       },
       "UpdateServiceGroupRequestV2": {
         "properties": {
           "duration": {
             "anyOf": [
               {
-                "type": "number"
+                "type": "number",
+                "minimum": 1.0
               },
               {
                 "type": "null"
               }
             ],
             "title": "Duration",
-            "description": "Duration for all services in group",
-            "gte": 1
+            "description": "Duration for all services in group"
           },
           "service_workers": {
             "items": {
-              "allOf": [
-                {
-                  "$ref": "#/components/schemas/ServiceWorkers"
-                }
-              ],
-              "name": "Service Workers Object"
+              "$ref": "#/components/schemas/ServiceWorkers"
             },
             "type": "array",
             "minItems": 1,

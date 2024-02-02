@@ -26,10 +26,10 @@ import { paginate } from "../pagination/paginate";
 import type * as buffer from "buffer"
 import { requestBeforeHook } from '../requestBeforeHook';
 /**
- * OrdersApi - axios parameter creator
+ * OrderApi - axios parameter creator
  * @export
  */
-export const OrdersApiAxiosParamCreator = function (configuration?: Configuration) {
+export const OrderApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * Creates an order from a quote
@@ -78,20 +78,20 @@ export const OrdersApiAxiosParamCreator = function (configuration?: Configuratio
 };
 
 /**
- * OrdersApi - functional programming interface
+ * OrderApi - functional programming interface
  * @export
  */
-export const OrdersApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = OrdersApiAxiosParamCreator(configuration)
+export const OrderApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = OrderApiAxiosParamCreator(configuration)
     return {
         /**
          * Creates an order from a quote
          * @summary Create Order
-         * @param {OrdersApiCreateRequest} requestParameters Request parameters.
+         * @param {OrderApiCreateRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async create(requestParameters: OrdersApiCreateRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OrderResponseV2>> {
+        async create(requestParameters: OrderApiCreateRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OrderResponseV2>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.create(requestParameters.quoteId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -99,57 +99,57 @@ export const OrdersApiFp = function(configuration?: Configuration) {
 };
 
 /**
- * OrdersApi - factory interface
+ * OrderApi - factory interface
  * @export
  */
-export const OrdersApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = OrdersApiFp(configuration)
+export const OrderApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = OrderApiFp(configuration)
     return {
         /**
          * Creates an order from a quote
          * @summary Create Order
-         * @param {OrdersApiCreateRequest} requestParameters Request parameters.
+         * @param {OrderApiCreateRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        create(requestParameters: OrdersApiCreateRequest, options?: AxiosRequestConfig): AxiosPromise<OrderResponseV2> {
+        create(requestParameters: OrderApiCreateRequest, options?: AxiosRequestConfig): AxiosPromise<OrderResponseV2> {
             return localVarFp.create(requestParameters, options).then((request) => request(axios, basePath));
         },
     };
 };
 
 /**
- * Request parameters for create operation in OrdersApi.
+ * Request parameters for create operation in OrderApi.
  * @export
- * @interface OrdersApiCreateRequest
+ * @interface OrderApiCreateRequest
  */
-export type OrdersApiCreateRequest = {
+export type OrderApiCreateRequest = {
     
     /**
     * Quote ID to generate order from
     * @type {string}
-    * @memberof OrdersApiCreate
+    * @memberof OrderApiCreate
     */
     readonly quoteId: string
     
 }
 
 /**
- * OrdersApiGenerated - object-oriented interface
+ * OrderApiGenerated - object-oriented interface
  * @export
- * @class OrdersApiGenerated
+ * @class OrderApiGenerated
  * @extends {BaseAPI}
  */
-export class OrdersApiGenerated extends BaseAPI {
+export class OrderApiGenerated extends BaseAPI {
     /**
      * Creates an order from a quote
      * @summary Create Order
-     * @param {OrdersApiCreateRequest} requestParameters Request parameters.
+     * @param {OrderApiCreateRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof OrdersApiGenerated
+     * @memberof OrderApiGenerated
      */
-    public create(requestParameters: OrdersApiCreateRequest, options?: AxiosRequestConfig) {
-        return OrdersApiFp(this.configuration).create(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    public create(requestParameters: OrderApiCreateRequest, options?: AxiosRequestConfig) {
+        return OrderApiFp(this.configuration).create(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 }

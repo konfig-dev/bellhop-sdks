@@ -28,14 +28,16 @@ import { HTTPValidationError } from '../models';
 import { LocationRequest } from '../models';
 // @ts-ignore
 import { QuoteResponse } from '../models';
+// @ts-ignore
+import { SetQuoteInventoryRequestNullable } from '../models';
 import { paginate } from "../pagination/paginate";
 import type * as buffer from "buffer"
 import { requestBeforeHook } from '../requestBeforeHook';
 /**
- * QuotesApi - axios parameter creator
+ * QuoteApi - axios parameter creator
  * @export
  */
-export const QuotesApiAxiosParamCreator = function (configuration?: Configuration) {
+export const QuoteApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * Creates a quote  Creates a quote for a given customer using the provided locations and service code. The LOCALFULLSERVICE service code will generate a service group with LOADINGUNLOADING and TRANSIT services. All other service codes generate service groups with a single service.
@@ -131,31 +133,31 @@ export const QuotesApiAxiosParamCreator = function (configuration?: Configuratio
 };
 
 /**
- * QuotesApi - functional programming interface
+ * QuoteApi - functional programming interface
  * @export
  */
-export const QuotesApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = QuotesApiAxiosParamCreator(configuration)
+export const QuoteApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = QuoteApiAxiosParamCreator(configuration)
     return {
         /**
          * Creates a quote  Creates a quote for a given customer using the provided locations and service code. The LOCALFULLSERVICE service code will generate a service group with LOADINGUNLOADING and TRANSIT services. All other service codes generate service groups with a single service.
          * @summary Create Quote
-         * @param {QuotesApiCreateRequest} requestParameters Request parameters.
+         * @param {QuoteApiCreateRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async create(requestParameters: QuotesApiCreateRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<QuoteResponse>> {
+        async create(requestParameters: QuoteApiCreateRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<QuoteResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.create(requestParameters, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * Fetch a quote by ID
          * @summary Get Quote
-         * @param {QuotesApiGetRequest} requestParameters Request parameters.
+         * @param {QuoteApiGetRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async get(requestParameters: QuotesApiGetRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<QuoteResponse>> {
+        async get(requestParameters: QuoteApiGetRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<QuoteResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.get(requestParameters.quoteId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -163,88 +165,88 @@ export const QuotesApiFp = function(configuration?: Configuration) {
 };
 
 /**
- * QuotesApi - factory interface
+ * QuoteApi - factory interface
  * @export
  */
-export const QuotesApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = QuotesApiFp(configuration)
+export const QuoteApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = QuoteApiFp(configuration)
     return {
         /**
          * Creates a quote  Creates a quote for a given customer using the provided locations and service code. The LOCALFULLSERVICE service code will generate a service group with LOADINGUNLOADING and TRANSIT services. All other service codes generate service groups with a single service.
          * @summary Create Quote
-         * @param {QuotesApiCreateRequest} requestParameters Request parameters.
+         * @param {QuoteApiCreateRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        create(requestParameters: QuotesApiCreateRequest, options?: AxiosRequestConfig): AxiosPromise<QuoteResponse> {
+        create(requestParameters: QuoteApiCreateRequest, options?: AxiosRequestConfig): AxiosPromise<QuoteResponse> {
             return localVarFp.create(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
          * Fetch a quote by ID
          * @summary Get Quote
-         * @param {QuotesApiGetRequest} requestParameters Request parameters.
+         * @param {QuoteApiGetRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        get(requestParameters: QuotesApiGetRequest, options?: AxiosRequestConfig): AxiosPromise<QuoteResponse> {
+        get(requestParameters: QuoteApiGetRequest, options?: AxiosRequestConfig): AxiosPromise<QuoteResponse> {
             return localVarFp.get(requestParameters, options).then((request) => request(axios, basePath));
         },
     };
 };
 
 /**
- * Request parameters for create operation in QuotesApi.
+ * Request parameters for create operation in QuoteApi.
  * @export
- * @interface QuotesApiCreateRequest
+ * @interface QuoteApiCreateRequest
  */
-export type QuotesApiCreateRequest = {
+export type QuoteApiCreateRequest = {
     
 } & CreateQuoteRequest
 
 /**
- * Request parameters for get operation in QuotesApi.
+ * Request parameters for get operation in QuoteApi.
  * @export
- * @interface QuotesApiGetRequest
+ * @interface QuoteApiGetRequest
  */
-export type QuotesApiGetRequest = {
+export type QuoteApiGetRequest = {
     
     /**
     * UUID of the quote
     * @type {string}
-    * @memberof QuotesApiGet
+    * @memberof QuoteApiGet
     */
     readonly quoteId: string
     
 }
 
 /**
- * QuotesApiGenerated - object-oriented interface
+ * QuoteApiGenerated - object-oriented interface
  * @export
- * @class QuotesApiGenerated
+ * @class QuoteApiGenerated
  * @extends {BaseAPI}
  */
-export class QuotesApiGenerated extends BaseAPI {
+export class QuoteApiGenerated extends BaseAPI {
     /**
      * Creates a quote  Creates a quote for a given customer using the provided locations and service code. The LOCALFULLSERVICE service code will generate a service group with LOADINGUNLOADING and TRANSIT services. All other service codes generate service groups with a single service.
      * @summary Create Quote
-     * @param {QuotesApiCreateRequest} requestParameters Request parameters.
+     * @param {QuoteApiCreateRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof QuotesApiGenerated
+     * @memberof QuoteApiGenerated
      */
-    public create(requestParameters: QuotesApiCreateRequest, options?: AxiosRequestConfig) {
-        return QuotesApiFp(this.configuration).create(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    public create(requestParameters: QuoteApiCreateRequest, options?: AxiosRequestConfig) {
+        return QuoteApiFp(this.configuration).create(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Fetch a quote by ID
      * @summary Get Quote
-     * @param {QuotesApiGetRequest} requestParameters Request parameters.
+     * @param {QuoteApiGetRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof QuotesApiGenerated
+     * @memberof QuoteApiGenerated
      */
-    public get(requestParameters: QuotesApiGetRequest, options?: AxiosRequestConfig) {
-        return QuotesApiFp(this.configuration).get(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    public get(requestParameters: QuoteApiGetRequest, options?: AxiosRequestConfig) {
+        return QuoteApiFp(this.configuration).get(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 }

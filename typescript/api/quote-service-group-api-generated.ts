@@ -35,17 +35,17 @@ import { ServiceGroupResponse } from '../models';
 // @ts-ignore
 import { ServiceType } from '../models';
 // @ts-ignore
-import { ServiceWorkersPropertyInner } from '../models';
+import { ServiceWorkers } from '../models';
 // @ts-ignore
 import { UpdateServiceGroupRequestV2 } from '../models';
 import { paginate } from "../pagination/paginate";
 import type * as buffer from "buffer"
 import { requestBeforeHook } from '../requestBeforeHook';
 /**
- * QuoteServiceGroupsApi - axios parameter creator
+ * QuoteServiceGroupApi - axios parameter creator
  * @export
  */
-export const QuoteServiceGroupsApiAxiosParamCreator = function (configuration?: Configuration) {
+export const QuoteServiceGroupApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * Overwrite the locations on a service group  The locations included in the request are overwritten as the locations on the service group maintaining the sequence in the request. This action triggers a re-estimation of the service group using the new locations.
@@ -150,6 +150,49 @@ export const QuoteServiceGroupsApiAxiosParamCreator = function (configuration?: 
             };
         },
         /**
+         * 
+         * @summary Get Service Group Estimate
+         * @param {string} serviceGroupId UUID of the service group
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createEstimate: async (serviceGroupId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'serviceGroupId' is not null or undefined
+            assertParamExists('createEstimate', 'serviceGroupId', serviceGroupId)
+            const localVarPath = `/quotes/service-groups/{service_group_id}/estimate`
+                .replace(`{${"service_group_id"}}`, encodeURIComponent(String(serviceGroupId !== undefined ? serviceGroupId : `-service_group_id-`)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Auth0HTTPBearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+    
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            requestBeforeHook({
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Creates an array of flexible service groups from a service group  Generate an array of flexible service groups. The services and locations will be copied from the source service group. One flexible service group will be created for each day and hour combination in the input.
          * @summary Create Flexible Service Groups
          * @param {string} quoteId UUID of the source quote
@@ -165,7 +208,7 @@ export const QuoteServiceGroupsApiAxiosParamCreator = function (configuration?: 
             assertParamExists('createFlexible', 'serviceGroupId', serviceGroupId)
             // verify required parameter 'flexibleServiceRequest' is not null or undefined
             assertParamExists('createFlexible', 'flexibleServiceRequest', flexibleServiceRequest)
-            const localVarPath = `/quotes/{quote_id}/service_groups/{service_group_id}/flexible`
+            const localVarPath = `/quotes/{quote_id}/service-groups/{service_group_id}/flexible`
                 .replace(`{${"quote_id"}}`, encodeURIComponent(String(quoteId !== undefined ? quoteId : `-quote_id-`)))
                 .replace(`{${"service_group_id"}}`, encodeURIComponent(String(serviceGroupId !== undefined ? serviceGroupId : `-service_group_id-`)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -299,49 +342,6 @@ export const QuoteServiceGroupsApiAxiosParamCreator = function (configuration?: 
             };
         },
         /**
-         * 
-         * @summary Get Service Group Estimate
-         * @param {string} serviceGroupId UUID of the service group
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getEstimate: async (serviceGroupId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'serviceGroupId' is not null or undefined
-            assertParamExists('getEstimate', 'serviceGroupId', serviceGroupId)
-            const localVarPath = `/quotes/service-groups/{service_group_id}/estimate`
-                .replace(`{${"service_group_id"}}`, encodeURIComponent(String(serviceGroupId !== undefined ? serviceGroupId : `-service_group_id-`)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Auth0HTTPBearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-    
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            requestBeforeHook({
-                queryParameters: localVarQueryParameter,
-                requestConfig: localVarRequestOptions,
-                path: localVarPath,
-                configuration
-            });
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
          * Replaces a service group with a flexible service group  Replaces the existing service group with the selected flexible service group.
          * @summary Replace Service Group
          * @param {string} quoteId UUID of the quote
@@ -350,13 +350,13 @@ export const QuoteServiceGroupsApiAxiosParamCreator = function (configuration?: 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        replace: async (quoteId: string, serviceGroupId: string, replaceServiceGroupRequest: ReplaceServiceGroupRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        update: async (quoteId: string, serviceGroupId: string, replaceServiceGroupRequest: ReplaceServiceGroupRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'quoteId' is not null or undefined
-            assertParamExists('replace', 'quoteId', quoteId)
+            assertParamExists('update', 'quoteId', quoteId)
             // verify required parameter 'serviceGroupId' is not null or undefined
-            assertParamExists('replace', 'serviceGroupId', serviceGroupId)
+            assertParamExists('update', 'serviceGroupId', serviceGroupId)
             // verify required parameter 'replaceServiceGroupRequest' is not null or undefined
-            assertParamExists('replace', 'replaceServiceGroupRequest', replaceServiceGroupRequest)
+            assertParamExists('update', 'replaceServiceGroupRequest', replaceServiceGroupRequest)
             const localVarPath = `/quotes/{quote_id}/service-groups/{service_group_id}`
                 .replace(`{${"quote_id"}}`, encodeURIComponent(String(quoteId !== undefined ? quoteId : `-quote_id-`)))
                 .replace(`{${"service_group_id"}}`, encodeURIComponent(String(serviceGroupId !== undefined ? serviceGroupId : `-service_group_id-`)));
@@ -405,13 +405,13 @@ export const QuoteServiceGroupsApiAxiosParamCreator = function (configuration?: 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        update: async (quoteId: string, serviceGroupId: string, updateServiceGroupRequestV2: UpdateServiceGroupRequestV2, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updateServices: async (quoteId: string, serviceGroupId: string, updateServiceGroupRequestV2: UpdateServiceGroupRequestV2, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'quoteId' is not null or undefined
-            assertParamExists('update', 'quoteId', quoteId)
+            assertParamExists('updateServices', 'quoteId', quoteId)
             // verify required parameter 'serviceGroupId' is not null or undefined
-            assertParamExists('update', 'serviceGroupId', serviceGroupId)
+            assertParamExists('updateServices', 'serviceGroupId', serviceGroupId)
             // verify required parameter 'updateServiceGroupRequestV2' is not null or undefined
-            assertParamExists('update', 'updateServiceGroupRequestV2', updateServiceGroupRequestV2)
+            assertParamExists('updateServices', 'updateServiceGroupRequestV2', updateServiceGroupRequestV2)
             const localVarPath = `/quotes/{quote_id}/service-groups/{service_group_id}/services`
                 .replace(`{${"quote_id"}}`, encodeURIComponent(String(quoteId !== undefined ? quoteId : `-quote_id-`)))
                 .replace(`{${"service_group_id"}}`, encodeURIComponent(String(serviceGroupId !== undefined ? serviceGroupId : `-service_group_id-`)));
@@ -455,460 +455,460 @@ export const QuoteServiceGroupsApiAxiosParamCreator = function (configuration?: 
 };
 
 /**
- * QuoteServiceGroupsApi - functional programming interface
+ * QuoteServiceGroupApi - functional programming interface
  * @export
  */
-export const QuoteServiceGroupsApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = QuoteServiceGroupsApiAxiosParamCreator(configuration)
+export const QuoteServiceGroupApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = QuoteServiceGroupApiAxiosParamCreator(configuration)
     return {
         /**
          * Overwrite the locations on a service group  The locations included in the request are overwritten as the locations on the service group maintaining the sequence in the request. This action triggers a re-estimation of the service group using the new locations.
          * @summary Change Locations On Service Group
-         * @param {QuoteServiceGroupsApiChangeLocationsRequest} requestParameters Request parameters.
+         * @param {QuoteServiceGroupApiChangeLocationsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async changeLocations(requestParameters: QuoteServiceGroupsApiChangeLocationsRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceGroupResponse>> {
+        async changeLocations(requestParameters: QuoteServiceGroupApiChangeLocationsRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceGroupResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.changeLocations(requestParameters.serviceGroupId, requestParameters.requestBody, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * Creates a new service group  A service group is a collection of services that are performed at the same time and location. The created service group will be created with the provided services, locations, and start date time. The workers, duration, and end date time will be estimated based on the locations and inventory attached to the quote.
          * @summary Create Service Group
-         * @param {QuoteServiceGroupsApiCreateRequest} requestParameters Request parameters.
+         * @param {QuoteServiceGroupApiCreateRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async create(requestParameters: QuoteServiceGroupsApiCreateRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceGroupResponse>> {
+        async create(requestParameters: QuoteServiceGroupApiCreateRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceGroupResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.create(requestParameters.quoteId, requestParameters, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Get Service Group Estimate
+         * @param {QuoteServiceGroupApiCreateEstimateRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createEstimate(requestParameters: QuoteServiceGroupApiCreateEstimateRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EstimationResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createEstimate(requestParameters.serviceGroupId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * Creates an array of flexible service groups from a service group  Generate an array of flexible service groups. The services and locations will be copied from the source service group. One flexible service group will be created for each day and hour combination in the input.
          * @summary Create Flexible Service Groups
-         * @param {QuoteServiceGroupsApiCreateFlexibleRequest} requestParameters Request parameters.
+         * @param {QuoteServiceGroupApiCreateFlexibleRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createFlexible(requestParameters: QuoteServiceGroupsApiCreateFlexibleRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<FlexibleQuoteResponse>>> {
+        async createFlexible(requestParameters: QuoteServiceGroupApiCreateFlexibleRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<FlexibleQuoteResponse>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createFlexible(requestParameters.quoteId, requestParameters.serviceGroupId, requestParameters, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * Delete a service group by quote ID and service group ID
          * @summary Delete Service Group
-         * @param {QuoteServiceGroupsApiDeleteRequest} requestParameters Request parameters.
+         * @param {QuoteServiceGroupApiDeleteRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async delete(requestParameters: QuoteServiceGroupsApiDeleteRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async delete(requestParameters: QuoteServiceGroupApiDeleteRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.delete(requestParameters.quoteId, requestParameters.serviceGroupId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * Fetch a service group by quote ID and service group ID
          * @summary Get Service Group
-         * @param {QuoteServiceGroupsApiGetRequest} requestParameters Request parameters.
+         * @param {QuoteServiceGroupApiGetRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async get(requestParameters: QuoteServiceGroupsApiGetRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceGroupResponse>> {
+        async get(requestParameters: QuoteServiceGroupApiGetRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceGroupResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.get(requestParameters.quoteId, requestParameters.serviceGroupId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Get Service Group Estimate
-         * @param {QuoteServiceGroupsApiGetEstimateRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getEstimate(requestParameters: QuoteServiceGroupsApiGetEstimateRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EstimationResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getEstimate(requestParameters.serviceGroupId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * Replaces a service group with a flexible service group  Replaces the existing service group with the selected flexible service group.
          * @summary Replace Service Group
-         * @param {QuoteServiceGroupsApiReplaceRequest} requestParameters Request parameters.
+         * @param {QuoteServiceGroupApiUpdateRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async replace(requestParameters: QuoteServiceGroupsApiReplaceRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceGroupResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.replace(requestParameters.quoteId, requestParameters.serviceGroupId, requestParameters, options);
+        async update(requestParameters: QuoteServiceGroupApiUpdateRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceGroupResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.update(requestParameters.quoteId, requestParameters.serviceGroupId, requestParameters, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * Update the service configuration on a service group  Update services, workers and duration on a service group. the service_workers object is a mapping of service code and number of workers.  Only the included service codes will be retained on the service group.  Any excluded services will be removed.
          * @summary Update Service Group Services
-         * @param {QuoteServiceGroupsApiUpdateRequest} requestParameters Request parameters.
+         * @param {QuoteServiceGroupApiUpdateServicesRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async update(requestParameters: QuoteServiceGroupsApiUpdateRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceGroupResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.update(requestParameters.quoteId, requestParameters.serviceGroupId, requestParameters, options);
+        async updateServices(requestParameters: QuoteServiceGroupApiUpdateServicesRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceGroupResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateServices(requestParameters.quoteId, requestParameters.serviceGroupId, requestParameters, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
 };
 
 /**
- * QuoteServiceGroupsApi - factory interface
+ * QuoteServiceGroupApi - factory interface
  * @export
  */
-export const QuoteServiceGroupsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = QuoteServiceGroupsApiFp(configuration)
+export const QuoteServiceGroupApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = QuoteServiceGroupApiFp(configuration)
     return {
         /**
          * Overwrite the locations on a service group  The locations included in the request are overwritten as the locations on the service group maintaining the sequence in the request. This action triggers a re-estimation of the service group using the new locations.
          * @summary Change Locations On Service Group
-         * @param {QuoteServiceGroupsApiChangeLocationsRequest} requestParameters Request parameters.
+         * @param {QuoteServiceGroupApiChangeLocationsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        changeLocations(requestParameters: QuoteServiceGroupsApiChangeLocationsRequest, options?: AxiosRequestConfig): AxiosPromise<ServiceGroupResponse> {
+        changeLocations(requestParameters: QuoteServiceGroupApiChangeLocationsRequest, options?: AxiosRequestConfig): AxiosPromise<ServiceGroupResponse> {
             return localVarFp.changeLocations(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
          * Creates a new service group  A service group is a collection of services that are performed at the same time and location. The created service group will be created with the provided services, locations, and start date time. The workers, duration, and end date time will be estimated based on the locations and inventory attached to the quote.
          * @summary Create Service Group
-         * @param {QuoteServiceGroupsApiCreateRequest} requestParameters Request parameters.
+         * @param {QuoteServiceGroupApiCreateRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        create(requestParameters: QuoteServiceGroupsApiCreateRequest, options?: AxiosRequestConfig): AxiosPromise<ServiceGroupResponse> {
+        create(requestParameters: QuoteServiceGroupApiCreateRequest, options?: AxiosRequestConfig): AxiosPromise<ServiceGroupResponse> {
             return localVarFp.create(requestParameters, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Get Service Group Estimate
+         * @param {QuoteServiceGroupApiCreateEstimateRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createEstimate(requestParameters: QuoteServiceGroupApiCreateEstimateRequest, options?: AxiosRequestConfig): AxiosPromise<EstimationResponse> {
+            return localVarFp.createEstimate(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
          * Creates an array of flexible service groups from a service group  Generate an array of flexible service groups. The services and locations will be copied from the source service group. One flexible service group will be created for each day and hour combination in the input.
          * @summary Create Flexible Service Groups
-         * @param {QuoteServiceGroupsApiCreateFlexibleRequest} requestParameters Request parameters.
+         * @param {QuoteServiceGroupApiCreateFlexibleRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createFlexible(requestParameters: QuoteServiceGroupsApiCreateFlexibleRequest, options?: AxiosRequestConfig): AxiosPromise<Array<FlexibleQuoteResponse>> {
+        createFlexible(requestParameters: QuoteServiceGroupApiCreateFlexibleRequest, options?: AxiosRequestConfig): AxiosPromise<Array<FlexibleQuoteResponse>> {
             return localVarFp.createFlexible(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
          * Delete a service group by quote ID and service group ID
          * @summary Delete Service Group
-         * @param {QuoteServiceGroupsApiDeleteRequest} requestParameters Request parameters.
+         * @param {QuoteServiceGroupApiDeleteRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        delete(requestParameters: QuoteServiceGroupsApiDeleteRequest, options?: AxiosRequestConfig): AxiosPromise<void> {
+        delete(requestParameters: QuoteServiceGroupApiDeleteRequest, options?: AxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.delete(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
          * Fetch a service group by quote ID and service group ID
          * @summary Get Service Group
-         * @param {QuoteServiceGroupsApiGetRequest} requestParameters Request parameters.
+         * @param {QuoteServiceGroupApiGetRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        get(requestParameters: QuoteServiceGroupsApiGetRequest, options?: AxiosRequestConfig): AxiosPromise<ServiceGroupResponse> {
+        get(requestParameters: QuoteServiceGroupApiGetRequest, options?: AxiosRequestConfig): AxiosPromise<ServiceGroupResponse> {
             return localVarFp.get(requestParameters, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Get Service Group Estimate
-         * @param {QuoteServiceGroupsApiGetEstimateRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getEstimate(requestParameters: QuoteServiceGroupsApiGetEstimateRequest, options?: AxiosRequestConfig): AxiosPromise<EstimationResponse> {
-            return localVarFp.getEstimate(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
          * Replaces a service group with a flexible service group  Replaces the existing service group with the selected flexible service group.
          * @summary Replace Service Group
-         * @param {QuoteServiceGroupsApiReplaceRequest} requestParameters Request parameters.
+         * @param {QuoteServiceGroupApiUpdateRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        replace(requestParameters: QuoteServiceGroupsApiReplaceRequest, options?: AxiosRequestConfig): AxiosPromise<ServiceGroupResponse> {
-            return localVarFp.replace(requestParameters, options).then((request) => request(axios, basePath));
+        update(requestParameters: QuoteServiceGroupApiUpdateRequest, options?: AxiosRequestConfig): AxiosPromise<ServiceGroupResponse> {
+            return localVarFp.update(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
          * Update the service configuration on a service group  Update services, workers and duration on a service group. the service_workers object is a mapping of service code and number of workers.  Only the included service codes will be retained on the service group.  Any excluded services will be removed.
          * @summary Update Service Group Services
-         * @param {QuoteServiceGroupsApiUpdateRequest} requestParameters Request parameters.
+         * @param {QuoteServiceGroupApiUpdateServicesRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        update(requestParameters: QuoteServiceGroupsApiUpdateRequest, options?: AxiosRequestConfig): AxiosPromise<ServiceGroupResponse> {
-            return localVarFp.update(requestParameters, options).then((request) => request(axios, basePath));
+        updateServices(requestParameters: QuoteServiceGroupApiUpdateServicesRequest, options?: AxiosRequestConfig): AxiosPromise<ServiceGroupResponse> {
+            return localVarFp.updateServices(requestParameters, options).then((request) => request(axios, basePath));
         },
     };
 };
 
 /**
- * Request parameters for changeLocations operation in QuoteServiceGroupsApi.
+ * Request parameters for changeLocations operation in QuoteServiceGroupApi.
  * @export
- * @interface QuoteServiceGroupsApiChangeLocationsRequest
+ * @interface QuoteServiceGroupApiChangeLocationsRequest
  */
-export type QuoteServiceGroupsApiChangeLocationsRequest = {
+export type QuoteServiceGroupApiChangeLocationsRequest = {
     /**
     * UUID of the service group
     * @type {string}
-    * @memberof QuoteServiceGroupsApiChangeLocations
+    * @memberof QuoteServiceGroupApiChangeLocations
     */
     readonly serviceGroupId: string
     /**
     * 
     * @type {Array<string>}
-    * @memberof QuoteServiceGroupsApiChangeLocations
+    * @memberof QuoteServiceGroupApiChangeLocations
     */
     readonly requestBody: Array<string>
 }
 
 /**
- * Request parameters for create operation in QuoteServiceGroupsApi.
+ * Request parameters for create operation in QuoteServiceGroupApi.
  * @export
- * @interface QuoteServiceGroupsApiCreateRequest
+ * @interface QuoteServiceGroupApiCreateRequest
  */
-export type QuoteServiceGroupsApiCreateRequest = {
+export type QuoteServiceGroupApiCreateRequest = {
     
     /**
     * UUID of the quote
     * @type {string}
-    * @memberof QuoteServiceGroupsApiCreate
+    * @memberof QuoteServiceGroupApiCreate
     */
     readonly quoteId: string
     
 } & QuoteServiceGroupsCreateRequest
 
 /**
- * Request parameters for createFlexible operation in QuoteServiceGroupsApi.
+ * Request parameters for createEstimate operation in QuoteServiceGroupApi.
  * @export
- * @interface QuoteServiceGroupsApiCreateFlexibleRequest
+ * @interface QuoteServiceGroupApiCreateEstimateRequest
  */
-export type QuoteServiceGroupsApiCreateFlexibleRequest = {
+export type QuoteServiceGroupApiCreateEstimateRequest = {
+    
+    /**
+    * UUID of the service group
+    * @type {string}
+    * @memberof QuoteServiceGroupApiCreateEstimate
+    */
+    readonly serviceGroupId: string
+    
+}
+
+/**
+ * Request parameters for createFlexible operation in QuoteServiceGroupApi.
+ * @export
+ * @interface QuoteServiceGroupApiCreateFlexibleRequest
+ */
+export type QuoteServiceGroupApiCreateFlexibleRequest = {
     
     /**
     * UUID of the source quote
     * @type {string}
-    * @memberof QuoteServiceGroupsApiCreateFlexible
+    * @memberof QuoteServiceGroupApiCreateFlexible
     */
     readonly quoteId: string
     
     /**
     * UUID of the Service Group to use as a template for the flexible service groups
     * @type {string}
-    * @memberof QuoteServiceGroupsApiCreateFlexible
+    * @memberof QuoteServiceGroupApiCreateFlexible
     */
     readonly serviceGroupId: string
     
 } & FlexibleServiceRequest
 
 /**
- * Request parameters for delete operation in QuoteServiceGroupsApi.
+ * Request parameters for delete operation in QuoteServiceGroupApi.
  * @export
- * @interface QuoteServiceGroupsApiDeleteRequest
+ * @interface QuoteServiceGroupApiDeleteRequest
  */
-export type QuoteServiceGroupsApiDeleteRequest = {
+export type QuoteServiceGroupApiDeleteRequest = {
     
     /**
     * UUID of the quote
     * @type {string}
-    * @memberof QuoteServiceGroupsApiDelete
+    * @memberof QuoteServiceGroupApiDelete
     */
     readonly quoteId: string
     
     /**
     * UUID of the service group to be deleted
     * @type {string}
-    * @memberof QuoteServiceGroupsApiDelete
+    * @memberof QuoteServiceGroupApiDelete
     */
     readonly serviceGroupId: string
     
 }
 
 /**
- * Request parameters for get operation in QuoteServiceGroupsApi.
+ * Request parameters for get operation in QuoteServiceGroupApi.
  * @export
- * @interface QuoteServiceGroupsApiGetRequest
+ * @interface QuoteServiceGroupApiGetRequest
  */
-export type QuoteServiceGroupsApiGetRequest = {
+export type QuoteServiceGroupApiGetRequest = {
     
     /**
     * UUID of the quote
     * @type {string}
-    * @memberof QuoteServiceGroupsApiGet
+    * @memberof QuoteServiceGroupApiGet
     */
     readonly quoteId: string
     
     /**
     * UUID of the service group
     * @type {string}
-    * @memberof QuoteServiceGroupsApiGet
+    * @memberof QuoteServiceGroupApiGet
     */
     readonly serviceGroupId: string
     
 }
 
 /**
- * Request parameters for getEstimate operation in QuoteServiceGroupsApi.
+ * Request parameters for update operation in QuoteServiceGroupApi.
  * @export
- * @interface QuoteServiceGroupsApiGetEstimateRequest
+ * @interface QuoteServiceGroupApiUpdateRequest
  */
-export type QuoteServiceGroupsApiGetEstimateRequest = {
-    
-    /**
-    * UUID of the service group
-    * @type {string}
-    * @memberof QuoteServiceGroupsApiGetEstimate
-    */
-    readonly serviceGroupId: string
-    
-}
-
-/**
- * Request parameters for replace operation in QuoteServiceGroupsApi.
- * @export
- * @interface QuoteServiceGroupsApiReplaceRequest
- */
-export type QuoteServiceGroupsApiReplaceRequest = {
+export type QuoteServiceGroupApiUpdateRequest = {
     
     /**
     * UUID of the quote
     * @type {string}
-    * @memberof QuoteServiceGroupsApiReplace
+    * @memberof QuoteServiceGroupApiUpdate
     */
     readonly quoteId: string
     
     /**
     * UUID of the service group
     * @type {string}
-    * @memberof QuoteServiceGroupsApiReplace
+    * @memberof QuoteServiceGroupApiUpdate
     */
     readonly serviceGroupId: string
     
 } & ReplaceServiceGroupRequest
 
 /**
- * Request parameters for update operation in QuoteServiceGroupsApi.
+ * Request parameters for updateServices operation in QuoteServiceGroupApi.
  * @export
- * @interface QuoteServiceGroupsApiUpdateRequest
+ * @interface QuoteServiceGroupApiUpdateServicesRequest
  */
-export type QuoteServiceGroupsApiUpdateRequest = {
+export type QuoteServiceGroupApiUpdateServicesRequest = {
     
     /**
     * UUID of the quote
     * @type {string}
-    * @memberof QuoteServiceGroupsApiUpdate
+    * @memberof QuoteServiceGroupApiUpdateServices
     */
     readonly quoteId: string
     
     /**
     * UUID of the service group
     * @type {string}
-    * @memberof QuoteServiceGroupsApiUpdate
+    * @memberof QuoteServiceGroupApiUpdateServices
     */
     readonly serviceGroupId: string
     
 } & UpdateServiceGroupRequestV2
 
 /**
- * QuoteServiceGroupsApiGenerated - object-oriented interface
+ * QuoteServiceGroupApiGenerated - object-oriented interface
  * @export
- * @class QuoteServiceGroupsApiGenerated
+ * @class QuoteServiceGroupApiGenerated
  * @extends {BaseAPI}
  */
-export class QuoteServiceGroupsApiGenerated extends BaseAPI {
+export class QuoteServiceGroupApiGenerated extends BaseAPI {
     /**
      * Overwrite the locations on a service group  The locations included in the request are overwritten as the locations on the service group maintaining the sequence in the request. This action triggers a re-estimation of the service group using the new locations.
      * @summary Change Locations On Service Group
-     * @param {QuoteServiceGroupsApiChangeLocationsRequest} requestParameters Request parameters.
+     * @param {QuoteServiceGroupApiChangeLocationsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof QuoteServiceGroupsApiGenerated
+     * @memberof QuoteServiceGroupApiGenerated
      */
-    public changeLocations(requestParameters: QuoteServiceGroupsApiChangeLocationsRequest, options?: AxiosRequestConfig) {
-        return QuoteServiceGroupsApiFp(this.configuration).changeLocations(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    public changeLocations(requestParameters: QuoteServiceGroupApiChangeLocationsRequest, options?: AxiosRequestConfig) {
+        return QuoteServiceGroupApiFp(this.configuration).changeLocations(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Creates a new service group  A service group is a collection of services that are performed at the same time and location. The created service group will be created with the provided services, locations, and start date time. The workers, duration, and end date time will be estimated based on the locations and inventory attached to the quote.
      * @summary Create Service Group
-     * @param {QuoteServiceGroupsApiCreateRequest} requestParameters Request parameters.
+     * @param {QuoteServiceGroupApiCreateRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof QuoteServiceGroupsApiGenerated
+     * @memberof QuoteServiceGroupApiGenerated
      */
-    public create(requestParameters: QuoteServiceGroupsApiCreateRequest, options?: AxiosRequestConfig) {
-        return QuoteServiceGroupsApiFp(this.configuration).create(requestParameters, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Creates an array of flexible service groups from a service group  Generate an array of flexible service groups. The services and locations will be copied from the source service group. One flexible service group will be created for each day and hour combination in the input.
-     * @summary Create Flexible Service Groups
-     * @param {QuoteServiceGroupsApiCreateFlexibleRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof QuoteServiceGroupsApiGenerated
-     */
-    public createFlexible(requestParameters: QuoteServiceGroupsApiCreateFlexibleRequest, options?: AxiosRequestConfig) {
-        return QuoteServiceGroupsApiFp(this.configuration).createFlexible(requestParameters, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Delete a service group by quote ID and service group ID
-     * @summary Delete Service Group
-     * @param {QuoteServiceGroupsApiDeleteRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof QuoteServiceGroupsApiGenerated
-     */
-    public delete(requestParameters: QuoteServiceGroupsApiDeleteRequest, options?: AxiosRequestConfig) {
-        return QuoteServiceGroupsApiFp(this.configuration).delete(requestParameters, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Fetch a service group by quote ID and service group ID
-     * @summary Get Service Group
-     * @param {QuoteServiceGroupsApiGetRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof QuoteServiceGroupsApiGenerated
-     */
-    public get(requestParameters: QuoteServiceGroupsApiGetRequest, options?: AxiosRequestConfig) {
-        return QuoteServiceGroupsApiFp(this.configuration).get(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    public create(requestParameters: QuoteServiceGroupApiCreateRequest, options?: AxiosRequestConfig) {
+        return QuoteServiceGroupApiFp(this.configuration).create(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @summary Get Service Group Estimate
-     * @param {QuoteServiceGroupsApiGetEstimateRequest} requestParameters Request parameters.
+     * @param {QuoteServiceGroupApiCreateEstimateRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof QuoteServiceGroupsApiGenerated
+     * @memberof QuoteServiceGroupApiGenerated
      */
-    public getEstimate(requestParameters: QuoteServiceGroupsApiGetEstimateRequest, options?: AxiosRequestConfig) {
-        return QuoteServiceGroupsApiFp(this.configuration).getEstimate(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    public createEstimate(requestParameters: QuoteServiceGroupApiCreateEstimateRequest, options?: AxiosRequestConfig) {
+        return QuoteServiceGroupApiFp(this.configuration).createEstimate(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Creates an array of flexible service groups from a service group  Generate an array of flexible service groups. The services and locations will be copied from the source service group. One flexible service group will be created for each day and hour combination in the input.
+     * @summary Create Flexible Service Groups
+     * @param {QuoteServiceGroupApiCreateFlexibleRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QuoteServiceGroupApiGenerated
+     */
+    public createFlexible(requestParameters: QuoteServiceGroupApiCreateFlexibleRequest, options?: AxiosRequestConfig) {
+        return QuoteServiceGroupApiFp(this.configuration).createFlexible(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Delete a service group by quote ID and service group ID
+     * @summary Delete Service Group
+     * @param {QuoteServiceGroupApiDeleteRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QuoteServiceGroupApiGenerated
+     */
+    public delete(requestParameters: QuoteServiceGroupApiDeleteRequest, options?: AxiosRequestConfig) {
+        return QuoteServiceGroupApiFp(this.configuration).delete(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Fetch a service group by quote ID and service group ID
+     * @summary Get Service Group
+     * @param {QuoteServiceGroupApiGetRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QuoteServiceGroupApiGenerated
+     */
+    public get(requestParameters: QuoteServiceGroupApiGetRequest, options?: AxiosRequestConfig) {
+        return QuoteServiceGroupApiFp(this.configuration).get(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Replaces a service group with a flexible service group  Replaces the existing service group with the selected flexible service group.
      * @summary Replace Service Group
-     * @param {QuoteServiceGroupsApiReplaceRequest} requestParameters Request parameters.
+     * @param {QuoteServiceGroupApiUpdateRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof QuoteServiceGroupsApiGenerated
+     * @memberof QuoteServiceGroupApiGenerated
      */
-    public replace(requestParameters: QuoteServiceGroupsApiReplaceRequest, options?: AxiosRequestConfig) {
-        return QuoteServiceGroupsApiFp(this.configuration).replace(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    public update(requestParameters: QuoteServiceGroupApiUpdateRequest, options?: AxiosRequestConfig) {
+        return QuoteServiceGroupApiFp(this.configuration).update(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Update the service configuration on a service group  Update services, workers and duration on a service group. the service_workers object is a mapping of service code and number of workers.  Only the included service codes will be retained on the service group.  Any excluded services will be removed.
      * @summary Update Service Group Services
-     * @param {QuoteServiceGroupsApiUpdateRequest} requestParameters Request parameters.
+     * @param {QuoteServiceGroupApiUpdateServicesRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof QuoteServiceGroupsApiGenerated
+     * @memberof QuoteServiceGroupApiGenerated
      */
-    public update(requestParameters: QuoteServiceGroupsApiUpdateRequest, options?: AxiosRequestConfig) {
-        return QuoteServiceGroupsApiFp(this.configuration).update(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    public updateServices(requestParameters: QuoteServiceGroupApiUpdateServicesRequest, options?: AxiosRequestConfig) {
+        return QuoteServiceGroupApiFp(this.configuration).updateServices(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 }

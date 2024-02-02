@@ -15,31 +15,31 @@ import { EstimationAccessFlags } from './estimation-access-flags';
 /**
  * Access challenges for the property.
  * @export
- * @interface CreateQuoteInventoryRequestAccessFlags
+ * @interface SetQuoteInventoryRequestAccessFlags
  */
-export interface CreateQuoteInventoryRequestAccessFlags {
+export interface SetQuoteInventoryRequestAccessFlags {
     /**
      * 
      * @type {boolean}
-     * @memberof CreateQuoteInventoryRequestAccessFlags
+     * @memberof SetQuoteInventoryRequestAccessFlags
      */
     'elevator': boolean;
     /**
      * 
      * @type {boolean}
-     * @memberof CreateQuoteInventoryRequestAccessFlags
+     * @memberof SetQuoteInventoryRequestAccessFlags
      */
     'elevator_reserved': boolean;
     /**
      * 
      * @type {boolean}
-     * @memberof CreateQuoteInventoryRequestAccessFlags
+     * @memberof SetQuoteInventoryRequestAccessFlags
      */
     'long_walk_to_truck': boolean;
     /**
      * 
      * @type {number}
-     * @memberof CreateQuoteInventoryRequestAccessFlags
+     * @memberof SetQuoteInventoryRequestAccessFlags
      */
     'stair_flights': number;
 }

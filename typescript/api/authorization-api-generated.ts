@@ -41,9 +41,9 @@ export const AuthorizationApiAxiosParamCreator = function (configuration?: Confi
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getAuthToken: async (auth0TokenRequest: Auth0TokenRequest, useCache?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createAuthorize: async (auth0TokenRequest: Auth0TokenRequest, useCache?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'auth0TokenRequest' is not null or undefined
-            assertParamExists('getAuthToken', 'auth0TokenRequest', auth0TokenRequest)
+            assertParamExists('createAuthorize', 'auth0TokenRequest', auth0TokenRequest)
             const localVarPath = `/authorize`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -95,12 +95,12 @@ export const AuthorizationApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Get Auth Token
-         * @param {AuthorizationApiGetAuthTokenRequest} requestParameters Request parameters.
+         * @param {AuthorizationApiCreateAuthorizeRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getAuthToken(requestParameters: AuthorizationApiGetAuthTokenRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Auth0TokenResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getAuthToken(requestParameters, requestParameters.useCache, options);
+        async createAuthorize(requestParameters: AuthorizationApiCreateAuthorizeRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Auth0TokenResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createAuthorize(requestParameters, requestParameters.useCache, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -116,27 +116,27 @@ export const AuthorizationApiFactory = function (configuration?: Configuration, 
         /**
          * 
          * @summary Get Auth Token
-         * @param {AuthorizationApiGetAuthTokenRequest} requestParameters Request parameters.
+         * @param {AuthorizationApiCreateAuthorizeRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getAuthToken(requestParameters: AuthorizationApiGetAuthTokenRequest, options?: AxiosRequestConfig): AxiosPromise<Auth0TokenResponse> {
-            return localVarFp.getAuthToken(requestParameters, options).then((request) => request(axios, basePath));
+        createAuthorize(requestParameters: AuthorizationApiCreateAuthorizeRequest, options?: AxiosRequestConfig): AxiosPromise<Auth0TokenResponse> {
+            return localVarFp.createAuthorize(requestParameters, options).then((request) => request(axios, basePath));
         },
     };
 };
 
 /**
- * Request parameters for getAuthToken operation in AuthorizationApi.
+ * Request parameters for createAuthorize operation in AuthorizationApi.
  * @export
- * @interface AuthorizationApiGetAuthTokenRequest
+ * @interface AuthorizationApiCreateAuthorizeRequest
  */
-export type AuthorizationApiGetAuthTokenRequest = {
+export type AuthorizationApiCreateAuthorizeRequest = {
     
     /**
     * 
     * @type {boolean}
-    * @memberof AuthorizationApiGetAuthToken
+    * @memberof AuthorizationApiCreateAuthorize
     */
     readonly useCache?: boolean
     
@@ -152,12 +152,12 @@ export class AuthorizationApiGenerated extends BaseAPI {
     /**
      * 
      * @summary Get Auth Token
-     * @param {AuthorizationApiGetAuthTokenRequest} requestParameters Request parameters.
+     * @param {AuthorizationApiCreateAuthorizeRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AuthorizationApiGenerated
      */
-    public getAuthToken(requestParameters: AuthorizationApiGetAuthTokenRequest, options?: AxiosRequestConfig) {
-        return AuthorizationApiFp(this.configuration).getAuthToken(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    public createAuthorize(requestParameters: AuthorizationApiCreateAuthorizeRequest, options?: AxiosRequestConfig) {
+        return AuthorizationApiFp(this.configuration).createAuthorize(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 }

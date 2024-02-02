@@ -77,5 +77,11 @@ export interface LocationResponse {
      * @memberof LocationResponse
      */
     'timezone': string | null;
+    /**
+     * Area in square feet
+     * @type {number}
+     * @memberof LocationResponse
+     */
+    'area': number | null;
 }
 

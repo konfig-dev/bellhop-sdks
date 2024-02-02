@@ -26,22 +26,22 @@ import { paginate } from "../pagination/paginate";
 import type * as buffer from "buffer"
 import { requestBeforeHook } from '../requestBeforeHook';
 /**
- * PostalCodesApi - axios parameter creator
+ * PostalCodeApi - axios parameter creator
  * @export
  */
-export const PostalCodesApiAxiosParamCreator = function (configuration?: Configuration) {
+export const PostalCodeApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * 
-         * @summary Get Postal Codes Serviceability
+         * @summary Get Postal Codes Serviceability V5
          * @param {string} originPostalCode 
          * @param {string} [destinationPostalCode] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getServiceability: async (originPostalCode: string, destinationPostalCode?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listServiceability: async (originPostalCode: string, destinationPostalCode?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'originPostalCode' is not null or undefined
-            assertParamExists('getServiceability', 'originPostalCode', originPostalCode)
+            assertParamExists('listServiceability', 'originPostalCode', originPostalCode)
             const localVarPath = `/postal-codes/serviceability`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -86,85 +86,85 @@ export const PostalCodesApiAxiosParamCreator = function (configuration?: Configu
 };
 
 /**
- * PostalCodesApi - functional programming interface
+ * PostalCodeApi - functional programming interface
  * @export
  */
-export const PostalCodesApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = PostalCodesApiAxiosParamCreator(configuration)
+export const PostalCodeApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = PostalCodeApiAxiosParamCreator(configuration)
     return {
         /**
          * 
-         * @summary Get Postal Codes Serviceability
-         * @param {PostalCodesApiGetServiceabilityRequest} requestParameters Request parameters.
+         * @summary Get Postal Codes Serviceability V5
+         * @param {PostalCodeApiListServiceabilityRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getServiceability(requestParameters: PostalCodesApiGetServiceabilityRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PostalCodesServiceabilityResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getServiceability(requestParameters.originPostalCode, requestParameters.destinationPostalCode, options);
+        async listServiceability(requestParameters: PostalCodeApiListServiceabilityRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PostalCodesServiceabilityResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listServiceability(requestParameters.originPostalCode, requestParameters.destinationPostalCode, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
 };
 
 /**
- * PostalCodesApi - factory interface
+ * PostalCodeApi - factory interface
  * @export
  */
-export const PostalCodesApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = PostalCodesApiFp(configuration)
+export const PostalCodeApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = PostalCodeApiFp(configuration)
     return {
         /**
          * 
-         * @summary Get Postal Codes Serviceability
-         * @param {PostalCodesApiGetServiceabilityRequest} requestParameters Request parameters.
+         * @summary Get Postal Codes Serviceability V5
+         * @param {PostalCodeApiListServiceabilityRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getServiceability(requestParameters: PostalCodesApiGetServiceabilityRequest, options?: AxiosRequestConfig): AxiosPromise<PostalCodesServiceabilityResponse> {
-            return localVarFp.getServiceability(requestParameters, options).then((request) => request(axios, basePath));
+        listServiceability(requestParameters: PostalCodeApiListServiceabilityRequest, options?: AxiosRequestConfig): AxiosPromise<PostalCodesServiceabilityResponse> {
+            return localVarFp.listServiceability(requestParameters, options).then((request) => request(axios, basePath));
         },
     };
 };
 
 /**
- * Request parameters for getServiceability operation in PostalCodesApi.
+ * Request parameters for listServiceability operation in PostalCodeApi.
  * @export
- * @interface PostalCodesApiGetServiceabilityRequest
+ * @interface PostalCodeApiListServiceabilityRequest
  */
-export type PostalCodesApiGetServiceabilityRequest = {
+export type PostalCodeApiListServiceabilityRequest = {
     
     /**
     * 
     * @type {string}
-    * @memberof PostalCodesApiGetServiceability
+    * @memberof PostalCodeApiListServiceability
     */
     readonly originPostalCode: string
     
     /**
     * 
     * @type {string}
-    * @memberof PostalCodesApiGetServiceability
+    * @memberof PostalCodeApiListServiceability
     */
     readonly destinationPostalCode?: string
     
 }
 
 /**
- * PostalCodesApiGenerated - object-oriented interface
+ * PostalCodeApiGenerated - object-oriented interface
  * @export
- * @class PostalCodesApiGenerated
+ * @class PostalCodeApiGenerated
  * @extends {BaseAPI}
  */
-export class PostalCodesApiGenerated extends BaseAPI {
+export class PostalCodeApiGenerated extends BaseAPI {
     /**
      * 
-     * @summary Get Postal Codes Serviceability
-     * @param {PostalCodesApiGetServiceabilityRequest} requestParameters Request parameters.
+     * @summary Get Postal Codes Serviceability V5
+     * @param {PostalCodeApiListServiceabilityRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PostalCodesApiGenerated
+     * @memberof PostalCodeApiGenerated
      */
-    public getServiceability(requestParameters: PostalCodesApiGetServiceabilityRequest, options?: AxiosRequestConfig) {
-        return PostalCodesApiFp(this.configuration).getServiceability(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    public listServiceability(requestParameters: PostalCodeApiListServiceabilityRequest, options?: AxiosRequestConfig) {
+        return PostalCodeApiFp(this.configuration).listServiceability(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 }

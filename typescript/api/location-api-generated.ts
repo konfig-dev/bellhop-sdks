@@ -30,10 +30,10 @@ import { paginate } from "../pagination/paginate";
 import type * as buffer from "buffer"
 import { requestBeforeHook } from '../requestBeforeHook';
 /**
- * LocationsApi - axios parameter creator
+ * LocationApi - axios parameter creator
  * @export
  */
-export const LocationsApiAxiosParamCreator = function (configuration?: Configuration) {
+export const LocationApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * Create quoting location object from address  Create Quoting Location standardizes input address via USPS and generates geo-location details Google Maps APIs. The location id is a hash of the required fields on the location object.
@@ -42,9 +42,9 @@ export const LocationsApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createQuoting: async (quotingLocationRequest: QuotingLocationRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        create: async (quotingLocationRequest: QuotingLocationRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'quotingLocationRequest' is not null or undefined
-            assertParamExists('createQuoting', 'quotingLocationRequest', quotingLocationRequest)
+            assertParamExists('create', 'quotingLocationRequest', quotingLocationRequest)
             const localVarPath = `/locations`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -86,71 +86,71 @@ export const LocationsApiAxiosParamCreator = function (configuration?: Configura
 };
 
 /**
- * LocationsApi - functional programming interface
+ * LocationApi - functional programming interface
  * @export
  */
-export const LocationsApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = LocationsApiAxiosParamCreator(configuration)
+export const LocationApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = LocationApiAxiosParamCreator(configuration)
     return {
         /**
          * Create quoting location object from address  Create Quoting Location standardizes input address via USPS and generates geo-location details Google Maps APIs. The location id is a hash of the required fields on the location object.
          * @summary Create Quoting Location
-         * @param {LocationsApiCreateQuotingRequest} requestParameters Request parameters.
+         * @param {LocationApiCreateRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createQuoting(requestParameters: LocationsApiCreateQuotingRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LocationResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createQuoting(requestParameters, options);
+        async create(requestParameters: LocationApiCreateRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LocationResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.create(requestParameters, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
 };
 
 /**
- * LocationsApi - factory interface
+ * LocationApi - factory interface
  * @export
  */
-export const LocationsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = LocationsApiFp(configuration)
+export const LocationApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = LocationApiFp(configuration)
     return {
         /**
          * Create quoting location object from address  Create Quoting Location standardizes input address via USPS and generates geo-location details Google Maps APIs. The location id is a hash of the required fields on the location object.
          * @summary Create Quoting Location
-         * @param {LocationsApiCreateQuotingRequest} requestParameters Request parameters.
+         * @param {LocationApiCreateRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createQuoting(requestParameters: LocationsApiCreateQuotingRequest, options?: AxiosRequestConfig): AxiosPromise<LocationResponse> {
-            return localVarFp.createQuoting(requestParameters, options).then((request) => request(axios, basePath));
+        create(requestParameters: LocationApiCreateRequest, options?: AxiosRequestConfig): AxiosPromise<LocationResponse> {
+            return localVarFp.create(requestParameters, options).then((request) => request(axios, basePath));
         },
     };
 };
 
 /**
- * Request parameters for createQuoting operation in LocationsApi.
+ * Request parameters for create operation in LocationApi.
  * @export
- * @interface LocationsApiCreateQuotingRequest
+ * @interface LocationApiCreateRequest
  */
-export type LocationsApiCreateQuotingRequest = {
+export type LocationApiCreateRequest = {
     
 } & QuotingLocationRequest
 
 /**
- * LocationsApiGenerated - object-oriented interface
+ * LocationApiGenerated - object-oriented interface
  * @export
- * @class LocationsApiGenerated
+ * @class LocationApiGenerated
  * @extends {BaseAPI}
  */
-export class LocationsApiGenerated extends BaseAPI {
+export class LocationApiGenerated extends BaseAPI {
     /**
      * Create quoting location object from address  Create Quoting Location standardizes input address via USPS and generates geo-location details Google Maps APIs. The location id is a hash of the required fields on the location object.
      * @summary Create Quoting Location
-     * @param {LocationsApiCreateQuotingRequest} requestParameters Request parameters.
+     * @param {LocationApiCreateRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof LocationsApiGenerated
+     * @memberof LocationApiGenerated
      */
-    public createQuoting(requestParameters: LocationsApiCreateQuotingRequest, options?: AxiosRequestConfig) {
-        return LocationsApiFp(this.configuration).createQuoting(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    public create(requestParameters: LocationApiCreateRequest, options?: AxiosRequestConfig) {
+        return LocationApiFp(this.configuration).create(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 }

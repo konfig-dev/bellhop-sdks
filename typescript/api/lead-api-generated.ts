@@ -34,54 +34,11 @@ import { paginate } from "../pagination/paginate";
 import type * as buffer from "buffer"
 import { requestBeforeHook } from '../requestBeforeHook';
 /**
- * LeadsApi - axios parameter creator
+ * LeadApi - axios parameter creator
  * @export
  */
-export const LeadsApiAxiosParamCreator = function (configuration?: Configuration) {
+export const LeadApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
-        /**
-         * 
-         * @summary Cancel Lead
-         * @param {string} code 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        cancel: async (code: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'code' is not null or undefined
-            assertParamExists('cancel', 'code', code)
-            const localVarPath = `/leads/{code}`
-                .replace(`{${"code"}}`, encodeURIComponent(String(code !== undefined ? code : `-code-`)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions: AxiosRequestConfig = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Auth0HTTPBearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-    
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            requestBeforeHook({
-                queryParameters: localVarQueryParameter,
-                requestConfig: localVarRequestOptions,
-                path: localVarPath,
-                configuration
-            });
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
         /**
          * 
          * @summary Create Lead
@@ -131,16 +88,59 @@ export const LeadsApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * 
-         * @summary Get Lead
-         * @param {string} code 
+         * @summary Cancel Lead
+         * @param {string} leadId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        get: async (code: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'code' is not null or undefined
-            assertParamExists('get', 'code', code)
-            const localVarPath = `/leads/{code}`
-                .replace(`{${"code"}}`, encodeURIComponent(String(code !== undefined ? code : `-code-`)));
+        delete: async (leadId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'leadId' is not null or undefined
+            assertParamExists('delete', 'leadId', leadId)
+            const localVarPath = `/leads/{lead_id}`
+                .replace(`{${"lead_id"}}`, encodeURIComponent(String(leadId !== undefined ? leadId : `-lead_id-`)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Auth0HTTPBearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+    
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            requestBeforeHook({
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Get Lead
+         * @param {string} leadId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        get: async (leadId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'leadId' is not null or undefined
+            assertParamExists('get', 'leadId', leadId)
+            const localVarPath = `/leads/{lead_id}`
+                .replace(`{${"lead_id"}}`, encodeURIComponent(String(leadId !== undefined ? leadId : `-lead_id-`)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -217,20 +217,20 @@ export const LeadsApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * 
+         * Update attributes of a lead.  :lead_id: The ID of the lead to update. This can be either the bellhop id or the external_id.
          * @summary Update Lead
-         * @param {string} code 
+         * @param {string} leadId 
          * @param {LeadUpdateRequest} leadUpdateRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        update: async (code: string, leadUpdateRequest: LeadUpdateRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'code' is not null or undefined
-            assertParamExists('update', 'code', code)
+        update: async (leadId: string, leadUpdateRequest: LeadUpdateRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'leadId' is not null or undefined
+            assertParamExists('update', 'leadId', leadId)
             // verify required parameter 'leadUpdateRequest' is not null or undefined
             assertParamExists('update', 'leadUpdateRequest', leadUpdateRequest)
-            const localVarPath = `/leads/{code}`
-                .replace(`{${"code"}}`, encodeURIComponent(String(code !== undefined ? code : `-code-`)));
+            const localVarPath = `/leads/{lead_id}`
+                .replace(`{${"lead_id"}}`, encodeURIComponent(String(leadId !== undefined ? leadId : `-lead_id-`)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -271,267 +271,267 @@ export const LeadsApiAxiosParamCreator = function (configuration?: Configuration
 };
 
 /**
- * LeadsApi - functional programming interface
+ * LeadApi - functional programming interface
  * @export
  */
-export const LeadsApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = LeadsApiAxiosParamCreator(configuration)
+export const LeadApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = LeadApiAxiosParamCreator(configuration)
     return {
         /**
          * 
-         * @summary Cancel Lead
-         * @param {LeadsApiCancelRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async cancel(requestParameters: LeadsApiCancelRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.cancel(requestParameters.code, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
          * @summary Create Lead
-         * @param {LeadsApiCreateRequest} requestParameters Request parameters.
+         * @param {LeadApiCreateRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async create(requestParameters: LeadsApiCreateRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LeadResponse>> {
+        async create(requestParameters: LeadApiCreateRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LeadResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.create(requestParameters, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
-         * @summary Get Lead
-         * @param {LeadsApiGetRequest} requestParameters Request parameters.
+         * @summary Cancel Lead
+         * @param {LeadApiDeleteRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async get(requestParameters: LeadsApiGetRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LeadResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.get(requestParameters.code, options);
+        async delete(requestParameters: LeadApiDeleteRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.delete(requestParameters.leadId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Get Lead
+         * @param {LeadApiGetRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async get(requestParameters: LeadApiGetRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LeadResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.get(requestParameters.leadId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
          * @summary List Leads
-         * @param {LeadsApiListRequest} requestParameters Request parameters.
+         * @param {LeadApiListRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async list(requestParameters: LeadsApiListRequest = {}, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<LeadResponse>>> {
+        async list(requestParameters: LeadApiListRequest = {}, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<LeadResponse>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.list(requestParameters.email, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
+         * Update attributes of a lead.  :lead_id: The ID of the lead to update. This can be either the bellhop id or the external_id.
          * @summary Update Lead
-         * @param {LeadsApiUpdateRequest} requestParameters Request parameters.
+         * @param {LeadApiUpdateRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async update(requestParameters: LeadsApiUpdateRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LeadResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.update(requestParameters.code, requestParameters, options);
+        async update(requestParameters: LeadApiUpdateRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LeadResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.update(requestParameters.leadId, requestParameters, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
 };
 
 /**
- * LeadsApi - factory interface
+ * LeadApi - factory interface
  * @export
  */
-export const LeadsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = LeadsApiFp(configuration)
+export const LeadApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = LeadApiFp(configuration)
     return {
         /**
          * 
-         * @summary Cancel Lead
-         * @param {LeadsApiCancelRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        cancel(requestParameters: LeadsApiCancelRequest, options?: AxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.cancel(requestParameters, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
          * @summary Create Lead
-         * @param {LeadsApiCreateRequest} requestParameters Request parameters.
+         * @param {LeadApiCreateRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        create(requestParameters: LeadsApiCreateRequest, options?: AxiosRequestConfig): AxiosPromise<LeadResponse> {
+        create(requestParameters: LeadApiCreateRequest, options?: AxiosRequestConfig): AxiosPromise<LeadResponse> {
             return localVarFp.create(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @summary Get Lead
-         * @param {LeadsApiGetRequest} requestParameters Request parameters.
+         * @summary Cancel Lead
+         * @param {LeadApiDeleteRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        get(requestParameters: LeadsApiGetRequest, options?: AxiosRequestConfig): AxiosPromise<LeadResponse> {
+        delete(requestParameters: LeadApiDeleteRequest, options?: AxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.delete(requestParameters, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Get Lead
+         * @param {LeadApiGetRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        get(requestParameters: LeadApiGetRequest, options?: AxiosRequestConfig): AxiosPromise<LeadResponse> {
             return localVarFp.get(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary List Leads
-         * @param {LeadsApiListRequest} requestParameters Request parameters.
+         * @param {LeadApiListRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        list(requestParameters: LeadsApiListRequest = {}, options?: AxiosRequestConfig): AxiosPromise<Array<LeadResponse>> {
+        list(requestParameters: LeadApiListRequest = {}, options?: AxiosRequestConfig): AxiosPromise<Array<LeadResponse>> {
             return localVarFp.list(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Update attributes of a lead.  :lead_id: The ID of the lead to update. This can be either the bellhop id or the external_id.
          * @summary Update Lead
-         * @param {LeadsApiUpdateRequest} requestParameters Request parameters.
+         * @param {LeadApiUpdateRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        update(requestParameters: LeadsApiUpdateRequest, options?: AxiosRequestConfig): AxiosPromise<LeadResponse> {
+        update(requestParameters: LeadApiUpdateRequest, options?: AxiosRequestConfig): AxiosPromise<LeadResponse> {
             return localVarFp.update(requestParameters, options).then((request) => request(axios, basePath));
         },
     };
 };
 
 /**
- * Request parameters for cancel operation in LeadsApi.
+ * Request parameters for create operation in LeadApi.
  * @export
- * @interface LeadsApiCancelRequest
+ * @interface LeadApiCreateRequest
  */
-export type LeadsApiCancelRequest = {
-    
-    /**
-    * 
-    * @type {string}
-    * @memberof LeadsApiCancel
-    */
-    readonly code: string
-    
-}
-
-/**
- * Request parameters for create operation in LeadsApi.
- * @export
- * @interface LeadsApiCreateRequest
- */
-export type LeadsApiCreateRequest = {
+export type LeadApiCreateRequest = {
     
 } & CreateLeadRequest
 
 /**
- * Request parameters for get operation in LeadsApi.
+ * Request parameters for delete operation in LeadApi.
  * @export
- * @interface LeadsApiGetRequest
+ * @interface LeadApiDeleteRequest
  */
-export type LeadsApiGetRequest = {
+export type LeadApiDeleteRequest = {
     
     /**
     * 
     * @type {string}
-    * @memberof LeadsApiGet
+    * @memberof LeadApiDelete
     */
-    readonly code: string
+    readonly leadId: string
     
 }
 
 /**
- * Request parameters for list operation in LeadsApi.
+ * Request parameters for get operation in LeadApi.
  * @export
- * @interface LeadsApiListRequest
+ * @interface LeadApiGetRequest
  */
-export type LeadsApiListRequest = {
+export type LeadApiGetRequest = {
     
     /**
     * 
     * @type {string}
-    * @memberof LeadsApiList
+    * @memberof LeadApiGet
+    */
+    readonly leadId: string
+    
+}
+
+/**
+ * Request parameters for list operation in LeadApi.
+ * @export
+ * @interface LeadApiListRequest
+ */
+export type LeadApiListRequest = {
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof LeadApiList
     */
     readonly email?: string
     
 }
 
 /**
- * Request parameters for update operation in LeadsApi.
+ * Request parameters for update operation in LeadApi.
  * @export
- * @interface LeadsApiUpdateRequest
+ * @interface LeadApiUpdateRequest
  */
-export type LeadsApiUpdateRequest = {
+export type LeadApiUpdateRequest = {
     
     /**
     * 
     * @type {string}
-    * @memberof LeadsApiUpdate
+    * @memberof LeadApiUpdate
     */
-    readonly code: string
+    readonly leadId: string
     
 } & LeadUpdateRequest
 
 /**
- * LeadsApiGenerated - object-oriented interface
+ * LeadApiGenerated - object-oriented interface
  * @export
- * @class LeadsApiGenerated
+ * @class LeadApiGenerated
  * @extends {BaseAPI}
  */
-export class LeadsApiGenerated extends BaseAPI {
+export class LeadApiGenerated extends BaseAPI {
     /**
      * 
-     * @summary Cancel Lead
-     * @param {LeadsApiCancelRequest} requestParameters Request parameters.
+     * @summary Create Lead
+     * @param {LeadApiCreateRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof LeadsApiGenerated
+     * @memberof LeadApiGenerated
      */
-    public cancel(requestParameters: LeadsApiCancelRequest, options?: AxiosRequestConfig) {
-        return LeadsApiFp(this.configuration).cancel(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    public create(requestParameters: LeadApiCreateRequest, options?: AxiosRequestConfig) {
+        return LeadApiFp(this.configuration).create(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
-     * @summary Create Lead
-     * @param {LeadsApiCreateRequest} requestParameters Request parameters.
+     * @summary Cancel Lead
+     * @param {LeadApiDeleteRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof LeadsApiGenerated
+     * @memberof LeadApiGenerated
      */
-    public create(requestParameters: LeadsApiCreateRequest, options?: AxiosRequestConfig) {
-        return LeadsApiFp(this.configuration).create(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    public delete(requestParameters: LeadApiDeleteRequest, options?: AxiosRequestConfig) {
+        return LeadApiFp(this.configuration).delete(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @summary Get Lead
-     * @param {LeadsApiGetRequest} requestParameters Request parameters.
+     * @param {LeadApiGetRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof LeadsApiGenerated
+     * @memberof LeadApiGenerated
      */
-    public get(requestParameters: LeadsApiGetRequest, options?: AxiosRequestConfig) {
-        return LeadsApiFp(this.configuration).get(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    public get(requestParameters: LeadApiGetRequest, options?: AxiosRequestConfig) {
+        return LeadApiFp(this.configuration).get(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @summary List Leads
-     * @param {LeadsApiListRequest} requestParameters Request parameters.
+     * @param {LeadApiListRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof LeadsApiGenerated
+     * @memberof LeadApiGenerated
      */
-    public list(requestParameters: LeadsApiListRequest = {}, options?: AxiosRequestConfig) {
-        return LeadsApiFp(this.configuration).list(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    public list(requestParameters: LeadApiListRequest = {}, options?: AxiosRequestConfig) {
+        return LeadApiFp(this.configuration).list(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * 
+     * Update attributes of a lead.  :lead_id: The ID of the lead to update. This can be either the bellhop id or the external_id.
      * @summary Update Lead
-     * @param {LeadsApiUpdateRequest} requestParameters Request parameters.
+     * @param {LeadApiUpdateRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof LeadsApiGenerated
+     * @memberof LeadApiGenerated
      */
-    public update(requestParameters: LeadsApiUpdateRequest, options?: AxiosRequestConfig) {
-        return LeadsApiFp(this.configuration).update(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    public update(requestParameters: LeadApiUpdateRequest, options?: AxiosRequestConfig) {
+        return LeadApiFp(this.configuration).update(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 }

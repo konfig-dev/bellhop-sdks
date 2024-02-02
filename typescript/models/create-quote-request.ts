@@ -12,6 +12,7 @@ import type * as buffer from "buffer"
 
 import { CreateQuoteRequestCustomer } from './create-quote-request-customer';
 import { LocationRequest } from './location-request';
+import { SetQuoteInventoryRequestNullable } from './set-quote-inventory-request-nullable';
 
 /**
  * Create Quote Request
@@ -43,5 +44,11 @@ export interface CreateQuoteRequest {
      * @memberof CreateQuoteRequest
      */
     'locations': { [key: string]: LocationRequest; };
+    /**
+     * 
+     * @type {SetQuoteInventoryRequestNullable}
+     * @memberof CreateQuoteRequest
+     */
+    'inventory'?: SetQuoteInventoryRequestNullable | null;
 }
 

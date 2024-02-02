@@ -77,5 +77,11 @@ export interface LocationResponseNullable {
      * @memberof LocationResponseNullable
      */
     'timezone': string | null;
+    /**
+     * Area in square feet
+     * @type {number}
+     * @memberof LocationResponseNullable
+     */
+    'area': number | null;
 }
 
