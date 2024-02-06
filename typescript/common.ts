@@ -143,7 +143,7 @@ export const setOAuthToObject = async function (object: any, name: string, scope
         : await configuration.accessToken;
     }
     const previousToken = await getToken()
-    
+
     /**
      * Authenticate if the token is not set or if it is expired
      */
