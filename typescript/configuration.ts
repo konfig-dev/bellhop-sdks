@@ -19,8 +19,6 @@ type ApiKey =
   | { [apiKeyName: string]: string | undefined };
 
 export interface ConfigurationParameters {
-    clientId?: string;
-    clientSecret?: string;
     /**
      * parameter for apiKey security
      * @param name security name
@@ -32,19 +30,14 @@ export interface ConfigurationParameters {
     accessToken?: string | Promise<string> | ((name?: string, scopes?: string[]) => string) | ((name?: string, scopes?: string[]) => Promise<string>);
     basePath?: string;
     baseOptions?: any;
+    oauthTokenUrl?: string;
+    oauthClientId?: string;
+    oauthClientSecret?: string;
     userAgent?: string;
     formDataCtor?: new () => any;
 }
 
 export class Configuration {
-    /**
-    * Client state
-    */
-    clientId?: string;
-    /**
-    * Client state
-    */
-    clientSecret?: string;
     /**
      * parameter for apiKey security
      * @param name security name
@@ -58,6 +51,18 @@ export class Configuration {
      * @memberof Configuration
      */
     username?: string;
+    /**
+     * token url for OAuth2 Application flow
+     */
+    oauthTokenUrl?: string;
+    /**
+     * client id for OAuth2 Application flow
+     */
+    oauthClientId?: string;
+    /**
+     * client secret for OAuth2 Application flow
+     */
+    oauthClientSecret?: string;
     /**
      * parameter for basic security
      *
@@ -100,8 +105,6 @@ export class Configuration {
     userAgent: string;
 
     constructor(param: ConfigurationParameters) {
-        this.clientId = param.clientId
-        this.clientSecret = param.clientSecret
         this.apiKey = param.apiKey
         if (this.apiKey === undefined) {
             this.apiKey = {}
@@ -112,6 +115,9 @@ export class Configuration {
         this.basePath = param.basePath;
         this.baseOptions = param.baseOptions ?? {};
         this.userAgent = param.userAgent === undefined ? "Konfig/0.1.3/typescript" : param.userAgent;
+        this.oauthTokenUrl = param.oauthTokenUrl;
+        this.oauthClientId = param.oauthClientId;
+        this.oauthClientSecret = param.oauthClientSecret;
         this.formDataCtor = param.formDataCtor;
     }
 

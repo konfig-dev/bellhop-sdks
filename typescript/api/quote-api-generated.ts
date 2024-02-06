@@ -16,6 +16,7 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction, isBrowser } from '../common';
+import { setOAuthToObject } from '../common';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
@@ -27,7 +28,19 @@ import { HTTPValidationError } from '../models';
 // @ts-ignore
 import { LocationRequest } from '../models';
 // @ts-ignore
+import { MovingIntentNullable } from '../models';
+// @ts-ignore
+import { QuoteInventoryItem } from '../models';
+// @ts-ignore
+import { QuoteInventoryResponse } from '../models';
+// @ts-ignore
+import { QuoteInventoryRoom } from '../models';
+// @ts-ignore
 import { QuoteResponse } from '../models';
+// @ts-ignore
+import { SetQuoteInventoryRequest } from '../models';
+// @ts-ignore
+import { SetQuoteInventoryRequestAccessFlags } from '../models';
 // @ts-ignore
 import { SetQuoteInventoryRequestNullable } from '../models';
 import { paginate } from "../pagination/paginate";
@@ -61,9 +74,9 @@ export const QuoteApiAxiosParamCreator = function (configuration?: Configuration
             const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication Auth0HTTPBearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+            // authentication OAuth2ImplicitBearer required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2ImplicitBearer", [], configuration)
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -79,6 +92,49 @@ export const QuoteApiAxiosParamCreator = function (configuration?: Configuration
                 configuration
             });
             localVarRequestOptions.data = serializeDataIfNeeded(createQuoteRequest, localVarRequestOptions, configuration)
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Delete Quote Inventory
+         * @param {string} quoteId UUID of the inventory
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteInventory: async (quoteId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'quoteId' is not null or undefined
+            assertParamExists('deleteInventory', 'quoteId', quoteId)
+            const localVarPath = `/quotes/{quote_id}/inventory`
+                .replace(`{${"quote_id"}}`, encodeURIComponent(String(quoteId !== undefined ? quoteId : `-quote_id-`)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication OAuth2ImplicitBearer required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2ImplicitBearer", [], configuration)
+
+    
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            requestBeforeHook({
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration
+            });
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
@@ -109,9 +165,9 @@ export const QuoteApiAxiosParamCreator = function (configuration?: Configuration
             const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication Auth0HTTPBearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+            // authentication OAuth2ImplicitBearer required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2ImplicitBearer", [], configuration)
 
     
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -122,6 +178,100 @@ export const QuoteApiAxiosParamCreator = function (configuration?: Configuration
                 path: localVarPath,
                 configuration
             });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Get Quote Inventory
+         * @param {string} quoteId UUID of the source quote
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getInventory: async (quoteId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'quoteId' is not null or undefined
+            assertParamExists('getInventory', 'quoteId', quoteId)
+            const localVarPath = `/quotes/{quote_id}/inventory`
+                .replace(`{${"quote_id"}}`, encodeURIComponent(String(quoteId !== undefined ? quoteId : `-quote_id-`)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication OAuth2ImplicitBearer required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2ImplicitBearer", [], configuration)
+
+    
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            requestBeforeHook({
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Update Quote Inventory
+         * @param {string} quoteId UUID of the inventory
+         * @param {SetQuoteInventoryRequest} setQuoteInventoryRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateInventory: async (quoteId: string, setQuoteInventoryRequest: SetQuoteInventoryRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'quoteId' is not null or undefined
+            assertParamExists('updateInventory', 'quoteId', quoteId)
+            // verify required parameter 'setQuoteInventoryRequest' is not null or undefined
+            assertParamExists('updateInventory', 'setQuoteInventoryRequest', setQuoteInventoryRequest)
+            const localVarPath = `/quotes/{quote_id}/inventory`
+                .replace(`{${"quote_id"}}`, encodeURIComponent(String(quoteId !== undefined ? quoteId : `-quote_id-`)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication OAuth2ImplicitBearer required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2ImplicitBearer", [], configuration)
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            requestBeforeHook({
+                requestBody: setQuoteInventoryRequest,
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration
+            });
+            localVarRequestOptions.data = serializeDataIfNeeded(setQuoteInventoryRequest, localVarRequestOptions, configuration)
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
@@ -151,6 +301,17 @@ export const QuoteApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
+         * 
+         * @summary Delete Quote Inventory
+         * @param {QuoteApiDeleteInventoryRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteInventory(requestParameters: QuoteApiDeleteInventoryRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteInventory(requestParameters.quoteId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
          * Fetch a quote by ID
          * @summary Get Quote
          * @param {QuoteApiGetRequest} requestParameters Request parameters.
@@ -159,6 +320,28 @@ export const QuoteApiFp = function(configuration?: Configuration) {
          */
         async get(requestParameters: QuoteApiGetRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<QuoteResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.get(requestParameters.quoteId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Get Quote Inventory
+         * @param {QuoteApiGetInventoryRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getInventory(requestParameters: QuoteApiGetInventoryRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<QuoteInventoryResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getInventory(requestParameters.quoteId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Update Quote Inventory
+         * @param {QuoteApiUpdateInventoryRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateInventory(requestParameters: QuoteApiUpdateInventoryRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<QuoteInventoryResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateInventory(requestParameters.quoteId, requestParameters, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -182,6 +365,16 @@ export const QuoteApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.create(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
+         * 
+         * @summary Delete Quote Inventory
+         * @param {QuoteApiDeleteInventoryRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteInventory(requestParameters: QuoteApiDeleteInventoryRequest, options?: AxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.deleteInventory(requestParameters, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Fetch a quote by ID
          * @summary Get Quote
          * @param {QuoteApiGetRequest} requestParameters Request parameters.
@@ -190,6 +383,26 @@ export const QuoteApiFactory = function (configuration?: Configuration, basePath
          */
         get(requestParameters: QuoteApiGetRequest, options?: AxiosRequestConfig): AxiosPromise<QuoteResponse> {
             return localVarFp.get(requestParameters, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Get Quote Inventory
+         * @param {QuoteApiGetInventoryRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getInventory(requestParameters: QuoteApiGetInventoryRequest, options?: AxiosRequestConfig): AxiosPromise<QuoteInventoryResponse> {
+            return localVarFp.getInventory(requestParameters, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Update Quote Inventory
+         * @param {QuoteApiUpdateInventoryRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateInventory(requestParameters: QuoteApiUpdateInventoryRequest, options?: AxiosRequestConfig): AxiosPromise<QuoteInventoryResponse> {
+            return localVarFp.updateInventory(requestParameters, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -202,6 +415,22 @@ export const QuoteApiFactory = function (configuration?: Configuration, basePath
 export type QuoteApiCreateRequest = {
     
 } & CreateQuoteRequest
+
+/**
+ * Request parameters for deleteInventory operation in QuoteApi.
+ * @export
+ * @interface QuoteApiDeleteInventoryRequest
+ */
+export type QuoteApiDeleteInventoryRequest = {
+    
+    /**
+    * UUID of the inventory
+    * @type {string}
+    * @memberof QuoteApiDeleteInventory
+    */
+    readonly quoteId: string
+    
+}
 
 /**
  * Request parameters for get operation in QuoteApi.
@@ -218,6 +447,38 @@ export type QuoteApiGetRequest = {
     readonly quoteId: string
     
 }
+
+/**
+ * Request parameters for getInventory operation in QuoteApi.
+ * @export
+ * @interface QuoteApiGetInventoryRequest
+ */
+export type QuoteApiGetInventoryRequest = {
+    
+    /**
+    * UUID of the source quote
+    * @type {string}
+    * @memberof QuoteApiGetInventory
+    */
+    readonly quoteId: string
+    
+}
+
+/**
+ * Request parameters for updateInventory operation in QuoteApi.
+ * @export
+ * @interface QuoteApiUpdateInventoryRequest
+ */
+export type QuoteApiUpdateInventoryRequest = {
+    
+    /**
+    * UUID of the inventory
+    * @type {string}
+    * @memberof QuoteApiUpdateInventory
+    */
+    readonly quoteId: string
+    
+} & SetQuoteInventoryRequest
 
 /**
  * QuoteApiGenerated - object-oriented interface
@@ -239,6 +500,18 @@ export class QuoteApiGenerated extends BaseAPI {
     }
 
     /**
+     * 
+     * @summary Delete Quote Inventory
+     * @param {QuoteApiDeleteInventoryRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QuoteApiGenerated
+     */
+    public deleteInventory(requestParameters: QuoteApiDeleteInventoryRequest, options?: AxiosRequestConfig) {
+        return QuoteApiFp(this.configuration).deleteInventory(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Fetch a quote by ID
      * @summary Get Quote
      * @param {QuoteApiGetRequest} requestParameters Request parameters.
@@ -248,5 +521,29 @@ export class QuoteApiGenerated extends BaseAPI {
      */
     public get(requestParameters: QuoteApiGetRequest, options?: AxiosRequestConfig) {
         return QuoteApiFp(this.configuration).get(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Get Quote Inventory
+     * @param {QuoteApiGetInventoryRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QuoteApiGenerated
+     */
+    public getInventory(requestParameters: QuoteApiGetInventoryRequest, options?: AxiosRequestConfig) {
+        return QuoteApiFp(this.configuration).getInventory(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Update Quote Inventory
+     * @param {QuoteApiUpdateInventoryRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QuoteApiGenerated
+     */
+    public updateInventory(requestParameters: QuoteApiUpdateInventoryRequest, options?: AxiosRequestConfig) {
+        return QuoteApiFp(this.configuration).updateInventory(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 }

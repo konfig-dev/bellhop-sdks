@@ -40,22 +40,15 @@
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
-            "application/json": {
+            "application/x-www-form-urlencoded": {
               "schema": {
-                "$ref": "#/components/schemas/Auth0TokenRequest"
-              },
-              "examples": {
-                "Example": {
-                  "summary": "Example",
-                  "description": "Example",
-                  "value": {
-                    "client_id": "147ee9a5d8334d988b2d805fc2bf5a10NOT_REAL",
-                    "client_secret": "0f27881a878c48cba709a7460c1ee757-03abbae1fa2d4482b70fb7d0d8324b9dNOT_REAL",
-                    "audience": "https://partners.bellhops.dev"
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/Body_get_auth_token_authorize_post"
                   }
-                }
+                ],
+                "title": "Body"
               }
             }
           }
@@ -90,10 +83,10 @@
           "PostalCode"
         ],
         "summary": "Get Postal Codes Serviceability V5",
-        "operationId": "PostalCode_listServiceability",
+        "operationId": "PostalCode_serviceability",
         "security": [
           {
-            "Auth0HTTPBearer": []
+            "OAuth2ImplicitBearer": []
           }
         ],
         "parameters": [
@@ -156,7 +149,7 @@
         "operationId": "Lead_create",
         "security": [
           {
-            "Auth0HTTPBearer": []
+            "OAuth2ImplicitBearer": []
           }
         ],
         "requestBody": {
@@ -200,7 +193,7 @@
         "operationId": "Lead_list",
         "security": [
           {
-            "Auth0HTTPBearer": []
+            "OAuth2ImplicitBearer": []
           }
         ],
         "parameters": [
@@ -259,7 +252,7 @@
         "operationId": "Lead_get",
         "security": [
           {
-            "Auth0HTTPBearer": []
+            "OAuth2ImplicitBearer": []
           }
         ],
         "parameters": [
@@ -304,7 +297,7 @@
         "operationId": "Lead_delete",
         "security": [
           {
-            "Auth0HTTPBearer": []
+            "OAuth2ImplicitBearer": []
           }
         ],
         "parameters": [
@@ -343,7 +336,7 @@
         "operationId": "Lead_update",
         "security": [
           {
-            "Auth0HTTPBearer": []
+            "OAuth2ImplicitBearer": []
           }
         ],
         "parameters": [
@@ -401,7 +394,7 @@
         "operationId": "Quote_get",
         "security": [
           {
-            "Auth0HTTPBearer": []
+            "OAuth2ImplicitBearer": []
           }
         ],
         "parameters": [
@@ -539,7 +532,9 @@
         },
         "security": [
           {
-            "Auth0HTTPBearer": []
+            "OAuth2ImplicitBearer": [
+              "create:quotes"
+            ]
           }
         ]
       }
@@ -554,7 +549,9 @@
         "operationId": "QuoteServiceGroup_create",
         "security": [
           {
-            "Auth0HTTPBearer": []
+            "OAuth2ImplicitBearer": [
+              "create:quotes"
+            ]
           }
         ],
         "parameters": [
@@ -637,7 +634,9 @@
         "operationId": "QuoteServiceGroup_updateService_groups",
         "security": [
           {
-            "Auth0HTTPBearer": []
+            "OAuth2ImplicitBearer": [
+              "create:quotes"
+            ]
           }
         ],
         "parameters": [
@@ -670,8 +669,8 @@
                   "summary": "Change locations",
                   "description": "Change locations on a service group",
                   "value": [
-                    "7b755011519641faa612ce9e47c8e7d4",
-                    "c5f4b1e593c54c11a7e6704da332f4f2"
+                    "1a99a4ff641f4040afb2f4f72fe377cc",
+                    "bb2078b5d93f44c0a98f268d86540450"
                   ]
                 }
               }
@@ -712,7 +711,9 @@
         "operationId": "QuoteServiceGroup_getService-group",
         "security": [
           {
-            "Auth0HTTPBearer": []
+            "OAuth2ImplicitBearer": [
+              "read:quotes"
+            ]
           }
         ],
         "parameters": [
@@ -771,7 +772,9 @@
         "operationId": "QuoteServiceGroup_deleteService-group",
         "security": [
           {
-            "Auth0HTTPBearer": []
+            "OAuth2ImplicitBearer": [
+              "delete:quotes"
+            ]
           }
         ],
         "parameters": [
@@ -825,7 +828,9 @@
         "operationId": "QuoteServiceGroup_update",
         "security": [
           {
-            "Auth0HTTPBearer": []
+            "OAuth2ImplicitBearer": [
+              "update:quotes"
+            ]
           }
         ],
         "parameters": [
@@ -864,7 +869,7 @@
                   "summary": "Replace a service group",
                   "description": "Replace a service group",
                   "value": {
-                    "flexible_quote_id": "d286dbfd-76a0-4457-ae69-08ca9b3f2dde"
+                    "flexible_quote_id": "0dd37117-3e93-4f7c-a496-8418906534e3"
                   }
                 }
               }
@@ -905,7 +910,9 @@
         "operationId": "QuoteServiceGroup_updateServices",
         "security": [
           {
-            "Auth0HTTPBearer": []
+            "OAuth2ImplicitBearer": [
+              "update:quotes"
+            ]
           }
         ],
         "parameters": [
@@ -995,7 +1002,9 @@
         "operationId": "QuoteServiceGroup_createFlexible",
         "security": [
           {
-            "Auth0HTTPBearer": []
+            "OAuth2ImplicitBearer": [
+              "update:quotes"
+            ]
           }
         ],
         "parameters": [
@@ -1078,13 +1087,15 @@
     "/quotes/{quote_id}/inventory": {
       "put": {
         "tags": [
-          "QuoteInventory"
+          "Quote"
         ],
         "summary": "Update Quote Inventory",
-        "operationId": "QuoteInventory_updateInventory",
+        "operationId": "Quote_updateInventory",
         "security": [
           {
-            "Auth0HTTPBearer": []
+            "OAuth2ImplicitBearer": [
+              "update:quotes"
+            ]
           }
         ],
         "parameters": [
@@ -1163,13 +1174,15 @@
       },
       "delete": {
         "tags": [
-          "QuoteInventory"
+          "Quote"
         ],
         "summary": "Delete Quote Inventory",
-        "operationId": "QuoteInventory_deleteInventory",
+        "operationId": "Quote_deleteInventory",
         "security": [
           {
-            "Auth0HTTPBearer": []
+            "OAuth2ImplicitBearer": [
+              "delete:quotes"
+            ]
           }
         ],
         "parameters": [
@@ -1203,13 +1216,15 @@
       },
       "get": {
         "tags": [
-          "QuoteInventory"
+          "Quote"
         ],
         "summary": "Get Quote Inventory",
-        "operationId": "QuoteInventory_listInventory",
+        "operationId": "Quote_getInventory",
         "security": [
           {
-            "Auth0HTTPBearer": []
+            "OAuth2ImplicitBearer": [
+              "read:quotes"
+            ]
           }
         ],
         "parameters": [
@@ -1258,7 +1273,9 @@
         "operationId": "QuoteServiceGroup_createEstimate",
         "security": [
           {
-            "Auth0HTTPBearer": []
+            "OAuth2ImplicitBearer": [
+              "read:quotes"
+            ]
           }
         ],
         "parameters": [
@@ -1355,7 +1372,9 @@
         },
         "security": [
           {
-            "Auth0HTTPBearer": []
+            "OAuth2ImplicitBearer": [
+              "create:locations"
+            ]
           }
         ]
       }
@@ -1370,7 +1389,7 @@
         "operationId": "Order_create",
         "security": [
           {
-            "Auth0HTTPBearer": []
+            "OAuth2ImplicitBearer": []
           }
         ],
         "parameters": [
@@ -1607,29 +1626,6 @@
         "title": "AccountSource",
         "description": "Pick-list values for account.accountsource"
       },
-      "Auth0TokenRequest": {
-        "properties": {
-          "client_id": {
-            "type": "string",
-            "title": "Client Id"
-          },
-          "client_secret": {
-            "type": "string",
-            "title": "Client Secret"
-          },
-          "audience": {
-            "type": "string",
-            "title": "Audience"
-          }
-        },
-        "type": "object",
-        "required": [
-          "client_id",
-          "client_secret",
-          "audience"
-        ],
-        "title": "Auth0TokenRequest"
-      },
       "Auth0TokenResponse": {
         "properties": {
           "token": {
@@ -1647,6 +1643,37 @@
           "cached"
         ],
         "title": "Auth0TokenResponse"
+      },
+      "Body_get_auth_token_authorize_post": {
+        "properties": {
+          "grant_type": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "client_credentials"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Grant Type"
+          },
+          "scope": {
+            "type": "string",
+            "title": "Scope",
+            "default": ""
+          },
+          "client_id": {
+            "type": "string",
+            "title": "Client Id"
+          },
+          "client_secret": {
+            "type": "string",
+            "title": "Client Secret"
+          }
+        },
+        "type": "object",
+        "title": "Body_get_auth_token_authorize_post"
       },
       "CreateCustomerAccountRequest": {
         "properties": {
@@ -2040,7 +2067,7 @@
             "title": "Start Datetime",
             "description": "Start date and time of the quote",
             "examples": [
-              "2024-02-02T16:12:36.152282"
+              "2024-02-05T15:50:48.765645"
             ]
           },
           "service_code": {
@@ -3575,7 +3602,7 @@
             "title": "Id",
             "description": "Location ID",
             "examples": [
-              "38fd476fb69743b88c3cd3efe202b72e"
+              "1bcd054ca1bc48a286be06556cabd171"
             ]
           },
           "property_type": {
@@ -4659,21 +4686,21 @@
             "examples": [
               [
                 {
-                  "created_at": "2024-02-02T16:12:35.244459+00:00",
-                  "end_datetime": "2024-02-02T16:12:35.244471+00:00",
+                  "created_at": "2024-02-05T15:50:47.449384+00:00",
+                  "end_datetime": "2024-02-05T15:50:47.449396+00:00",
                   "end_timezone": "America/New_York",
                   "estimated_hours": 2.5,
                   "estimated_pricing_strategy": "HOURLY",
                   "estimated_unit_price": 10000,
                   "estimated_workers": 2,
-                  "id": "260bb103-faf0-42af-9156-2e9d8807e333",
+                  "id": "06f0decc-82dd-494d-8d9b-0261346d4bc5",
                   "locked": false,
                   "service_code": "LOADING",
-                  "service_group_id": "8c054668-5b5f-4de9-b2a6-9fb46b17bc11",
-                  "start_datetime": "2024-02-02T16:12:35.244471+00:00",
+                  "service_group_id": "8dbc30c0-8442-4368-a0f5-fb05e36a668c",
+                  "start_datetime": "2024-02-05T15:50:47.449395+00:00",
                   "start_timezone": "America/New_York",
                   "total_cost": 10000,
-                  "updated_at": "2024-02-02T16:12:35.244470+00:00"
+                  "updated_at": "2024-02-05T15:50:47.449394+00:00"
                 }
               ]
             ]
@@ -4738,7 +4765,7 @@
                 "area": 1000,
                 "city": "New York City",
                 "country": "US",
-                "id": "e277864463f147e8ac490693e3d2bc7f",
+                "id": "53526308aef0431db8c8583191fa6366",
                 "line_1": "123 Main St",
                 "line_2": "Apt 1",
                 "market_code": "NEW_YORK_NY",
@@ -4767,7 +4794,7 @@
             "title": "Id",
             "description": "Service Quote ID",
             "examples": [
-              "c0f11a6c-4be0-42ca-84cc-8d3c76d19ce5"
+              "063aa72b-b818-4cf3-866c-03841252f3cc"
             ]
           },
           "created_at": {
@@ -4931,7 +4958,7 @@
             "title": "Service Group Id",
             "description": "Service Group ID",
             "examples": [
-              "904c8d8d-bfd2-4904-bbe0-7443ee114549"
+              "c3a48bae-de16-421f-9f7b-81db92ace33e"
             ]
           },
           "service_code": {
@@ -5242,9 +5269,14 @@
       }
     },
     "securitySchemes": {
-      "Auth0HTTPBearer": {
-        "type": "http",
-        "scheme": "bearer"
+      "OAuth2ImplicitBearer": {
+        "type": "oauth2",
+        "flows": {
+          "implicit": {
+            "scopes": {},
+            "authorizationUrl": "/authorize"
+          }
+        }
       }
     }
   }

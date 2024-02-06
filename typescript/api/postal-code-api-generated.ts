@@ -16,6 +16,7 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction, isBrowser } from '../common';
+import { setOAuthToObject } from '../common';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
@@ -39,9 +40,9 @@ export const PostalCodeApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listServiceability: async (originPostalCode: string, destinationPostalCode?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        serviceability: async (originPostalCode: string, destinationPostalCode?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'originPostalCode' is not null or undefined
-            assertParamExists('listServiceability', 'originPostalCode', originPostalCode)
+            assertParamExists('serviceability', 'originPostalCode', originPostalCode)
             const localVarPath = `/postal-codes/serviceability`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -54,9 +55,9 @@ export const PostalCodeApiAxiosParamCreator = function (configuration?: Configur
             const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication Auth0HTTPBearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+            // authentication OAuth2ImplicitBearer required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2ImplicitBearer", [], configuration)
             if (originPostalCode !== undefined) {
                 localVarQueryParameter['origin_postal_code'] = originPostalCode;
             }
@@ -95,12 +96,12 @@ export const PostalCodeApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Get Postal Codes Serviceability V5
-         * @param {PostalCodeApiListServiceabilityRequest} requestParameters Request parameters.
+         * @param {PostalCodeApiServiceabilityRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listServiceability(requestParameters: PostalCodeApiListServiceabilityRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PostalCodesServiceabilityResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.listServiceability(requestParameters.originPostalCode, requestParameters.destinationPostalCode, options);
+        async serviceability(requestParameters: PostalCodeApiServiceabilityRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PostalCodesServiceabilityResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.serviceability(requestParameters.originPostalCode, requestParameters.destinationPostalCode, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -116,34 +117,34 @@ export const PostalCodeApiFactory = function (configuration?: Configuration, bas
         /**
          * 
          * @summary Get Postal Codes Serviceability V5
-         * @param {PostalCodeApiListServiceabilityRequest} requestParameters Request parameters.
+         * @param {PostalCodeApiServiceabilityRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listServiceability(requestParameters: PostalCodeApiListServiceabilityRequest, options?: AxiosRequestConfig): AxiosPromise<PostalCodesServiceabilityResponse> {
-            return localVarFp.listServiceability(requestParameters, options).then((request) => request(axios, basePath));
+        serviceability(requestParameters: PostalCodeApiServiceabilityRequest, options?: AxiosRequestConfig): AxiosPromise<PostalCodesServiceabilityResponse> {
+            return localVarFp.serviceability(requestParameters, options).then((request) => request(axios, basePath));
         },
     };
 };
 
 /**
- * Request parameters for listServiceability operation in PostalCodeApi.
+ * Request parameters for serviceability operation in PostalCodeApi.
  * @export
- * @interface PostalCodeApiListServiceabilityRequest
+ * @interface PostalCodeApiServiceabilityRequest
  */
-export type PostalCodeApiListServiceabilityRequest = {
+export type PostalCodeApiServiceabilityRequest = {
     
     /**
     * 
     * @type {string}
-    * @memberof PostalCodeApiListServiceability
+    * @memberof PostalCodeApiServiceability
     */
     readonly originPostalCode: string
     
     /**
     * 
     * @type {string}
-    * @memberof PostalCodeApiListServiceability
+    * @memberof PostalCodeApiServiceability
     */
     readonly destinationPostalCode?: string
     
@@ -159,12 +160,12 @@ export class PostalCodeApiGenerated extends BaseAPI {
     /**
      * 
      * @summary Get Postal Codes Serviceability V5
-     * @param {PostalCodeApiListServiceabilityRequest} requestParameters Request parameters.
+     * @param {PostalCodeApiServiceabilityRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PostalCodeApiGenerated
      */
-    public listServiceability(requestParameters: PostalCodeApiListServiceabilityRequest, options?: AxiosRequestConfig) {
-        return PostalCodeApiFp(this.configuration).listServiceability(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    public serviceability(requestParameters: PostalCodeApiServiceabilityRequest, options?: AxiosRequestConfig) {
+        return PostalCodeApiFp(this.configuration).serviceability(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 }

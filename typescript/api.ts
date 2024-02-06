@@ -17,6 +17,5 @@ export * from './api/location-api';
 export * from './api/order-api';
 export * from './api/postal-code-api';
 export * from './api/quote-api';
-export * from './api/quote-inventory-api';
 export * from './api/quote-service-group-api';
 

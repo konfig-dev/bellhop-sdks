@@ -16,7 +16,6 @@ import {
   OrderApi,
   PostalCodeApi,
   QuoteApi,
-  QuoteInventoryApi,
   QuoteServiceGroupApi,
 } from "./api";
 import { Configuration, ConfigurationParameters } from "./configuration";
@@ -28,7 +27,6 @@ export class Bellhop extends BellhopCustom {
   readonly order: OrderApi;
   readonly postalCode: PostalCodeApi;
   readonly quote: QuoteApi;
-  readonly quoteInventory: QuoteInventoryApi;
   readonly quoteServiceGroup: QuoteServiceGroupApi;
 
   constructor(configurationParameters: ConfigurationParameters) {
@@ -39,7 +37,6 @@ export class Bellhop extends BellhopCustom {
     this.order = new OrderApi(configuration);
     this.postalCode = new PostalCodeApi(configuration);
     this.quote = new QuoteApi(configuration);
-    this.quoteInventory = new QuoteInventoryApi(configuration);
     this.quoteServiceGroup = new QuoteServiceGroupApi(configuration);
   }
 

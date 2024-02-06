@@ -1,2 +1,2 @@
-    clientId: "CLIENT_ID",
-    clientSecret: "CLIENT_SECRET",
+    oauthClientId: "CLIENT_ID",
+    oauthClientSecret: "CLIENT_SECRET",

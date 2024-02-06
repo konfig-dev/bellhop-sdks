@@ -56,13 +56,6 @@ generators:
     outputDirectory: typescript
     clientName: Bellhop
     apiDocumentationAuthenticationPartial: snippets/typescriptDocAuthPartial.ts
-    clientStateWithExamples:
-      - name: clientId
-        required: true
-      - name: clientSecret
-        required: true
-    dependencies:
-      jwt-decode: 4.0.0
     git:
       userId: konfig-dev
       repoId: bellhop-sdks/tree/main/typescript

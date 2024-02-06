@@ -25,12 +25,12 @@ Bellhop's Partner API
   * [`bellhop.lead.update`](#bellhopleadupdate)
   * [`bellhop.location.create`](#bellhoplocationcreate)
   * [`bellhop.order.create`](#bellhopordercreate)
-  * [`bellhop.postalCode.listServiceability`](#bellhoppostalcodelistserviceability)
+  * [`bellhop.postalCode.serviceability`](#bellhoppostalcodeserviceability)
   * [`bellhop.quote.create`](#bellhopquotecreate)
+  * [`bellhop.quote.deleteInventory`](#bellhopquotedeleteinventory)
   * [`bellhop.quote.get`](#bellhopquoteget)
-  * [`bellhop.quoteInventory.deleteInventory`](#bellhopquoteinventorydeleteinventory)
-  * [`bellhop.quoteInventory.listInventory`](#bellhopquoteinventorylistinventory)
-  * [`bellhop.quoteInventory.updateInventory`](#bellhopquoteinventoryupdateinventory)
+  * [`bellhop.quote.getInventory`](#bellhopquotegetinventory)
+  * [`bellhop.quote.updateInventory`](#bellhopquoteupdateinventory)
   * [`bellhop.quoteServiceGroup.changeLocations`](#bellhopquoteservicegroupchangelocations)
   * [`bellhop.quoteServiceGroup.create`](#bellhopquoteservicegroupcreate)
   * [`bellhop.quoteServiceGroup.createEstimate`](#bellhopquoteservicegroupcreateestimate)
@@ -83,8 +83,8 @@ import { Bellhop } from "bellhop-partners-typescript";
 const bellhop = new Bellhop({
   // Defining the base path is optional and defaults to https://partners.bellhops.dev/v5
   // basePath: "https://partners.bellhops.dev/v5",
-  clientId: "CLIENT_ID",
-  clientSecret: "CLIENT_SECRET",
+  oauthClientId: "CLIENT_ID",
+  oauthClientSecret: "CLIENT_SECRET",
 });
 
 const createResponse = await bellhop.lead.create({
@@ -277,7 +277,9 @@ const listResponse = await bellhop.lead.list({});
 
 ### `bellhop.lead.update`<a id="bellhopleadupdate"></a>
 
-Update attributes of a lead.  :lead_id: The ID of the lead to update. This can be either the bellhop id or the external_id.
+Update attributes of a lead.
+
+:lead_id: The ID of the lead to update. This can be either the bellhop id or the external_id.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -313,7 +315,11 @@ const updateResponse = await bellhop.lead.update({
 
 ### `bellhop.location.create`<a id="bellhoplocationcreate"></a>
 
-Create quoting location object from address  Create Quoting Location standardizes input address via USPS and generates geo-location details Google Maps APIs. The location id is a hash of the required fields on the location object.
+Create quoting location object from address
+
+Create Quoting Location standardizes input address via USPS and generates
+geo-location details Google Maps APIs.
+The location id is a hash of the required fields on the location object.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -418,14 +424,14 @@ Quote ID to generate order from
 ---
 
 
-### `bellhop.postalCode.listServiceability`<a id="bellhoppostalcodelistserviceability"></a>
+### `bellhop.postalCode.serviceability`<a id="bellhoppostalcodeserviceability"></a>
 
 Get Postal Codes Serviceability V5
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
-const listServiceabilityResponse = await bellhop.postalCode.listServiceability({
+const serviceabilityResponse = await bellhop.postalCode.serviceability({
   originPostalCode: "originPostalCode_example",
 });
 ```
@@ -451,7 +457,12 @@ const listServiceabilityResponse = await bellhop.postalCode.listServiceability({
 
 ### `bellhop.quote.create`<a id="bellhopquotecreate"></a>
 
-Creates a quote  Creates a quote for a given customer using the provided locations and service code. The LOCALFULLSERVICE service code will generate a service group with LOADINGUNLOADING and TRANSIT services. All other service codes generate service groups with a single service.
+Creates a quote
+
+Creates a quote for a given customer using the provided locations and service code.
+The LOCALFULLSERVICE service code will generate a service group with
+LOADINGUNLOADING and TRANSIT services.
+All other service codes generate service groups with a single service.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -463,7 +474,7 @@ const createResponse = await bellhop.quote.create({
     phone: "phone_example",
     email: "email_example",
   },
-  start_datetime: "2024-02-02T16:12:36.152282",
+  start_datetime: "2024-02-05T15:50:48.765645",
   service_code: "LOCALFULLSERVICE",
   locations: {
     key: {
@@ -508,6 +519,33 @@ Mapping locations and their sequence
 ---
 
 
+### `bellhop.quote.deleteInventory`<a id="bellhopquotedeleteinventory"></a>
+
+Delete Quote Inventory
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```typescript
+const deleteInventoryResponse = await bellhop.quote.deleteInventory({
+  quoteId: "quoteId_example",
+});
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### quoteId: `string`<a id="quoteid-string"></a>
+
+UUID of the inventory
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/quotes/{quote_id}/inventory` `DELETE`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
 ### `bellhop.quote.get`<a id="bellhopquoteget"></a>
 
 Fetch a quote by ID
@@ -539,41 +577,14 @@ UUID of the quote
 ---
 
 
-### `bellhop.quoteInventory.deleteInventory`<a id="bellhopquoteinventorydeleteinventory"></a>
-
-Delete Quote Inventory
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```typescript
-const deleteInventoryResponse = await bellhop.quoteInventory.deleteInventory({
-  quoteId: "quoteId_example",
-});
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### quoteId: `string`<a id="quoteid-string"></a>
-
-UUID of the inventory
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/quotes/{quote_id}/inventory` `DELETE`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `bellhop.quoteInventory.listInventory`<a id="bellhopquoteinventorylistinventory"></a>
+### `bellhop.quote.getInventory`<a id="bellhopquotegetinventory"></a>
 
 Get Quote Inventory
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
-const listInventoryResponse = await bellhop.quoteInventory.listInventory({
+const getInventoryResponse = await bellhop.quote.getInventory({
   quoteId: "quoteId_example",
 });
 ```
@@ -597,14 +608,14 @@ UUID of the source quote
 ---
 
 
-### `bellhop.quoteInventory.updateInventory`<a id="bellhopquoteinventoryupdateinventory"></a>
+### `bellhop.quote.updateInventory`<a id="bellhopquoteupdateinventory"></a>
 
 Update Quote Inventory
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
-const updateInventoryResponse = await bellhop.quoteInventory.updateInventory({
+const updateInventoryResponse = await bellhop.quote.updateInventory({
   quoteId: "quoteId_example",
   area: 1000,
   rooms: [
@@ -667,7 +678,11 @@ List of additional bulky items in the property.
 
 ### `bellhop.quoteServiceGroup.changeLocations`<a id="bellhopquoteservicegroupchangelocations"></a>
 
-Overwrite the locations on a service group  The locations included in the request are overwritten as the locations on the service group maintaining the sequence in the request. This action triggers a re-estimation of the service group using the new locations.
+Overwrite the locations on a service group
+
+The locations included in the request are overwritten as the locations on
+the service group maintaining the sequence in the request.
+This action triggers a re-estimation of the service group using the new locations.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -676,8 +691,8 @@ const changeLocationsResponse = await bellhop.quoteServiceGroup.changeLocations(
   {
     serviceGroupId: "service_group_id_example",
     requestBody: [
-      "7b755011519641faa612ce9e47c8e7d4",
-      "c5f4b1e593c54c11a7e6704da332f4f2",
+      "1a99a4ff641f4040afb2f4f72fe377cc",
+      "bb2078b5d93f44c0a98f268d86540450",
     ],
   }
 );
@@ -706,7 +721,14 @@ UUID of the service group
 
 ### `bellhop.quoteServiceGroup.create`<a id="bellhopquoteservicegroupcreate"></a>
 
-Creates a new service group  A service group is a collection of services that are performed at the same time and location. The created service group will be created with the provided services, locations, and start date time. The workers, duration, and end date time will be estimated based on the locations and inventory attached to the quote.
+Creates a new service group
+
+A service group is a collection of services that are performed at the
+same time and location.
+The created service group will be created with the provided services,
+locations, and start date time.
+The workers, duration, and end date time will be estimated based on the
+locations and inventory attached to the quote.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -786,7 +808,11 @@ UUID of the service group
 
 ### `bellhop.quoteServiceGroup.createFlexible`<a id="bellhopquoteservicegroupcreateflexible"></a>
 
-Creates an array of flexible service groups from a service group  Generate an array of flexible service groups. The services and locations will be copied from the source service group. One flexible service group will be created for each day and hour combination in the input.
+Creates an array of flexible service groups from a service group
+
+Generate an array of flexible service groups. The services and locations
+will be copied from the source service group.
+One flexible service group will be created for each day and hour combination in the input.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -905,7 +931,9 @@ UUID of the service group
 
 ### `bellhop.quoteServiceGroup.update`<a id="bellhopquoteservicegroupupdate"></a>
 
-Replaces a service group with a flexible service group  Replaces the existing service group with the selected flexible service group.
+Replaces a service group with a flexible service group
+
+Replaces the existing service group with the selected flexible service group.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -944,7 +972,14 @@ UUID of the service group
 
 ### `bellhop.quoteServiceGroup.updateServices`<a id="bellhopquoteservicegroupupdateservices"></a>
 
-Update the service configuration on a service group  Update services, workers and duration on a service group. the service_workers object is a mapping of service code and number of workers.  Only the included service codes will be retained on the service group.  Any excluded services will be removed.
+Update the service configuration on a service group
+
+Update services, workers and duration on a service group.
+the service_workers object is a mapping of service code and number of workers.
+
+Only the included service codes will be retained on the service group.
+
+Any excluded services will be removed.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 

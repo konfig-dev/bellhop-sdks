@@ -17,6 +17,7 @@ import axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
 import { requestAfterHook } from "./requestAfterHook";
 import { requestBeforeUrlHook } from "./requestBeforeUrlHook";
 import { readableStreamToString, BellhopError, parseIfJson } from "./error";
+import { jwtDecode } from "jwt-decode";
 
 /**
  *
@@ -95,6 +96,51 @@ export const setBearerAuthToObject = async function (object: any, configuration?
             ? await configuration.accessToken()
             : await configuration.accessToken;
         object["Authorization"] = "Bearer " + accessToken;
+    }
+}
+
+/**
+ *
+ * @export
+ */
+export const setOAuthToObject = async function (object: any, name: string, scopes: string[], configuration?: Configuration) {
+    if (configuration === undefined) return;
+    const authenticate = async () => {
+        if (configuration.oauthClientId && configuration.oauthClientSecret && configuration.accessToken === undefined) {
+            configuration.accessToken = await wrapAxiosRequest(async () => {
+                if (configuration.basePath === undefined) {
+                    throw new Error("basePath must be set to use the oauth2 authentication");
+                }
+                const url = configuration.oauthTokenUrl ?? removeTrailingSlash(configuration.basePath) + "/authorize";
+                const oauthResponse = await axios.request({
+                    url,
+                    method: "POST",
+                    headers: {
+                        "content-type": "application/x-www-form-urlencoded",
+                    },
+                    data: `grant_type=client_credentials&client_id=${configuration.oauthClientId}&client_secret=${configuration.oauthClientSecret}`,
+                });
+                const json = await oauthResponse.data;
+                return json.access_token;
+            })
+        }
+    }
+    const token =
+      typeof configuration.accessToken === "function"
+        ? await configuration.accessToken(name, scopes)
+        : await configuration.accessToken;
+    if (token === undefined) {
+        await authenticate();
+    } else {
+        // check that the token is still valid
+        const decodedToken = jwtDecode(token);
+        const currentTime = Date.now() / 1000;
+        if ((decodedToken as any)["exp"] < currentTime) {
+          await authenticate();
+        }
+    }
+    if (token) {
+        object["Authorization"] = "Bearer " + token;
     }
 }
 

@@ -6,8 +6,8 @@ describe("bellhop-partners-typescript", () => {
   });
   it("List Leads OAuth", async () => {
     const bellhop = new Bellhop({
-      clientId: process.env.BELLHOP_CLIENT_ID,
-      clientSecret: process.env.BELLHOP_CLIENT_SECRET,
+      oauthClientId: process.env.BELLHOP_CLIENT_ID,
+      oauthClientSecret: process.env.BELLHOP_CLIENT_SECRET,
       basePath: "https://partners.bellhops.dev/v5",
     });
     const response = await bellhop.lead.list();

@@ -31,9 +31,6 @@
       "name": "Lead"
     },
     {
-      "name": "QuoteInventory"
-    },
-    {
       "name": "Quote"
     },
     {
@@ -53,10 +50,10 @@
           "PostalCode"
         ],
         "summary": "Get Postal Codes Serviceability V5",
-        "operationId": "PostalCode_listServiceability",
+        "operationId": "PostalCode_serviceability",
         "security": [
           {
-            "Auth0HTTPBearer": [
+            "OAuth2ImplicitBearer": [
             ]
           }
         ],
@@ -114,7 +111,7 @@
         "operationId": "Lead_create",
         "security": [
           {
-            "Auth0HTTPBearer": [
+            "OAuth2ImplicitBearer": [
             ]
           }
         ],
@@ -159,7 +156,7 @@
         "operationId": "Lead_list",
         "security": [
           {
-            "Auth0HTTPBearer": [
+            "OAuth2ImplicitBearer": [
             ]
           }
         ],
@@ -209,7 +206,7 @@
         "operationId": "Lead_get",
         "security": [
           {
-            "Auth0HTTPBearer": [
+            "OAuth2ImplicitBearer": [
             ]
           }
         ],
@@ -255,7 +252,7 @@
         "operationId": "Lead_delete",
         "security": [
           {
-            "Auth0HTTPBearer": [
+            "OAuth2ImplicitBearer": [
             ]
           }
         ],
@@ -294,7 +291,7 @@
         "operationId": "Lead_update",
         "security": [
           {
-            "Auth0HTTPBearer": [
+            "OAuth2ImplicitBearer": [
             ]
           }
         ],
@@ -353,7 +350,7 @@
         "operationId": "Quote_get",
         "security": [
           {
-            "Auth0HTTPBearer": [
+            "OAuth2ImplicitBearer": [
             ]
           }
         ],
@@ -404,7 +401,8 @@
         "operationId": "Quote_create",
         "security": [
           {
-            "Auth0HTTPBearer": [
+            "OAuth2ImplicitBearer": [
+              "create:quotes"
             ]
           }
         ],
@@ -508,7 +506,8 @@
         "operationId": "QuoteServiceGroup_create",
         "security": [
           {
-            "Auth0HTTPBearer": [
+            "OAuth2ImplicitBearer": [
+              "create:quotes"
             ]
           }
         ],
@@ -586,7 +585,8 @@
         "operationId": "QuoteServiceGroups_changeLocations",
         "security": [
           {
-            "Auth0HTTPBearer": [
+            "OAuth2ImplicitBearer": [
+              "create:quotes"
             ]
           }
         ],
@@ -616,8 +616,8 @@
                   "summary": "Change locations",
                   "description": "Change locations on a service group",
                   "value": [
-                    "7b755011519641faa612ce9e47c8e7d4",
-                    "c5f4b1e593c54c11a7e6704da332f4f2"
+                    "1a99a4ff641f4040afb2f4f72fe377cc",
+                    "bb2078b5d93f44c0a98f268d86540450"
                   ]
                 }
               }
@@ -657,7 +657,8 @@
         "operationId": "QuoteServiceGroups_get",
         "security": [
           {
-            "Auth0HTTPBearer": [
+            "OAuth2ImplicitBearer": [
+              "read:quotes"
             ]
           }
         ],
@@ -717,7 +718,8 @@
         "operationId": "QuoteServiceGroups_delete",
         "security": [
           {
-            "Auth0HTTPBearer": [
+            "OAuth2ImplicitBearer": [
+              "delete:quotes"
             ]
           }
         ],
@@ -772,7 +774,8 @@
         "operationId": "QuoteServiceGroup_update",
         "security": [
           {
-            "Auth0HTTPBearer": [
+            "OAuth2ImplicitBearer": [
+              "update:quotes"
             ]
           }
         ],
@@ -813,7 +816,7 @@
                   "summary": "Replace a service group",
                   "description": "Replace a service group",
                   "value": {
-                    "flexible_quote_id": "d286dbfd-76a0-4457-ae69-08ca9b3f2dde"
+                    "flexible_quote_id": "0dd37117-3e93-4f7c-a496-8418906534e3"
                   }
                 }
               }
@@ -853,7 +856,8 @@
         "operationId": "QuoteServiceGroup_updateServices",
         "security": [
           {
-            "Auth0HTTPBearer": [
+            "OAuth2ImplicitBearer": [
+              "update:quotes"
             ]
           }
         ],
@@ -944,7 +948,8 @@
         "operationId": "QuoteServiceGroup_createFlexible",
         "security": [
           {
-            "Auth0HTTPBearer": [
+            "OAuth2ImplicitBearer": [
+              "update:quotes"
             ]
           }
         ],
@@ -1025,13 +1030,14 @@
     "/quotes/{quote_id}/inventory": {
       "put": {
         "tags": [
-          "QuoteInventory"
+          "Quote"
         ],
         "summary": "Update Quote Inventory",
-        "operationId": "QuoteInventory_updateInventory",
+        "operationId": "Quote_updateInventory",
         "security": [
           {
-            "Auth0HTTPBearer": [
+            "OAuth2ImplicitBearer": [
+              "update:quotes"
             ]
           }
         ],
@@ -1111,13 +1117,14 @@
       },
       "delete": {
         "tags": [
-          "QuoteInventory"
+          "Quote"
         ],
         "summary": "Delete Quote Inventory",
-        "operationId": "QuoteInventory_deleteInventory",
+        "operationId": "Quote_deleteInventory",
         "security": [
           {
-            "Auth0HTTPBearer": [
+            "OAuth2ImplicitBearer": [
+              "delete:quotes"
             ]
           }
         ],
@@ -1152,13 +1159,14 @@
       },
       "get": {
         "tags": [
-          "QuoteInventory"
+          "Quote"
         ],
         "summary": "Get Quote Inventory",
-        "operationId": "QuoteInventory_listInventory",
+        "operationId": "Quote_getInventory",
         "security": [
           {
-            "Auth0HTTPBearer": [
+            "OAuth2ImplicitBearer": [
+              "read:quotes"
             ]
           }
         ],
@@ -1208,7 +1216,8 @@
         "operationId": "QuoteServiceGroup_createEstimate",
         "security": [
           {
-            "Auth0HTTPBearer": [
+            "OAuth2ImplicitBearer": [
+              "read:quotes"
             ]
           }
         ],
@@ -1258,7 +1267,8 @@
         "operationId": "Location_create",
         "security": [
           {
-            "Auth0HTTPBearer": [
+            "OAuth2ImplicitBearer": [
+              "create:locations"
             ]
           }
         ],
@@ -1321,7 +1331,7 @@
         "operationId": "Order_create",
         "security": [
           {
-            "Auth0HTTPBearer": [
+            "OAuth2ImplicitBearer": [
             ]
           }
         ],
@@ -1536,29 +1546,6 @@
           "Zippy Shell Corp Relo"
         ]
       },
-      "Auth0TokenRequest": {
-        "title": "Auth0TokenRequest",
-        "properties": {
-          "client_id": {
-            "title": "Client Id",
-            "type": "string"
-          },
-          "client_secret": {
-            "title": "Client Secret",
-            "type": "string"
-          },
-          "audience": {
-            "title": "Audience",
-            "type": "string"
-          }
-        },
-        "type": "object",
-        "required": [
-          "client_id",
-          "client_secret",
-          "audience"
-        ]
-      },
       "Auth0TokenResponse": {
         "title": "Auth0TokenResponse",
         "properties": {
@@ -1576,6 +1563,31 @@
           "token",
           "cached"
         ]
+      },
+      "Body_get_auth_token_authorize_post": {
+        "title": "Body_get_auth_token_authorize_post",
+        "properties": {
+          "grant_type": {
+            "title": "Grant Type",
+            "type": "string",
+            "pattern": "client_credentials",
+            "nullable": true
+          },
+          "scope": {
+            "title": "Scope",
+            "type": "string",
+            "default": ""
+          },
+          "client_id": {
+            "title": "Client Id",
+            "type": "string"
+          },
+          "client_secret": {
+            "title": "Client Secret",
+            "type": "string"
+          }
+        },
+        "type": "object"
       },
       "CreateCustomerAccountRequest": {
         "title": "CreateCustomerAccountRequest",
@@ -1819,9 +1831,9 @@
             "description": "Start date and time of the quote",
             "type": "string",
             "format": "date-time",
-            "example": "2024-02-02T16:12:36.152282",
+            "example": "2024-02-05T15:50:48.765645",
             "x-examples": [
-              "2024-02-02T16:12:36.152282"
+              "2024-02-05T15:50:48.765645"
             ]
           },
           "service_code": {
@@ -2942,9 +2954,9 @@
             "title": "Id",
             "description": "Location ID",
             "type": "string",
-            "example": "38fd476fb69743b88c3cd3efe202b72e",
+            "example": "1bcd054ca1bc48a286be06556cabd171",
             "x-examples": [
-              "38fd476fb69743b88c3cd3efe202b72e"
+              "1bcd054ca1bc48a286be06556cabd171"
             ]
           },
           "property_type": {
@@ -3663,41 +3675,41 @@
             "type": "array",
             "example": [
               {
-                "created_at": "2024-02-02T16:12:35.244459+00:00",
-                "end_datetime": "2024-02-02T16:12:35.244471+00:00",
+                "created_at": "2024-02-05T15:50:47.449384+00:00",
+                "end_datetime": "2024-02-05T15:50:47.449396+00:00",
                 "end_timezone": "America/New_York",
                 "estimated_hours": 2.5,
                 "estimated_pricing_strategy": "HOURLY",
                 "estimated_unit_price": 10000,
                 "estimated_workers": 2,
-                "id": "260bb103-faf0-42af-9156-2e9d8807e333",
+                "id": "06f0decc-82dd-494d-8d9b-0261346d4bc5",
                 "locked": false,
                 "service_code": "LOADING",
-                "service_group_id": "8c054668-5b5f-4de9-b2a6-9fb46b17bc11",
-                "start_datetime": "2024-02-02T16:12:35.244471+00:00",
+                "service_group_id": "8dbc30c0-8442-4368-a0f5-fb05e36a668c",
+                "start_datetime": "2024-02-05T15:50:47.449395+00:00",
                 "start_timezone": "America/New_York",
                 "total_cost": 10000,
-                "updated_at": "2024-02-02T16:12:35.244470+00:00"
+                "updated_at": "2024-02-05T15:50:47.449394+00:00"
               }
             ],
             "x-examples": [
               [
                 {
-                  "created_at": "2024-02-02T16:12:35.244459+00:00",
-                  "end_datetime": "2024-02-02T16:12:35.244471+00:00",
+                  "created_at": "2024-02-05T15:50:47.449384+00:00",
+                  "end_datetime": "2024-02-05T15:50:47.449396+00:00",
                   "end_timezone": "America/New_York",
                   "estimated_hours": 2.5,
                   "estimated_pricing_strategy": "HOURLY",
                   "estimated_unit_price": 10000,
                   "estimated_workers": 2,
-                  "id": "260bb103-faf0-42af-9156-2e9d8807e333",
+                  "id": "06f0decc-82dd-494d-8d9b-0261346d4bc5",
                   "locked": false,
                   "service_code": "LOADING",
-                  "service_group_id": "8c054668-5b5f-4de9-b2a6-9fb46b17bc11",
-                  "start_datetime": "2024-02-02T16:12:35.244471+00:00",
+                  "service_group_id": "8dbc30c0-8442-4368-a0f5-fb05e36a668c",
+                  "start_datetime": "2024-02-05T15:50:47.449395+00:00",
                   "start_timezone": "America/New_York",
                   "total_cost": 10000,
-                  "updated_at": "2024-02-02T16:12:35.244470+00:00"
+                  "updated_at": "2024-02-05T15:50:47.449394+00:00"
                 }
               ]
             ]
@@ -3763,9 +3775,9 @@
             "description": "Service Quote ID",
             "type": "string",
             "format": "uuid",
-            "example": "c0f11a6c-4be0-42ca-84cc-8d3c76d19ce5",
+            "example": "063aa72b-b818-4cf3-866c-03841252f3cc",
             "x-examples": [
-              "c0f11a6c-4be0-42ca-84cc-8d3c76d19ce5"
+              "063aa72b-b818-4cf3-866c-03841252f3cc"
             ]
           },
           "created_at": {
@@ -3878,9 +3890,9 @@
             "description": "Service Group ID",
             "type": "string",
             "format": "uuid",
-            "example": "904c8d8d-bfd2-4904-bbe0-7443ee114549",
+            "example": "c3a48bae-de16-421f-9f7b-81db92ace33e",
             "x-examples": [
-              "904c8d8d-bfd2-4904-bbe0-7443ee114549"
+              "c3a48bae-de16-421f-9f7b-81db92ace33e"
             ]
           },
           "service_code": {
@@ -4797,9 +4809,9 @@
             "title": "Id",
             "description": "Location ID",
             "type": "string",
-            "example": "38fd476fb69743b88c3cd3efe202b72e",
+            "example": "1bcd054ca1bc48a286be06556cabd171",
             "x-examples": [
-              "38fd476fb69743b88c3cd3efe202b72e"
+              "1bcd054ca1bc48a286be06556cabd171"
             ]
           },
           "property_type": {
@@ -4853,7 +4865,7 @@
           "area": 1000,
           "city": "New York City",
           "country": "US",
-          "id": "e277864463f147e8ac490693e3d2bc7f",
+          "id": "53526308aef0431db8c8583191fa6366",
           "line_1": "123 Main St",
           "line_2": "Apt 1",
           "market_code": "NEW_YORK_NY",
@@ -4867,7 +4879,7 @@
             "area": 1000,
             "city": "New York City",
             "country": "US",
-            "id": "e277864463f147e8ac490693e3d2bc7f",
+            "id": "53526308aef0431db8c8583191fa6366",
             "line_1": "123 Main St",
             "line_2": "Apt 1",
             "market_code": "NEW_YORK_NY",
@@ -4929,9 +4941,15 @@
       }
     },
     "securitySchemes": {
-      "Auth0HTTPBearer": {
-        "type": "http",
-        "scheme": "bearer"
+      "OAuth2ImplicitBearer": {
+        "type": "oauth2",
+        "flows": {
+          "implicit": {
+            "scopes": {
+            },
+            "authorizationUrl": "/authorize"
+          }
+        }
       }
     }
   }

@@ -16,6 +16,7 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction, isBrowser } from '../common';
+import { setOAuthToObject } from '../common';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
@@ -61,9 +62,9 @@ export const LeadApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication Auth0HTTPBearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+            // authentication OAuth2ImplicitBearer required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2ImplicitBearer", [], configuration)
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -109,9 +110,9 @@ export const LeadApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication Auth0HTTPBearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+            // authentication OAuth2ImplicitBearer required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2ImplicitBearer", [], configuration)
 
     
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -152,9 +153,9 @@ export const LeadApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication Auth0HTTPBearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+            // authentication OAuth2ImplicitBearer required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2ImplicitBearer", [], configuration)
 
     
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -192,9 +193,9 @@ export const LeadApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication Auth0HTTPBearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+            // authentication OAuth2ImplicitBearer required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2ImplicitBearer", [], configuration)
             if (email !== undefined) {
                 localVarQueryParameter['email'] = email;
             }
@@ -242,9 +243,9 @@ export const LeadApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication Auth0HTTPBearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+            // authentication OAuth2ImplicitBearer required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2ImplicitBearer", [], configuration)
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
