@@ -4,49 +4,41 @@ examples_2: {}
 examples_3: {}
 ignorePotentialIncorrectType: true
 operationIds:
-  /authorize:
-    post: Authorization_getAuthToken
   /leads:
-    get: Leads_list
-    post: Leads_create
-  /leads/{code}:
-    delete: Leads_cancel
-    get: Leads_get
-    patch: Leads_update
+    get: Lead_list
+    post: Lead_create
+  /leads/{lead_id}:
+    delete: Lead_cancel
+    get: Lead_get
+    patch: Lead_update
   /locations:
-    post: Locations_createQuoting
+    post: Location_create
   /orders/{quote_id}:
-    post: Orders_create
-  /postal-codes/serviceability:
-    get: PostalCodes_getServiceability
+    post: Order_create
   /quotes:
-    post: Quotes_create
+    post: Quote_create
   /quotes/service-groups/{service_group_id}/estimate:
-    get: QuoteServiceGroups_getEstimate
+    post: QuoteServiceGroup_getEstimate
   /quotes/service_groups/{service_group_id}/locations:
-    put: QuoteServiceGroups_changeLocations
-  /quotes/{inventory_id}/inventory:
-    delete: QuoteInventory_delete
-    put: QuoteInventory_update
+    put: QuoteServiceGroup_changeLocations
   /quotes/{quote_id}:
-    get: Quotes_get
+    get: Quote_get
   /quotes/{quote_id}/inventory:
-    get: QuoteInventory_get
-    post: QuoteInventory_create
+    delete: Quote_deleteInventory
+    get: Quote_getInventory
+    put: Quote_updateInventory
   /quotes/{quote_id}/service-group/{service_group_id}:
-    delete: QuoteServiceGroups_delete
-    get: QuoteServiceGroups_get
+    delete: QuoteServiceGroup_delete
+    get: QuoteServiceGroup_get
   /quotes/{quote_id}/service-groups:
-    post: QuoteServiceGroups_create
+    post: QuoteServiceGroup_create
   /quotes/{quote_id}/service-groups/{service_group_id}:
-    patch: QuoteServiceGroups_replace
+    patch: QuoteServiceGroup_replace
+  /quotes/{quote_id}/service-groups/{service_group_id}/flexible:
+    post: QuoteServiceGroup_createFlexible
   /quotes/{quote_id}/service-groups/{service_group_id}/services:
-    put: QuoteServiceGroups_update
-  /quotes/{quote_id}/service_groups/{service_group_id}/flexible:
-    post: QuoteServiceGroups_createFlexible
-operationTags:
-  /quotes/service-groups/{service_group_id}/estimate:
-    get: QuoteServiceGroups
+    put: QuoteServiceGroup_update
+operationTags: {}
 renameTags: {}
 requestSchemaNames:
   /quotes/service_groups/{service_group_id}/locations:

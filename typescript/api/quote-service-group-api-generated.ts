@@ -74,9 +74,9 @@ export const QuoteServiceGroupApiAxiosParamCreator = function (configuration?: C
             const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication OAuth2ImplicitBearer required
+            // authentication OAuth2ClientCredentialsBearer required
             // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2ImplicitBearer", [], configuration)
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2ClientCredentialsBearer", ["quotes:update"], configuration)
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -125,9 +125,9 @@ export const QuoteServiceGroupApiAxiosParamCreator = function (configuration?: C
             const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication OAuth2ImplicitBearer required
+            // authentication OAuth2ClientCredentialsBearer required
             // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2ImplicitBearer", [], configuration)
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2ClientCredentialsBearer", ["quotes:update"], configuration)
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -173,9 +173,9 @@ export const QuoteServiceGroupApiAxiosParamCreator = function (configuration?: C
             const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication OAuth2ImplicitBearer required
+            // authentication OAuth2ClientCredentialsBearer required
             // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2ImplicitBearer", [], configuration)
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2ClientCredentialsBearer", ["quotes:read"], configuration)
 
     
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -223,9 +223,9 @@ export const QuoteServiceGroupApiAxiosParamCreator = function (configuration?: C
             const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication OAuth2ImplicitBearer required
+            // authentication OAuth2ClientCredentialsBearer required
             // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2ImplicitBearer", [], configuration)
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2ClientCredentialsBearer", ["quotes:update"], configuration)
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -275,9 +275,9 @@ export const QuoteServiceGroupApiAxiosParamCreator = function (configuration?: C
             const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication OAuth2ImplicitBearer required
+            // authentication OAuth2ClientCredentialsBearer required
             // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2ImplicitBearer", [], configuration)
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2ClientCredentialsBearer", ["quotes:update"], configuration)
 
     
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -322,9 +322,9 @@ export const QuoteServiceGroupApiAxiosParamCreator = function (configuration?: C
             const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication OAuth2ImplicitBearer required
+            // authentication OAuth2ClientCredentialsBearer required
             // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2ImplicitBearer", [], configuration)
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2ClientCredentialsBearer", ["quotes:read"], configuration)
 
     
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -372,9 +372,9 @@ export const QuoteServiceGroupApiAxiosParamCreator = function (configuration?: C
             const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication OAuth2ImplicitBearer required
+            // authentication OAuth2ClientCredentialsBearer required
             // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2ImplicitBearer", [], configuration)
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2ClientCredentialsBearer", ["quotes:update"], configuration)
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -427,9 +427,9 @@ export const QuoteServiceGroupApiAxiosParamCreator = function (configuration?: C
             const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication OAuth2ImplicitBearer required
+            // authentication OAuth2ClientCredentialsBearer required
             // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2ImplicitBearer", [], configuration)
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2ClientCredentialsBearer", ["quotes:update"], configuration)
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';

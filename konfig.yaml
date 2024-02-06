@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://unpkg.com/konfig-lib@latest/konfig-yaml.schema.json
 
 outputDirectory: /tmp/bellhop-sdks-out
-specRemotePath: https://partners.bellhop.com/v5/openapi.json
+specRemotePath: https://partners.bellhop.dev/v5/openapi.json
 specInputPath: openapi.json
 specPath: openapi-fixed.json
 fixConfig:

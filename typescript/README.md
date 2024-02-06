@@ -474,7 +474,7 @@ const createResponse = await bellhop.quote.create({
     phone: "phone_example",
     email: "email_example",
   },
-  start_datetime: "2024-02-05T15:50:48.765645",
+  start_datetime: "2024-02-06T20:20:06.515155",
   service_code: "LOCALFULLSERVICE",
   locations: {
     key: {
@@ -691,8 +691,8 @@ const changeLocationsResponse = await bellhop.quoteServiceGroup.changeLocations(
   {
     serviceGroupId: "service_group_id_example",
     requestBody: [
-      "1a99a4ff641f4040afb2f4f72fe377cc",
-      "bb2078b5d93f44c0a98f268d86540450",
+      "7fec6c0eeb4a44f290b24edb3abe4b9b",
+      "1b6664f3d42b4edea302a4c2dc18dbd9",
     ],
   }
 );

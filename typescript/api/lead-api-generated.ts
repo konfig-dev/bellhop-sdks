@@ -62,9 +62,9 @@ export const LeadApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication OAuth2ImplicitBearer required
+            // authentication OAuth2ClientCredentialsBearer required
             // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2ImplicitBearer", [], configuration)
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2ClientCredentialsBearer", ["leads:create"], configuration)
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -110,9 +110,9 @@ export const LeadApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication OAuth2ImplicitBearer required
+            // authentication OAuth2ClientCredentialsBearer required
             // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2ImplicitBearer", [], configuration)
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2ClientCredentialsBearer", ["leads:delete"], configuration)
 
     
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -153,9 +153,9 @@ export const LeadApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication OAuth2ImplicitBearer required
+            // authentication OAuth2ClientCredentialsBearer required
             // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2ImplicitBearer", [], configuration)
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2ClientCredentialsBearer", ["leads:read"], configuration)
 
     
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -193,9 +193,9 @@ export const LeadApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication OAuth2ImplicitBearer required
+            // authentication OAuth2ClientCredentialsBearer required
             // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2ImplicitBearer", [], configuration)
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2ClientCredentialsBearer", ["leads:read"], configuration)
             if (email !== undefined) {
                 localVarQueryParameter['email'] = email;
             }
@@ -243,9 +243,9 @@ export const LeadApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication OAuth2ImplicitBearer required
+            // authentication OAuth2ClientCredentialsBearer required
             // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2ImplicitBearer", [], configuration)
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2ClientCredentialsBearer", ["leads:update"], configuration)
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';

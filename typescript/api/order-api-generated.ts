@@ -55,9 +55,9 @@ export const OrderApiAxiosParamCreator = function (configuration?: Configuration
             const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication OAuth2ImplicitBearer required
+            // authentication OAuth2ClientCredentialsBearer required
             // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2ImplicitBearer", [], configuration)
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2ClientCredentialsBearer", ["orders:create"], configuration)
 
     
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
