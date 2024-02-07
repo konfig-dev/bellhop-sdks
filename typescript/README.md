@@ -6,7 +6,7 @@
 
 Bellhop's Partner API
 
-[![npm](https://img.shields.io/badge/npm-v0.1.3-blue)](https://www.npmjs.com/package/bellhop-partners-typescript/v/0.1.3)
+[![npm](https://img.shields.io/badge/npm-v0.1.4-blue)](https://www.npmjs.com/package/bellhop-partners-typescript/v/0.1.4)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](http://www.bellhop.com/)
 
 </div>
